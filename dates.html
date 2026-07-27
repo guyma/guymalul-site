@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מועדי סדנאות | העובד הראשון שלך | גיא מלול</title>
+<meta name="description" content="המועדים הקבועים של הסדנה &quot;העובד הראשון שלך&quot;: כל יום ראשון וכל יום רביעי, 10:00 עד 13:00.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- absolute URLs, final domain; they change if this goes up on github.io first -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="גיא מלול">
+<meta property="og:url" content="https://guymalul.co.il/dates.html">
+<meta property="og:title" content="מועדי סדנאות | העובד הראשון שלך">
+<meta property="og:description" content="כל יום ראשון וכל יום רביעי, 10:00 עד 13:00. מקום נסגר רק אחרי שיחת התאמה.">
+<meta property="og:image" content="https://guymalul.co.il/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="העובד הראשון שלך. סדנה של שלוש שעות בזום.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://guymalul.co.il/og-card.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* The locked site theme, unchanged: white ground, one electric violet,
+     hard 4px corners, Rubik in three weights, hierarchy from size.
+     A secondary page carries no colour block and no animation. */
+  :root {
+    --ground: #ffffff;
+    --tone:   #f4f2ff;
+    --ink:    #0a0a0a;   /* 19.8:1 on white */
+    --body:   #5a5a5a;   /* 6.9:1  */
+    --muted:  #6e6e6e;   /* 5.1:1  */
+    --line:   #e6e6e6;
+    --acc:      #3b1cf0;   /* 8.0:1 on white, both ways */
+    --acc-d:    #2e13c4;   /* 10.5:1 on white */
+    --acc-tint: #eae5fe;
+    --acc-line: #cec3fc;
+    --font: 'Rubik', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --bar: 52px;
+    --pad-x: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  body {
+    font-family: var(--font);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.7;
+    background: var(--ground);
+    color: var(--body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+  }
+
+  ::selection { background: var(--acc-tint); }
+
+  a { color: var(--acc); font-weight: 500; }
+
+  /* the skip link IS pressable, so it wears the pressable signature */
+  .skip {
+    position: fixed;
+    inset-inline-start: var(--pad-x);
+    top: -120px;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.55rem 1.15rem;
+    border-radius: 4px;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .skip:focus { top: 0.4rem; }
+  #main:focus { outline: 2px solid var(--acc); outline-offset: -4px; }
+
+  .topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    min-height: var(--bar);
+    padding: 0.35rem var(--pad-x);
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .topbar .topbar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.3rem 0.95rem;
+    border-radius: 4px;
+    background: var(--acc);
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.88rem;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+  .topbar .brand, .topbar .topbar-btn { min-width: 0; }
+
+  main { flex: 1 0 auto; padding: calc(var(--bar) + 2.6rem) var(--pad-x) 3.5rem; }
+  .wrap { max-width: 620px; margin: 0 auto; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    color: var(--acc);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+    margin-bottom: 1.8rem;
+  }
+  .back-link:hover, .back-link:focus-visible { text-decoration-thickness: 2px; }
+  .back-link svg { width: 14px; height: 14px; fill: currentColor; flex: none; }
+
+  h1 {
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+  .sub { margin-bottom: 3rem; }
+
+  h2 {
+    font-size: clamp(1.35rem, 5.6vw, 1.65rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+
+  .block { padding-top: 2.4rem; border-top: 1px solid var(--line); }
+  .block + .block { margin-top: 2.8rem; }
+
+  p { margin-bottom: 1.15rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .date-list { list-style: none; margin: 0 0 1.3rem; }
+  .date-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .date-row:last-child { border-bottom: 1px solid var(--line); }
+  .date-day { color: var(--ink); font-weight: 500; font-size: 1.18rem; }
+  .date-when { flex: none; color: var(--body); font-size: 1.02rem; }
+
+  .gate-line { color: var(--ink); font-weight: 600; font-size: 1.18rem; margin-bottom: 0.5rem; }
+
+  /* the one pressable signature: flat solid fill, hard 4px corner */
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 420px;
+    min-height: 54px;
+    margin-top: 2rem;
+    padding: 0.85rem 1.8rem;
+    border-radius: 4px;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 1.06rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--acc-d); }
+
+  .soft-line { margin-top: 1.1rem; margin-bottom: 0; font-size: 0.95rem; color: var(--muted); }
+  .soft-line a {
+    display: inline-block;
+    padding: 0.9rem 0.25rem;
+    margin: -0.9rem -0.25rem;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  footer {
+    flex: none;
+    padding: 2.4rem var(--pad-x) 3rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  footer .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 1.3rem; }
+  footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 0;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+  footer a:hover, footer a:focus-visible { text-decoration-thickness: 2px; }
+  footer a span { overflow-wrap: anywhere; }
+
+  @media (min-width: 640px) {
+    .btn { width: auto; display: inline-flex; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <a class="skip" href="#main">דלג לתוכן</a>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">העובד הראשון שלך</a>
+    <a class="topbar-btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+  </header>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="ic-back" viewBox="0 0 24 24">
+        <path d="M9.7 6.3 8.3 4.9 1.2 12l7.1 7.1 1.4-1.4L5 13h17.8v-2H5l4.7-4.7z" transform="scale(-1,1) translate(-24,0)"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <a class="back-link" href="index.html"><svg aria-hidden="true"><use href="#ic-back"/></svg><span>חזרה לעמוד הסדנה</span></a>
+
+      <h1>מועדי סדנאות</h1>
+      <p class="sub">"העובד הראשון שלך". סדנה של שלוש שעות בזום, עד 5 משתתפים.</p>
+
+      <section class="block" aria-labelledby="fixed-h">
+        <h2 id="fixed-h">המועדים הקבועים</h2>
+        <ul class="date-list">
+          <li class="date-row">
+            <span class="date-day">כל יום ראשון</span>
+            <span class="date-when">10:00 עד 13:00</span>
+          </li>
+          <li class="date-row">
+            <span class="date-day">כל יום רביעי</span>
+            <span class="date-when">10:00 עד 13:00</span>
+          </li>
+        </ul>
+        <p>הסדנה חוזרת כל שבוע, באותם מועדים. אם פספסת אחת, יש את הבאה.</p>
+      </section>
+
+      <section class="block" aria-labelledby="gate-h">
+        <h2 id="gate-h">איך נסגר מקום</h2>
+        <p class="gate-line">אין הרשמה ישירה.</p>
+        <p>מקום נסגר רק אחרי שיחת התאמה קצרה, בלי התחייבות. בשיחה אנחנו מאפיינים יחד את העסק והתהליכים שלך, ובודקים אם הסדנה באמת תקדם אותך.</p>
+        <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+        <p class="soft-line">או לכל שאלה, <a href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <a href="index.html"><span>העובד הראשון שלך · guymalul.co.il</span></a>
+      <a href="accessibility.html"><span>הצהרת נגישות</span></a>
+    </div>
+  </footer>
+
+</body>
+</html>

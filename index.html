@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>העובד הראשון שלך | גיא מלול</title>
+<meta name="description" content="סדנה של שלוש שעות בזום. העובד הראשון שלך. לומדים איך לגייס אותו.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- The share card. Most of this funnel arrives through WhatsApp, so a shared
+     link IS the first impression. og:image and og:url must be ABSOLUTE - a
+     relative path shows no image at all. THE BASE BELOW IS THE FINAL DOMAIN:
+     if the site goes up on github.io first, all four absolute URLs change. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="גיא מלול">
+<meta property="og:url" content="https://guymalul.co.il/">
+<meta property="og:title" content="העובד הראשון שלך | גיא מלול">
+<meta property="og:description" content="סדנה של שלוש שעות בזום. העובד הראשון שלך. לומדים איך לגייס אותו.">
+<meta property="og:image" content="https://guymalul.co.il/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="העובד הראשון שלך. סדנה של שלוש שעות בזום.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="העובד הראשון שלך | גיא מלול">
+<meta name="twitter:description" content="סדנה של שלוש שעות בזום. העובד הראשון שלך. לומדים איך לגייס אותו.">
+<meta name="twitter:image" content="https://guymalul.co.il/og-card.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===========================================================
+     The ground is flat and it never moves. ONE hue, and it means
+     one thing: you can press this. It arrives as whole blocks with
+     hard edges, never as a tint over the page. Hierarchy comes from
+     size and space, not from hue and not from weight 800.
+     Anything coloured that you CANNOT press carries no fill and no
+     frame - it is a mark and a line.
+     =========================================================== */
+  :root {
+    --ground: #ffffff;
+    --tone:   #f4f2ff;   /* one second tone, to GROUP two sections */
+    --ink:    #0a0a0a;   /* 19.8:1 on white */
+    --body:   #5a5a5a;   /* 6.9:1  */
+    --muted:  #6e6e6e;   /* 5.1:1 - the secondary greys have to clear AA too */
+    --line:   #e6e6e6;
+    --line-tone: #ddd8fb;
+    --acc:      #3b1cf0;   /* white on it 8.0:1; on white 8.0:1 */
+    --acc-d:    #2e13c4;   /* 10.5:1 on white - label text and hover */
+    --acc-tint: #eae5fe;   /* a flat wash, never a gradient */
+    --acc-line: #cec3fc;
+    --font: 'Rubik', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --bar: 52px;
+    --pad-x: clamp(1.25rem, 5vw, 2rem);
+    --sec-y: clamp(3.6rem, 12vw, 6rem);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  body {
+    font-family: var(--font);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.7;
+    background: var(--ground);
+    color: var(--body);
+    -webkit-font-smoothing: antialiased;
+    overflow-wrap: break-word;
+  }
+
+  ::selection { background: var(--acc-tint); }
+
+  /* ---------- structure ---------- */
+  main { position: relative; }
+  /* the skip link IS pressable, so it wears the page's pressable signature -
+     the fill and the 4px corner. Off-screen until focused, first tab stop. */
+  .skip {
+    position: fixed;
+    inset-inline-start: var(--pad-x);
+    top: -120px;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.55rem 1.15rem;
+    border-radius: 4px;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .skip:focus { top: 0.4rem; }
+  /* focus is never suppressed anywhere on this page; the skip target ADDS an
+     indicator rather than removing one, so the jump is visible where it lands */
+  #main:focus { outline: 2px solid var(--acc); outline-offset: -4px; }
+
+  section {
+    padding: var(--sec-y) var(--pad-x);
+    border-top: 1px solid var(--line);
+  }
+  section.hero { border-top: none; }
+  /* the second tone groups the two sections that belong together:
+     what you are getting into, and what it costs. One band, not a zebra. */
+  section.tone { background: var(--tone); }
+  section.tone + section.tone { border-top: none; }
+  section.tone + section { border-top: none; }
+  .wrap { max-width: 660px; margin: 0 auto; }
+
+  /* ---------- type ---------- */
+  h1, h2 {
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+  }
+  /* the headings are sentences now, not labels: one notch down from the
+     label scale so they stay a heading and the H1 stays the only big thing */
+  h2 {
+    font-size: clamp(1.55rem, 6.8vw, 2.1rem);
+    margin-bottom: 1.5rem;
+    text-wrap: balance;
+  }
+
+  p { margin-bottom: 1.15rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  a { color: var(--acc); font-weight: 500; }
+  .body-link {
+    display: inline-block;
+    padding: 0.9rem 0.25rem;
+    margin: -0.9rem -0.25rem;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  /* a section's opening line: one notch above body, ink, never coloured */
+  .lede {
+    font-size: 1.18rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 1.6rem;
+  }
+  /* the line a section lands on */
+  .verdict {
+    font-size: 1.28rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 1.7rem 0 1.5rem;
+  }
+  /* the section's visual peak: a sentence that has to be seen, lifted by size,
+     air and the page's own hairline vocabulary instead of by a frame or a hue.
+     Everything around it is 17px body; the two words inside step up again, and
+     the contrast line under it stays small so the peak keeps the height. */
+  .pull-block {
+    margin: 2.9rem 0;
+    padding: 1.9rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .pull {
+    font-size: clamp(1.32rem, 5.8vw, 1.65rem);
+    font-weight: 400;
+    line-height: 1.34;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.55rem;
+    text-wrap: balance;
+  }
+  .pull-key {
+    font-weight: 600;
+    font-size: 1.12em;
+    letter-spacing: -0.035em;
+  }
+  .pull-under {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--body);
+    margin-bottom: 0;
+  }
+  .quote {
+    font-size: 1.28rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  /* ---------- the top bar: flat, hairline, one flat solid button ---------- */
+  .topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    min-height: var(--bar);
+    padding: 0.35rem var(--pad-x);
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .topbar .topbar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.3rem 0.95rem;
+    border-radius: 4px;
+    background: var(--acc);
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.88rem;
+    line-height: 1.2;
+    text-decoration: none;
+    text-align: center;
+  }
+  /* no nowrap and no shrink floor: overflow-x is hidden, so a label that runs
+     past the edge is unrecoverable. At 200% zoom it wraps instead of clipping;
+     at every real phone width there is room and it stays on one line. */
+  .topbar .brand, .topbar .topbar-btn { min-width: 0; }
+
+  /* ---------- buttons: flat solid fill, hard corner, no gradient, no glow ----------
+     The 4px corner plus a saturated fill is the page's ONE pressable signature.
+     Nothing that cannot be pressed is allowed to wear it. */
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 420px;
+    min-height: 54px;
+    padding: 0.85rem 1.8rem;
+    border-radius: 4px;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 1.06rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--acc-d); }
+  .cta-row { margin-top: 2rem; }
+
+  /* the secondary button: the same fill, separated by SIZE. A real
+     destination that isn't the sale still has to read as pressable, and an
+     outline reads as decoration next to a solid page. */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 46px;
+    padding: 0.65rem 1.25rem;
+    border: 1.5px solid var(--acc);
+    border-radius: 4px;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.3;
+    text-decoration: none;
+    transition: filter 0.2s ease;
+  }
+  .btn-ghost:hover, .btn-ghost:focus-visible { filter: brightness(0.9); }
+  .btn-ghost svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
+  .btn-row { margin: 1.4rem 0 1.5rem; }
+  .soft-line {
+    margin-top: 1.1rem;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  /* =================== the fold ===================
+     Two movements, one continuous scroll. The first carries the
+     eyebrow, the headline and one 17px spoken paragraph, and the
+     headline is the only large thing on the screen. The turn (the
+     name of the thing) opens the second movement after a long pause,
+     which is what decision 20 asks for: the name answers the pain. */
+  .hero {
+    padding-top: calc(var(--bar) + 3rem);
+    padding-bottom: 0;
+  }
+  /* above the headline: the line that lowers the guard, and the page's model
+     for every coloured thing you cannot press. No fill and no frame - a solid
+     rule, then the words in the accent. It carries the hue at full strength,
+     so it is not quiet, but it wears none of the button's signature, so it
+     never promises a tap it cannot honour. */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 0.94rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--acc-d);
+    margin-bottom: 1.7rem;
+  }
+  .eyebrow::before {
+    content: "";
+    flex: none;
+    width: 22px;
+    height: 4px;
+    background: var(--acc);
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 11vw, 3.9rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.6rem;
+  }
+  .hero h1 .h1-say { display: block; text-wrap: balance; }
+  /* the question turns on the reader. It already owns its own line;
+     the colour is the second channel, never the only one, and it carries
+     no underline so it cannot be mistaken for something to press. */
+  .hero h1 .h1-ask {
+    display: block;
+    margin-top: 0.12em;
+    color: var(--acc);
+    text-decoration: none;
+  }
+
+  /* below the headline: what the thing actually is. Grey, so it reads as
+     the fact line it is and never competes with the spoken paragraph.
+     It is bound TIGHT to the H1 and opens a real gap under itself, so it
+     reads as a caption on the headline and never as a clause interrupting
+     `ואצלך?` and the verb chain it governs. */
+  .fold-what {
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: -0.015em;
+    color: var(--body);
+    margin-bottom: 2.6rem;
+  }
+
+  /* one paragraph, three beats, all at body size */
+  .said { font-size: 1.0625rem; line-height: 1.65; margin-bottom: 0; }
+  .said .b-frag { display: block; color: var(--ink); font-weight: 500; margin-bottom: 0.5rem; }
+  .said .b-pain { display: block; }
+  .said .b-punch { display: block; color: var(--ink); font-weight: 600; margin-top: 0.75rem; }
+
+  /* the turn: the fold's second movement, and its payoff. It sits on WHITE -
+     the full-colour panel that used to carry it was rejected as too strong and
+     reading dated (owner, 27.7), so the name carries the moment on type and
+     air. One colour panel survives on the page and it is the close. */
+  .turn {
+    margin-top: 8rem;
+    padding-bottom: var(--sec-y);
+  }
+  /* the name is the page's peak and it carries that on SIZE. It used to run
+     27px against a 40px H1 - typographically subordinate to the line it
+     answers - and the colour panel had been hiding that. */
+  .turn .brand-peak {
+    font-size: clamp(2.3rem, 10.2vw, 3.3rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.65rem;
+    /* the clipping edge below would cut the descenders without this */
+    padding-bottom: 0.09em;
+    overflow: hidden;
+  }
+  /* The only motion on the page. The RESTING state here is the finished
+     state, so if the script never runs the name is simply present at full
+     size; only JS that is actually running arms the hidden state. */
+  .turn .brand-peak > .peak-in { display: block; }
+  .turn .brand-peak > .peak-in.armed { transform: translateY(115%); }
+  .turn .brand-peak > .peak-in.armed.go {
+    transform: translateY(0);
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .turn .method { margin-bottom: 0; font-size: 1.12rem; }
+  .turn .cta-row { margin-top: 2.4rem; }
+  /* on the closing colour block the button inverts: white is what you press there */
+  .final .btn { background: #ffffff; color: var(--acc); }
+  .final .btn:hover, .final .btn:focus-visible { background: #e6e0fe; }
+  .final .soft-line { color: #cec3fc; }
+  .final .soft-line a { color: #ffffff; }
+
+  /* ---------- the pair table: hairline rows, hierarchy in ink ---------- */
+  .tw { width: 100%; border-collapse: collapse; margin: 1.8rem 0 1.6rem; }
+  .tw thead { display: none; }
+  .tw tbody, .tw tr, .tw td { display: block; }
+  .tw tr { padding: 1.15rem 0; border-top: 1px solid var(--line); }
+  .tw tr:last-child { border-bottom: 1px solid var(--line); }
+  .tw td { padding: 0; line-height: 1.6; }
+  .tw td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .tw td.cell-emp { margin-top: 0.7rem; color: var(--ink); font-weight: 500; }
+
+  /* ---------- the aside: an indent and a hairline, never a box ---------- */
+  .aside {
+    margin: 1.8rem 0;
+    padding-inline-start: 1.1rem;
+    border-inline-start: 2px solid var(--line);
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .aside p { color: var(--ink); }
+  .tone .aside { border-inline-start-color: var(--line-tone); }
+
+  /* ---------- callouts: two on the whole page, and that is the design ----------
+     A frame here means "this one will cost you if you skip it". Three signals
+     carry it and none of them is hue: the shape of the icon (triangle vs
+     circle), the label word, and the frame itself. The colour only tunes the
+     temperature. Five framed blocks would be five unframed blocks. */
+  .callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin: 2rem 0;
+    padding: 1rem 1.15rem 1.05rem;
+    border: 1px solid var(--co-line);
+    border-inline-start: 3px solid var(--co-edge);
+    border-radius: 4px;
+    background: var(--co-bg);
+    color: var(--ink);
+  }
+  .callout .co-ic { flex: none; width: 1.25rem; height: 1.25rem; margin-top: 0.28rem; fill: var(--co-edge); }
+  .callout .co-body { min-width: 0; }
+  .callout .co-label {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    color: var(--co-text);
+    margin-bottom: 0.15rem;
+  }
+  .callout p { color: var(--ink); }
+  /* the warning is the page's one INK callout: the hue is spent on what you
+     can press, so the hard constraint separates itself by going neutral and
+     letting the triangle and the label word carry it. */
+  .callout--warn { --co-bg: #f6f6f6; --co-line: #e0e0e0; --co-edge: var(--ink); --co-text: var(--ink); }
+  .callout--info { --co-bg: var(--acc-tint); --co-line: var(--acc-line); --co-edge: var(--acc); --co-text: var(--acc-d); }
+  .tone .callout--info { --co-bg: #ffffff; }
+
+  /* ---------- lists ---------- */
+  .reqs { list-style: none; margin: 1.3rem 0 1.6rem; }
+  .reqs li { padding: 0.85rem 0; border-top: 1px solid var(--line); }
+  .reqs li:last-child { border-bottom: 1px solid var(--line); }
+
+  .gets { list-style: none; margin: 1.3rem 0 1.6rem; }
+  .gets li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .gets li:last-child { border-bottom: 1px solid var(--line); }
+  .tone .gets li { border-color: var(--line-tone); }
+  .gets .yes {
+    flex: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-top: 0.3rem;
+    border-radius: 50%;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nots { list-style: none; display: grid; gap: 1rem; margin: 1.2rem 0 1.5rem; }
+  .nots li { display: flex; gap: 0.75rem; align-items: flex-start; }
+  .no {
+    flex: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-top: 0.3rem;
+    border-radius: 50%;
+    border: 1.5px solid #c4c4c4;
+    color: var(--ink);
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .yes-line { display: flex; gap: 0.75rem; align-items: flex-start; margin-top: 1.6rem; }
+  .yes-line .yes {
+    flex: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-top: 0.3rem;
+    border-radius: 50%;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .yes-line span:last-child { color: var(--ink); }
+  .after-yes { margin-top: 1.6rem; }
+
+  /* ---------- the offer: the one card on the page ---------- */
+  .price-figure {
+    display: block;
+    font-size: clamp(3.2rem, 15vw, 4.6rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.1;
+    color: var(--acc);
+  }
+  .price-line { margin-top: 0.7rem; margin-bottom: 2rem; }
+  .offer {
+    background: var(--ground);
+    border: 1px solid var(--acc-line);
+    border-radius: 4px;
+    padding: clamp(1.3rem, 5vw, 1.9rem);
+    margin-bottom: 1.6rem;
+  }
+  .offer .gets { margin: 0.9rem 0 0; }
+  .offer .gets li { border-color: var(--line); }
+  .offer .gets li:last-child { border-bottom: none; padding-bottom: 0; }
+  .stack-title { color: var(--ink); font-weight: 600; margin-bottom: 0; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { margin-top: 0.4rem; }
+  .faq-list details { border-bottom: 1px solid var(--line); }
+  .faq-list details:first-of-type { border-top: 1px solid var(--line); }
+  .faq-list summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 60px;
+    padding: 1.1rem 0;
+    font-weight: 500;
+    font-size: 1.06rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary .tog {
+    flex: none;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    border: 1px solid var(--acc-line);
+    background: var(--acc-tint);
+    color: var(--acc);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease;
+  }
+  .faq-list details[open] summary .tog { transform: rotate(45deg); }
+  .faq-body { padding: 0 0 1.3rem; }
+
+  /* ---------- the close: the second whole block of colour ---------- */
+  section.final { background: var(--acc); border-top: none; }
+  .final h2 { color: #ffffff; }
+  .final .lead { color: #ffffff; font-size: 1.18rem; font-weight: 500; line-height: 1.55; }
+  .final .after { margin-top: 1.2rem; margin-bottom: 0; color: #e6e0fe; }
+
+  footer {
+    padding: 2.4rem var(--pad-x) 3rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  footer .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 1.3rem; }
+  /* the footer's links carry the resting underline like every other link on the
+     page. Without it they read as accent text with no underline, which is this
+     page's signal for emphasis, not for a destination. */
+  footer a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+  footer a:hover, footer a:focus-visible { text-decoration-thickness: 2px; }
+  /* the address is one unbreakable token; let it break rather than run off the
+     clipped edge at high zoom */
+  footer a { min-width: 0; }
+  footer a span { overflow-wrap: anywhere; }
+  footer svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
+  footer .foot-name { color: var(--ink); font-weight: 500; }
+
+  /* ---------- from tablet up ---------- */
+  @media (min-width: 640px) {
+    .btn { width: auto; display: inline-flex; }
+    .hero { padding-top: calc(var(--bar) + 6rem); }
+
+    .tw thead { display: table-header-group; }
+    .tw tbody { display: table-row-group; }
+    .tw tr { display: table-row; padding: 0; border-top: none; }
+    .tw tr:last-child { border-bottom: none; }
+    .tw th {
+      display: table-cell;
+      text-align: right;
+      vertical-align: bottom;
+      padding: 0 1rem 0.7rem;
+      font-weight: 500;
+      font-size: 0.86rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+    .tw td {
+      display: table-cell;
+      vertical-align: top;
+      width: 50%;
+      padding: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .tw td::before { display: none; }
+    .tw td.cell-emp { margin-top: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <a class="skip" href="#main">דלג לתוכן</a>
+
+  <header class="topbar">
+    <a class="brand" href="#top">העובד הראשון שלך</a>
+    <a class="topbar-btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+  </header>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="ic-mail" viewBox="0 0 24 24">
+        <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+      </symbol>
+      <!-- the two callout marks. Triangle vs circle: the signal survives
+           with every drop of colour removed. -->
+      <symbol id="ic-warn" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M12 2.4 23 21.4H1L12 2.4Zm0 4.6a1.1 1.1 0 0 0-1.1 1.1v5.3a1.1 1.1 0 0 0 2.2 0V8.1A1.1 1.1 0 0 0 12 7Zm0 8.7a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/>
+      </symbol>
+      <symbol id="ic-info" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M12 1.9a10.1 10.1 0 1 0 0 20.2 10.1 10.1 0 0 0 0-20.2Zm0 3.6a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Zm0 4a1.1 1.1 0 0 1 1.1 1.1v5.9a1.1 1.1 0 0 1-2.2 0v-5.9A1.1 1.1 0 0 1 12 9.5Z"/>
+      </symbol>
+      <symbol id="ic-ext" viewBox="0 0 24 24">
+        <path d="M5 3h6v2H5.99L6 18h12v-5h2v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/>
+        <path d="M14 3h7v7h-2V6.42l-7.3 7.29-1.41-1.42L17.58 5H14V3Z"/>
+      </symbol>
+      <symbol id="ic-in" viewBox="0 0 24 24">
+        <path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.75H5.67v8.59h2.67zM7 8.48a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 9.86v-4.71c0-2.53-1.35-3.7-3.15-3.7-1.45 0-2.1.8-2.47 1.36V9.75h-2.66v8.59h2.66v-4.8c0-1.27.24-2.5 1.82-2.5 1.55 0 1.57 1.45 1.57 2.58v4.72h2.23z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ===== הפתיחה (the fold) ===== -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <p class="eyebrow rev">בלי לכתוב שורת קוד, ובלי להיות איש מחשבים</p>
+        <h1>
+          <span class="h1-say">העסק שלי כבר לא נמצא רק אצלי בראש, הוא בתיקייה על המחשב.</span>
+          <span class="h1-ask">ואצלך?</span>
+        </h1>
+        <p class="fold-what rev">סדנה של שלוש שעות בזום</p>
+        <p class="said rev">
+          <span class="b-frag">פותח צ'אט, מסביר, מעתיק, מדביק.</span>
+          <span class="b-pain">הוא כבר מכיר אותך, הדברים עובדים, אבל משהו עדיין לא 100, הוא לא באמת <strong>עובד איתך</strong> או <strong>בשבילך</strong>, אתה כל הזמן אומר לו מה לעשות.</span>
+          <span class="b-punch">הלו. זה בדיוק הפער.</span>
+        </p>
+
+        <div class="turn">
+          <p class="brand-peak rev">העובד הראשון שלך.</p>
+          <p class="method rev">לומדים איך לגייס אותו.</p>
+          <div class="cta-row">
+            <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+          </div>
+          <p class="soft-line">או לכל שאלה, <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== הכאב, כלי מול עובד ===== -->
+    <section>
+      <div class="wrap">
+        <h2 class="rev-h">אבל תשים לב מי מתחיל כל דבר.</h2>
+
+        <table class="tw">
+          <thead>
+            <tr>
+              <th scope="col">איך אתה עובד עם כלי</th>
+              <th scope="col">איך עובדים עם עובד</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="rev">
+              <td data-label="איך אתה עובד עם כלי">אתה מבקש שיעזור לך לנסח פוסט</td>
+              <td class="cell-emp" data-label="איך עובדים עם עובד">הוא כותב אותו מהשיחה שהייתה לך ביום חמישי</td>
+            </tr>
+            <tr class="rev">
+              <td data-label="איך אתה עובד עם כלי">אתה מבקש שיסדר לך את רשימת המשימות</td>
+              <td class="cell-emp" data-label="איך עובדים עם עובד">הוא יודע מה אמרת שהכי חשוב, ולפני כמה ימים</td>
+            </tr>
+            <tr class="rev">
+              <td data-label="איך אתה עובד עם כלי">אתה מבקש שיסדר קובץ חשבוניות שהעלית</td>
+              <td class="cell-emp" data-label="איך עובדים עם עובד">הוא אומר לך אילו ארבע חסרות, ומאיזה ספק</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="aside rev">אתה מתחיל כל משימה.<br>
+        הוא כבר יודע מה לעשות בלי שתסביר מחדש.</p>
+
+        <p class="verdict rev">זה ההבדל בין כלי לעובד.</p>
+
+        <p class="rev">מגייסים אותו, עושים לו חפיפה על העסק, מלמדים אותו מי אנחנו ואיך אנחנו אוהבים לעבוד.</p>
+        <p class="rev">לא מחזיקים לו את היד. לא צריך להגיד לו מה לבנות, צריך ללמד אותו איך אנחנו עובדים, הוא יבנה לבד.</p>
+        <p class="rev">וזה לא הבדל של טכנולוגיה, זה הבדל של איך אתה מלמד אותו.</p>
+      </div>
+    </section>
+
+    <!-- ===== איפה זה בכלל יושב ===== -->
+    <section>
+      <div class="wrap">
+        <h2 class="rev-h">יש שלב לפני הראשון, ואף אחד לא הסביר לך אותו.</h2>
+        <p class="rev">יש מי שקורא לזה סוכן, יש מי שקורא לזה עוזר אישי, ויש מי שקורא לזה יד ימיני.<br>
+        איך שלא תקרא לזה, השאלה הראשונה היא איפה הדבר הזה יושב אצלך.</p>
+        <p class="rev">חיפשת איפה לוחצים ולא מצאת? אין מסך שכתוב עליו "סוכנים", ואין כפתור כזה, וזאת הסיבה.</p>
+        <p class="rev">יש תיקייה, והיא במחשב שלך, ואתה יוצר אותה.<br>
+        בפנים יושבים קבצים, ובקבצים האלה יושב מה שהעובד יודע עליך.</p>
+        <p class="verdict rev">זה הכל. ובגלל זה זה עובד.</p>
+
+        <p class="rev">ואל תדאג, הכנתי לך מדריך מפורט ומסודר, שעתיים של הכנה לפני שאתה מתחיל.<br>
+        חוץ ממנו צריך רק מחשב Windows שאיתו אתה מגיע לזום, ומנוי Claude בתשלום.</p>
+
+        <div class="callout callout--warn rev">
+          <svg class="co-ic" aria-hidden="true"><use href="#ic-warn"/></svg>
+          <div class="co-body">
+            <span class="co-label">שים לב</span>
+            <p><strong>ההכנה היא דרישה, לא המלצה.</strong> תתחיל אותה כמה ימים לפני, לא ערב לפני, כי בזום לא עושים התקנות.</p>
+          </div>
+        </div>
+
+        <p class="rev">כל מילה במדריך כתובה לבן אדם שהוא לא איש מחשבים:</p>
+        <p class="btn-row rev">
+          <a class="btn-ghost" href="https://guyma.github.io/the-office-prework" target="_blank" rel="noopener"><span>מדריך ההכנה</span><svg aria-hidden="true"><use href="#ic-ext"/></svg></a>
+        </p>
+        <p class="rev">תקרא אותו לפני שאתה מחליט. אני מעדיף שתדע למה אתה נכנס.</p>
+      </div>
+    </section>
+
+    <!-- ===== מה קורה בשלוש השעות ===== -->
+    <section>
+      <div class="wrap">
+        <h2 class="rev-h">ובשלוש שעות איתי אתה יוצא עם משהו עובד.</h2>
+        <p class="quote rev">"הראית לי שזה עובד, לא לימדת אותי לבנות."</p>
+        <p class="rev">אם יצאת ככה מוובינר AI, צודק. אז ככה זה בנוי אצלי.</p>
+
+        <p class="rev">אני מסביר את השיטה ואת Claude Code בלי מילים גדולות, כדי שתדע בדיוק על מה מדברים.<br>
+        ומלמד אותך לגייס עובד, בלי לדלג על החלק המשעמם.<br>
+        ואתה מתחיל לעשות את זה בעצמך, על העסק שלך, בזמן שאני בחדר.</p>
+
+        <div class="callout callout--info rev">
+          <svg class="co-ic" aria-hidden="true"><use href="#ic-info"/></svg>
+          <div class="co-body">
+            <span class="co-label">שיהיה ברור</span>
+            <p>ושנדבר ישר, כי זה חשוב לי יותר מלמלא מקום:<br>
+            הלוואי שיכולתי להגיד לך שאחרי הסדנה אתה טס לתאילנד, יושב על החוף, והעסק עובד לבד. אבל זה לא קורה.<br>
+            הבנייה שלך, והיא לוקחת שבועות. ממש כמו לגייס עובד אמיתי.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== מה יוצא לך ביד ===== -->
+    <section>
+      <div class="wrap">
+        <h2 class="rev-h">אתה סוגר את הזום, ויש לך ממה להתחיל.</h2>
+        <p class="lede rev">"המשרד". ערכת פתיחה שנשארת אצלך, גם אם לא תראה אותי יותר לעולם.</p>
+
+        <p class="rev">בפנים תיקיות וקבצים, וכתוב בהם מה אתה עושה ואיך אתה עובד.<br>
+        יש שם סקילים שכבר עובדים, ויש קבצים שמחכים ריקים בכוונה, כי הם מתמלאים כשהעובד פוגש אותך.</p>
+
+        <div class="pull-block rev">
+          <p class="pull">התיקיות האלה הן <span class="pull-key">מוח שני</span> לעסק שלך.</p>
+          <p class="pull-under">במקום החומר העצום שמפוזר לך היום בין וואטסאפ, מיילים ומחברת.</p>
+        </div>
+
+        <div class="aside rev">
+          <p>ובוא נדייק, כי זו סדנה ראשונה ואני לא הולך לייפות:<br>
+          אתה לא מקבל את כל המשרד. הוא נבנה לאט לאט.<br>
+          מה שאתה כן מקבל זה בסיס שעובד, ואת הידיעה המדויקת איך להמשיך לבנות אותו.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== מי מלמד ===== -->
+    <section>
+      <div class="wrap">
+        <h2 class="rev-h">רגע, אתה עדיין לא יודע מי אני.</h2>
+        <p class="rev">נעים להכיר, אני גיא מלול. מהנדס תוכנה במיקרוסופט, ו-AI זה מה שאני עושה שם כל היום. לפני זה אלביט וצ'ק פוינט
+        (<a class="body-link" href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener">LinkedIn</a>).</p>
+        <p class="rev">לפני כל זה ניהלתי כמעט שבע שנים אתר תיירות במדבר. כספים, שיווק, עובדים, לקוחות.</p>
+        <p class="rev">את השיטה אני מריץ היום על העסק שלי. מה שתלמד בסדנה זה איך אני עובד באמת.</p>
+      </div>
+    </section>
+
+    <!-- ===== למי זה לא מתאים ===== -->
+    <section>
+      <div class="wrap">
+        <h2 class="rev-h">מה אם זה לא בשבילך? אני אגיד לך מאיפה כן להתחיל.</h2>
+        <p class="rev">בסדנה יש חמישה מקומות, ואני רוצה שכל אחד מהם ייצא עם ערך אמיתי.</p>
+        <p class="rev">יש מצבים שבהם הסדנה הזאת לא תיתן לך את מה שאתה מחפש, לפחות לא עכשיו:</p>
+        <ul class="reqs">
+          <li class="rev">אם עוד לא עבדת עם AI, הסדנה מתחילה מהתקרה של מי שכבר עובד עם צ'אט, ולא מהיסודות. יהיה פה בלוג עם התכנים הבסיסיים בדיוק בשביל השלב הזה, ועד אז כתוב לי ואני אגיד לך מאיפה להתחיל.</li>
+          <li class="rev">אם באת ללמוד AI ברמה טכנית, זו לא הסדנה, ולא כותבים פה שורת קוד אחת.</li>
+          <li class="rev">אם אתה מחפש שמישהו פשוט יבנה לך את זה, זה לא מה שאני מוכר. השיטה היא המוצר, ואתה בונה אותו.</li>
+          <li class="rev">אם העסק שלך רץ רק מהטלפון, צריך מחשב, ובלי זה אי אפשר.</li>
+          <li class="rev">אם אין לך אנגלית בסיסית, יהיה לך קשה.</li>
+          <li class="rev">ואם אתה כבר בונה לעצמך סוכנים ומערכות, הסדנה הזאת כנראה תרגיש לך בסיסית.</li>
+        </ul>
+        <div class="yes-line rev"><span class="yes" aria-hidden="true">✓</span><span>וזה כן בשבילך אם אתה כבר עובד עם AI כל יום, מוצף, מרגיש שיש שם הרבה יותר, ובאת ללמוד לבנות בעצמך.</span></div>
+        <p class="rev after-yes">בשביל זה יש שיחת התאמה לפני שנתחיל. אני רוצה לדעת מראש שאני הולך לתת לך ערך אמיתי, ואם זה לא הזמן, אני אגיד לך את זה ואגיד לך מה כן יקדם אותך עכשיו.</p>
+        <div class="cta-row rev">
+          <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== תיאום ציפיות ===== -->
+    <section class="tone">
+      <div class="wrap">
+        <h2 class="rev-h">לפני שנמשיך למחיר, שיהיה על השולחן.</h2>
+        <p class="rev">שלוש שעות נותנות לך שני דברים: אתה מבין איך השיטה עובדת, ואתה יודע איך לגייס את העובד הראשון שלך.<br>
+        הן לא נותנות עסק שרץ לבד.<br>
+        הבנייה האמיתית קורית אחרי, אצלך, ולוקחת שבועות.</p>
+        <p class="rev">וכן, זו דרך מהירה וזולה יותר מלגייס עובד אמיתי.</p>
+
+        <p class="rev">מה לא יהיה, שלא תגלה את זה בזום:</p>
+        <ul class="nots">
+          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי חיבורי API.</span></li>
+          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי אינטגרציות למערכות שיש לך היום.</span></li>
+          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי שרתי MCP.</span></li>
+          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי חיבור לוואטסאפ.</span></li>
+          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי אוטומציות שרצות לפי שעון, ובלי עובד שרץ 24/7. את זה לא בונים בשלוש שעות.</span></li>
+        </ul>
+        <p class="rev">כל אלה קיימים בעולם, והם לא חלק מהסדנה. בשלוש שעות בונים בסיס שעובד.</p>
+
+        <div class="callout callout--info rev">
+          <svg class="co-ic" aria-hidden="true"><use href="#ic-info"/></svg>
+          <div class="co-body">
+            <span class="co-label">איך זה עובד</span>
+            <p>ועוד דבר: אין הרשמה ישירה.<br>
+            כל מי שמגיע לסדנה עובר קודם שיחת התאמה קצרה, בלי התחייבות.<br>
+            אני יודע איך זה נשמע, כי בדרך כלל פשוט משלמים ונכנסים.<br>
+            אנחנו מאפיינים יחד את העסק והתהליכים שלך, ובודקים אם הסדנה באמת תקדם אותך.<br>
+            גם אם נגלה שלא, לא תצא מהשיחה בידיים ריקות.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== מחיר ===== -->
+    <section class="tone">
+      <div class="wrap">
+        <h2 class="rev-h">ועכשיו למחיר.</h2>
+        <strong class="price-figure">1,000 ש"ח.</strong>
+        <p class="price-line rev">כתוב פה. בלי שיחת מכירה, ובלי להתמקח.</p>
+
+        <div class="offer rev">
+          <p class="stack-title">מה שנכנס פנימה:</p>
+          <ul class="gets">
+            <li><span class="yes" aria-hidden="true">✓</span><span>הסדנה עצמה. 3 שעות בזום, עד 5 אנשים.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>איך מגייסים את העובד הראשון שלך, על העסק שלך ואיתי בחדר.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>"המשרד", ערכת הפתיחה שנשארת אצלך.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>שאלון הכנה והוראות התקנה מסודרות.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>קבוצת הבוגרים, שנשארת פתוחה גם אחרי.</span></li>
+          </ul>
+        </div>
+
+        <p class="rev">מעבר לזה יש לך מנוי Claude, 20 דולר לחודש ומעלה. הוא לא עובר דרכי ואני לא מרוויח ממנו.</p>
+      </div>
+    </section>
+
+    <!-- ===== שאלות ששואלים אותי ===== -->
+    <section>
+      <div class="wrap">
+        <h2 class="rev-h">בטח נשארו לך שאלות.</h2>
+        <div class="faq-list">
+          <details class="rev">
+            <summary><span>למה דווקא Claude Code, ולא הכלי שאני עובד איתו היום?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">כי הוא עובד על הקבצים שבמחשב שלך, ולא בתוך טאב בדפדפן.<br>
+            זה ההבדל שמאפשר לעובד להתקיים בכלל, ולא רק לענות לך.<br>
+            השיטה עצמה עוברת לכל כלי. הכלים מתחלפים, המבנה נשאר.<br>
+            אבל הסדנה עצמה בנויה על Claude Code, וכל ההכנה שלה היא בשבילו.</div>
+          </details>
+          <details class="rev">
+            <summary><span>אני לא טכני. זה בשבילי?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">בוא נדייק. לא צריך לדעת לתכנת, לא צריך להיות איש מחשבים, ולא כותבים שורת קוד.<br>
+            כן צריך: לשבת מול מחשב בנוחות, להתקין תוכנה לפי הוראות, ולאהוב ללמוד דברים חדשים.<br>
+            אם זה אתה, זה בשבילך.</div>
+          </details>
+          <details class="rev">
+            <summary><span>כמה זה עולה לי מעבר למחיר הסדנה?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">מנוי Claude בתשלום. Pro זה 20 דולר לחודש, Max יותר נוח ויותר יקר.<br>
+            עם החינמי אי אפשר לעבוד, וזה לא הערה קטנה, זה תנאי סף.<br>
+            שאר ההתקנות לא עולות כלום.</div>
+          </details>
+          <details class="rev">
+            <summary><span>מתי הסדנה הבאה? תהיה הקלטה?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">כל המועדים בעמוד המועדים: <a class="body-link" href="dates.html">עמוד המועדים</a>.<br>
+            מקום נסגר רק אחרי שיחת התאמה.<br>
+            אין הקלטה. הסדנה חוזרת, אז אם פספסת אחת, יש את הבאה.</div>
+          </details>
+          <details class="rev">
+            <summary><span>איפה המידע שלי יושב?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">הקבצים יושבים במחשב שלך, בתיקייה שלך. לא אצלי ולא בשרת שלי.<br>
+            מה שאתה שולח ל-Claude עובר ל-Claude, בדיוק כמו בצ'אט שאתה עובד איתו היום.<br>
+            לי אין גישה לקבצים שלך, לא בסדנה ולא אחריה.</div>
+          </details>
+          <details class="rev">
+            <summary><span>הכלים משתנים כל חודש. מה יישאר לי בעוד שנה?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">גם עם טכנולוגיה מלפני שנה, אם תעבוד בשיטה שאני מלמד, אתה תגיע לתוצאות יותר טובות ממי שעובד עם הטכנולוגיה שיצאה היום.<br>
+            כשהכלי מתקדם, אתה לא רודף אחריו. אתה מקבל במתנה עובד יותר חכם.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== הכפתור ===== -->
+    <section class="final">
+      <div class="wrap">
+        <h2 class="rev-h">ואם זה מדבר אליך, בוא נדבר.</h2>
+        <p class="lead rev">שלוש שעות, נקודת פתיחה אמיתית, והבנייה שלך משם.<br>
+        אשמח לספר בדיוק איך זה עובד 🙏</p>
+        <div class="cta-row">
+          <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+        </div>
+        <p class="after rev">אתה כותב לי בוואטסאפ, אני חוזר אליך, וקובעים שיחה קצרה.</p>
+        <p class="soft-line">או לכל שאלה, <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span class="foot-name">גיא מלול</span>
+      <a href="mailto:mguym86@gmail.com"><svg aria-hidden="true"><use href="#ic-mail"/></svg><span>mguym86@gmail.com</span></a>
+      <a href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ic-in"/></svg><span>LinkedIn</span></a>
+      <a href="accessibility.html"><span>הצהרת נגישות</span></a>
+      <span>guymalul.co.il</span>
+    </div>
+  </footer>
+
+  <script>
+    /* The page's only animation: the brand name rises once out of its clipping
+       edge. No library - CSS does the motion, this just decides when.
+       Reduced-motion never arms, so that reader gets the finished page. */
+    (function () {
+      var el = document.querySelector('.turn .brand-peak');
+      if (!el) return;
+      var inner = document.createElement('span');
+      inner.className = 'peak-in';
+      inner.innerHTML = el.innerHTML;
+      el.innerHTML = '';
+      el.appendChild(inner);
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!('IntersectionObserver' in window)) return;
+
+      /* Nothing may leave the name hidden. The hidden state is armed only once
+         an observer is really watching, and it is dropped again the moment the
+         observer misbehaves - a peak nobody can see is worse than no motion. */
+      var io, delivered = false;
+      function show() { inner.classList.add('go'); if (io) io.disconnect(); }
+
+      try {
+        io = new IntersectionObserver(function (entries) {
+          delivered = true;
+          entries.forEach(function (e) { if (e.isIntersecting) show(); });
+        }, { threshold: 0.2 });
+        inner.classList.add('armed');
+        io.observe(el);
+      } catch (err) {
+        inner.classList.remove('armed');
+        return;
+      }
+
+      /* An observer always delivers a first entry for what it observes, even
+         when the element is off-screen. No first entry means it is not working,
+         and only then does the name reveal itself without the rise. Waiting for
+         a scroll is NOT a failure and must not trip this. */
+      setTimeout(function () { if (!delivered) show(); }, 1000);
+    })();
+  </script>
+
+</body>
+</html>
