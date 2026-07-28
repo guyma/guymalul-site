@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שאלון ההקמה | העובד הראשון שלך</title>
+<meta name="description" content="שאלון ההקמה של המשרד: ממלאים פעם אחת, מורידים קובץ מוכן, והעובד הראשון שלכם מכיר את העסק.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5fb;
+    --ink: #16141f;
+    --dim: #55506b;
+    --muted: #6a6584;
+    --line: #e7e5f0;
+    --teal: #0d7d72;
+    --violet: #6d4de0;
+    --grad: linear-gradient(120deg, #0d9484, #6d4de0);
+    --font-body: 'Rubik', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.8;
+  }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(246,245,251,0.92);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .topbar .brand { font-weight: 700; font-size: 0.95rem; color: var(--ink); text-decoration: none; }
+  .topbar .progress-pill { font-size: 0.85rem; color: var(--dim); }
+  .progress-track { height: 3px; background: var(--line); }
+  .progress-bar { height: 100%; width: 0%; background: var(--grad); transition: width 0.4s ease; }
+
+  main { max-width: 680px; margin: 0 auto; padding: 30px 18px 90px; }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(38,30,80,0.05);
+    animation: rise 0.5s ease both;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); font-weight: 700; line-height: 1.25; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .h1-underline { width: 84px; height: 5px; border-radius: 3px; background: var(--grad); margin-bottom: 16px; }
+  .hero-sub { font-size: 1.06rem; color: var(--dim); margin-bottom: 14px; }
+  .hero-notes { list-style: none; display: grid; gap: 8px; margin-top: 6px; }
+  .hero-notes li { padding-inline-start: 24px; position: relative; color: var(--dim); font-size: 0.95rem; }
+  .hero-notes li::before { content: "✦"; position: absolute; inset-inline-start: 0; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; }
+
+  .chip {
+    display: inline-block;
+    font-size: 0.78rem; font-weight: 500; color: #fff;
+    background: var(--grad);
+    border-radius: 999px; padding: 2px 12px;
+    margin-inline-end: 8px; vertical-align: 2px;
+  }
+  h2.part-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 2px; }
+  .part-intro { color: var(--muted); font-size: 0.92rem; margin-bottom: 12px; }
+  .part-count { font-size: 0.8rem; color: var(--teal); margin-bottom: 14px; }
+
+  .q { margin-bottom: 26px; }
+  .q:last-child { margin-bottom: 4px; }
+  .q-title { font-weight: 700; margin-bottom: 2px; }
+  .q-title .done-mark { font-size: 0.8rem; font-weight: 500; margin-inline-start: 6px; visibility: hidden; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .q.answered .q-title .done-mark { visibility: visible; }
+  .q-hint { font-size: 0.88rem; color: var(--muted); margin-bottom: 10px; }
+  .radio-row { display: flex; gap: 12px; }
+  .radio-row label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px; background: #fbfbfd; border: 1px solid #dcd9e8; border-radius: 12px; font-weight: 700; cursor: pointer; }
+  .radio-row input { width: 18px; height: 18px; accent-color: var(--teal); }
+  textarea {
+    width: 100%; min-height: 96px; resize: vertical;
+    font-family: var(--font-body); font-size: 1rem; line-height: 1.7; color: var(--ink);
+    background: #fbfbfd;
+    border: 1px solid #dcd9e8;
+    border-radius: 12px; padding: 12px 14px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  textarea:focus { outline: none; border-color: var(--violet); background: #fff; box-shadow: 0 0 0 3px rgba(109,77,224,0.13); }
+
+  .actions { text-align: center; }
+  .btn {
+    display: block; width: 100%;
+    font-family: var(--font-body); font-size: 1.05rem; font-weight: 700; cursor: pointer;
+    border-radius: 14px; padding: 15px 28px; margin-bottom: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  }
+  .btn:active { transform: scale(0.99); }
+  .btn-primary { background: var(--grad); color: #fff; border: none; box-shadow: 0 8px 22px rgba(80,60,190,0.28); }
+  .btn-primary:hover { opacity: 0.92; }
+  .btn-secondary { background: #fff; color: var(--ink); border: 1px solid #cfcbe2; }
+  .btn-secondary:hover { border-color: var(--violet); }
+  .action-note { font-size: 0.9rem; color: var(--dim); min-height: 1.4em; }
+
+  .steps { list-style: none; counter-reset: step; display: grid; gap: 14px; margin-top: 10px; }
+  .steps li { counter-increment: step; position: relative; padding-inline-start: 42px; }
+  .steps li::before {
+    content: counter(step);
+    position: absolute; inset-inline-start: 0; top: 3px;
+    width: 28px; height: 28px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--grad); color: #fff; font-weight: 700; font-size: 0.9rem;
+  }
+  code { direction: ltr; unicode-bidi: embed; background: #efedf7; border-radius: 6px; padding: 1px 7px; font-size: 0.9em; }
+
+  .fineprint { font-size: 0.92rem; color: var(--dim); }
+  .samples-check {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 16px; padding: 13px 14px; cursor: pointer;
+    background: #fbfbfd; border: 1px solid #dcd9e8; border-radius: 12px;
+    font-weight: 700; color: var(--ink); font-size: 1rem;
+  }
+  .samples-check input { width: 20px; height: 20px; accent-color: var(--teal); flex-shrink: 0; }
+  .fineprint strong { color: var(--ink); }
+
+  footer { text-align: center; padding: 16px 18px 44px; color: var(--muted); font-size: 0.9rem; }
+  footer a { color: var(--violet); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">העובד הראשון שלך</a>
+    <span class="progress-pill" id="progress-pill" role="status" aria-live="polite">0/13 הושלמו</span>
+  </div>
+  <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+</div>
+
+<main id="top">
+  <section class="card">
+    <h1>שאלון ההקמה של המשרד</h1>
+    <div class="h1-underline"></div>
+    <p class="hero-sub">
+      זו עבודת ההכנה שהופכת עובד AI גנרי לעובד שמכיר את העסק שלכם.
+      בסוף מורידים קובץ אחד מוכן.
+    </p>
+    <ul class="hero-notes">
+      <li>ממלאים פעם אחת לעסק.</li>
+      <li>שום תשובה לא נשלחת לשום מקום. הקובץ נוצר אצלכם ויורד ישירות למחשב שלכם.</li>
+    </ul>
+  </section>
+
+  <div id="form-root"></div>
+
+  <section class="card fineprint">
+    <p><strong>ועוד הכנה אחת, חשובה באמת: אספו דוגמאות כתיבה שלכם.</strong></p>
+    <p style="margin-top:8px;">
+      מהדוגמאות האלה העובד לומד את הקול שלכם, איך אתם באמת נשמעים. פתחו תיקייה אחת
+      במחשב ואספו אליה כל מה שתמצאו. לפחות 3, ואין תקרה: כל דוגמה מחדדת.
+    </p>
+    <ul class="hero-notes" style="margin-top:10px;">
+      <li>פוסטים שפרסמתם: פייסבוק, אינסטגרם, לינקדאין.</li>
+      <li>הצעת מחיר ששלחתם.</li>
+      <li>שיחות וואטסאפ עם לקוחות (באפליקציה: Export chat).</li>
+      <li>מיילים ששלחתם ללקוחות.</li>
+      <li>ניוזלטר, סיכום פגישה, או כל מסמך שכתבתם בעצמכם.</li>
+    </ul>
+    <p style="margin-top:10px;">
+      <strong>וגם קבצים של העסק.</strong> מחירון, חוזה, הצעת מחיר ישנה, ההודעה שאתם
+      שולחים שוב ושוב: אל תתארו אותם בטופס, פשוט אספו אותם לאותה תיקייה.
+    </p>
+    <p style="margin-top:10px;">
+      לא צריך לסדר כלום ולא צריך לשנות כלום. אוספים, ובסדנה נלמד את העובד מהכול.
+    </p>
+    <label class="samples-check">
+      <input type="checkbox" id="samples-done">
+      <span>הכנתי תיקיית דוגמאות, הכול בפנים</span>
+    </label>
+  </section>
+
+  <section class="card actions">
+    <button class="btn btn-primary" id="btn-download">להוריד את הקובץ המוכן</button>
+    <button class="btn btn-secondary" id="btn-copy">להעתיק את הקובץ ללוח</button>
+    <p class="action-note" id="action-note" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card">
+    <h2 class="part-title">מה עושים עם הקובץ?</h2>
+    <ol class="steps">
+      <li>מורידים את הקובץ <code>my-business-he.md</code> מהכפתור למעלה.</li>
+      <li>שומרים אותו במקום שקל למצוא, למשל שולחן העבודה.</li>
+      <li>מביאים אותו לסדנה. שם העובד החדש שלכם יקרא אותו ויכיר אתכם.</li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  נתקעתם? <a href="https://wa.me/972503991358?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%90%D7%A0%D7%99%20%D7%91%D7%A9%D7%90%D7%9C%D7%95%D7%9F%20%D7%94%D7%94%D7%A7%D7%9E%D7%94%20%D7%95%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94">כתבו לי בוואטסאפ</a>
+</footer>
+
+<script>
+const PARTS = [
+  {
+    title: "חלק א' · אתם",
+    intro: "כל עובד חדש צריך להכיר את הבוס. ספרו לו על עצמכם.",
+    questions: [
+      { id: "q0", radio: true, title: "לשון פנייה: באיזו לשון לכתוב אליך ועליך?",
+        hint: "עברית היא שפה ממוגדרת. זה קובע איך העובד מנסח כל משפט אליך ועליך.",
+        options: ["לשון זכר", "לשון נקבה"],
+        md: "**לשון פנייה: באיזו לשון לכתוב אליך ועליך?**\nלשון זכר או לשון נקבה." },
+      { id: "q1", title: "1. בפסקה אחת: מי אתם ומה אתם עושים?",
+        hint: "שם, תפקיד, מה אתם נותנים ולמי. מה עובר רק דרככם, אילו החלטות רק אתם מקבלים. איך אתם עובדים: הרגלים, שעות, מה מעצבן אתכם. ועובדות שחשוב לכם שכל עובד ידע.",
+        md: "**1. בפסקה אחת: מי אתם ומה אתם עושים?**\nשם, תפקיד, מה אתם נותנים ולמי. מה עובר רק דרככם, אילו החלטות רק אתם מקבלים.\nאיך אתם עובדים: הרגלים, שעות, מה מעצבן אתכם. ועובדות שחשוב לכם שכל עובד ידע." },
+      { id: "q2", title: "2. אם מחר אתם נעלמים: לאן הלקוחות הולכים, ומה הם מפסידים?",
+        hint: "ועוד אחת: מה לדעתכם כל התחום שלכם עושה לא נכון?",
+        md: "**2. אם מחר אתם נעלמים: לאן הלקוחות הולכים, ומה הם מפסידים?**\nועוד אחת: מה לדעתכם כל התחום שלכם עושה לא נכון?" }
+    ]
+  },
+  {
+    title: "חלק ב' · העסק",
+    intro: "דף החברה. מה שעובד חדש מקבל ביום הראשון.",
+    questions: [
+      { id: "q3", title: "3. מה אתם מוכרים, וכמה זה עולה?",
+        hint: "השירותים העיקריים וטווחי מחירים. אין עדיין מחיר סגור? כתבו את זה, גם זו תשובה.",
+        md: "**3. מה אתם מוכרים, וכמה זה עולה?**\nהשירותים העיקריים וטווחי מחירים. אין עדיין מחיר סגור? כתבו את זה, גם זו תשובה." },
+      { id: "q4", title: "4. איפה העסק היום, ולאן אתם חולמים לקחת אותו?",
+        hint: "מתחילים? צומחים? לבד או עם צוות. ואם יש אנשים: מי, ומה רק הם מאשרים? מה בוער בכם, מה התשוקה שלכם בהקשר העסקי? והחלום: אימפקט, לא מספר.",
+        md: "**4. איפה העסק היום, ולאן אתם חולמים לקחת אותו?**\nמתחילים? צומחים? לבד או עם צוות, ואם יש אנשים: מי, ומה רק הם מאשרים?\nמה בוער בכם, מה התשוקה שלכם (בהקשר העסקי)? והחלום: אימפקט, לא מספר." }
+    ]
+  },
+  {
+    title: "חלק ג' · הלקוחות",
+    intro: "דמיינו לקוח אחד. לא קהל, לא סגמנט. בן אדם.",
+    questions: [
+      { id: "q5", title: "5. מי הלקוח האחד שלכם, ואיפה הוא מסתובב?",
+        hint: "מי הוא, מה הוא מנסה לפתור, ומה מעיר אותו בלילה. מה הוא מנסה להשיג, ומה הוא כבר ניסה ולא עבד? איפה הוא מסתובב, אילו קבוצות ופלטפורמות? אילו מילים שלו תופסות אותו?",
+        md: "**5. מי הלקוח האחד שלכם, ואיפה הוא מסתובב?**\nמי הוא, מה הוא מנסה לפתור, ומה מעיר אותו בלילה. מה הוא מנסה להשיג, ומה הוא כבר\nניסה ולא עבד? איפה הוא מסתובב, אילו קבוצות ופלטפורמות? אילו מילים שלו תופסות אותו?" },
+      { id: "q6", title: "6. ספרו על לקוח אחד: לפני ואחרי.",
+        hint: "איך הוא הגיע אליכם, איך הוא נראה שלושה חודשים אחרי, ומה הוא אמר לכם.",
+        md: "**6. ספרו על לקוח אחד: לפני ואחרי.**\nאיך הוא הגיע אליכם, איך הוא נראה שלושה חודשים אחרי, ומה הוא אמר לכם." },
+      { id: "q7", title: "7. הדביקו 2 עד 3 הודעות אמיתיות מלקוחות.",
+        hint: "וואטסאפ, מייל, ביקורת. המילים שלהם שוות זהב, כמו שהן. רק שם או פרט רגיש מחליפים ל-[שם] לפני ההדבקה.",
+        md: "**7. הדביקו 2 עד 3 הודעות אמיתיות מלקוחות.**\nוואטסאפ, מייל, ביקורת. המילים שלהם שוות זהב, כמו שהן. רק שם או פרט רגיש\nמחליפים ל-[שם] לפני ההדבקה." }
+    ]
+  },
+  {
+    title: "חלק ד' · הקול",
+    intro: "ההבדל בין עובד שנשמע כמוכם לעובד שנשמע כמו רובוט.",
+    questions: [
+      { id: "q8", title: "8. איך אתם נשמעים?",
+        hint: "השלימו: \"אנחנו ___ אבל לא ___\" (שניים או שלושה כאלה). הוסיפו משפט אחד שרק אתם הייתם כותבים, ושתיים או שלוש מילים שאסור שיצאו לכם מהמקלדת. והרגלי כתיבה: אורך משפטים, אימוג'י, שפה.",
+        md: "**8. איך אתם נשמעים?**\nהשלימו: \"אנחנו ___ אבל לא ___\" (שניים או שלושה כאלה). הוסיפו משפט אחד שרק אתם הייתם\nכותבים, ושתיים או שלוש מילים שאסור שיצאו לכם מהמקלדת. והרגלי כתיבה: אורך משפטים,\nאימוג'י, שפה." }
+    ]
+  },
+  {
+    title: "חלק ה' · הכללים",
+    intro: "מה שעובד ותיק יודע בלי לשאול.",
+    questions: [
+      { id: "q9", title: "9. מתי כן ומתי לא?",
+        hint: "מתי אתם נותנים הנחה? מתי מוותרים על לקוח? מה לא עושים: שעות, תחומים, סוגי עבודות.",
+        md: "**9. מתי כן ומתי לא?**\nמתי אתם נותנים הנחה? מתי מוותרים על לקוח? מה לא עושים: שעות, תחומים, סוגי עבודות." },
+      { id: "q10", title: "10. מה אסור לעובד לעשות בלי לשאול אתכם?",
+        hint: "לסגור מחיר? להבטיח מועד? לפנות ללקוח? ומה דווקא יגרום לכם לסמוך עליו יותר?",
+        md: "**10. מה אסור לעובד לעשות בלי לשאול אתכם?**\nלסגור מחיר? להבטיח מועד? לפנות ללקוח? ומה דווקא יגרום לכם לסמוך עליו יותר?" }
+    ]
+  },
+  {
+    title: "חלק ו' · בשביל מה גייסתם אותו",
+    intro: "את המשימה הראשונה בוחרים בסדנה, ביחד. כאן העובד לומד איפה הזמן שלכם נשרף.",
+    questions: [
+      { id: "q11", title: "11. מה שורף לכם הכי הרבה זמן, סתם?",
+        hint: "העבודות שחוזרות על עצמן ולא צריכות דווקא אתכם. ומה הייתם שמחים למצוא מסודר כל בוקר, לפני שהתחלתם לעבוד?",
+        md: "**11. מה שורף לכם הכי הרבה זמן, סתם?**\nהעבודות שחוזרות על עצמן ולא צריכות דווקא אתכם. ומה הייתם שמחים למצוא מסודר כל\nבוקר, לפני שהתחלתם לעבוד?" }
+    ]
+  },
+  {
+    title: "בונוס · המבחן (רשות)",
+    bonus: true,
+    intro: "אפשר לדלג. אבל זה כיף.",
+    questions: [
+      { id: "q12", title: "12. כתבו 3 שאלות שעובד חדש חייב לדעת לענות עליהן.",
+        hint: "\"כמה עולה X?\", \"מה סגרנו עם [שם]?\". אחרי /meet-the-boss, בחנו אותו.",
+        md: "**12. כתבו 3 שאלות שעובד חדש חייב לדעת לענות עליהן.**\n\"כמה עולה X?\", \"מה סגרנו עם [שם]?\". אחרי `/meet-the-boss`, בחנו אותו." }
+    ]
+  },
+  {
+    title: "עוד משהו?",
+    intro: "כל מה שעובד חדש היה צריך לדעת ביום הראשון, ולא שאלנו.",
+    optional: true,
+    questions: [
+      { id: "q13", title: "יש עוד משהו שחשוב שהעובד ידע?",
+        hint: "רשות. מה שלא נכנס לאף שאלה למעלה.",
+        md: null }
+    ]
+  }
+];
+
+const COUNTED = 12; // required: q0-q11; q12 (bonus) + q13 are optional, uncounted
+const store = window.localStorage;
+
+function el(tag, cls, html) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+function render() {
+  const root = document.getElementById("form-root");
+  PARTS.forEach(part => {
+    const card = el("section", "card");
+    const tparts = part.title.split(" · ");
+    card.appendChild(el("h2", "part-title", tparts.length === 2
+      ? '<span class="chip">' + tparts[0] + '</span>' + tparts[1]
+      : part.title));
+    card.appendChild(el("p", "part-intro", part.intro));
+    const count = el("p", "part-count");
+    count.dataset.part = part.title;
+    card.appendChild(count);
+    part.questions.forEach(q => {
+      const wrap = el("div", "q");
+      wrap.id = "wrap-" + q.id;
+      const t = el("p", "q-title", q.title + ' <span class="done-mark">✔ נענתה</span>');
+      wrap.appendChild(t);
+      wrap.appendChild(el("p", "q-hint", q.hint));
+      if (q.radio) {
+        const row = el("div", "radio-row");
+        row.setAttribute("role", "radiogroup");
+        row.setAttribute("aria-label", q.title);
+        q.options.forEach(opt => {
+          const lab = document.createElement("label");
+          const r = document.createElement("input");
+          r.type = "radio"; r.name = q.id; r.value = opt;
+          r.checked = store.getItem("misrad-" + q.id) === opt;
+          r.addEventListener("change", () => { store.setItem("misrad-" + q.id, opt); refresh(); });
+          lab.appendChild(r); lab.appendChild(document.createTextNode(opt));
+          row.appendChild(lab);
+        });
+        wrap.appendChild(row);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.id = q.id;
+        ta.setAttribute("aria-label", q.title);
+        ta.value = store.getItem("misrad-" + q.id) || "";
+        ta.addEventListener("input", () => {
+          store.setItem("misrad-" + q.id, ta.value);
+          refresh();
+        });
+        wrap.appendChild(ta);
+      }
+      card.appendChild(wrap);
+    });
+    root.appendChild(card);
+  });
+  refresh();
+}
+
+function answered(q) {
+  return (store.getItem("misrad-" + q.id) || "").trim().length > 0;
+}
+
+function samplesDone() { return store.getItem("misrad-samples-done") === "1"; }
+
+function refresh() {
+  let total = 0;
+  PARTS.forEach(part => {
+    let partDone = 0;
+    part.questions.forEach(q => {
+      const done = answered(q);
+      document.getElementById("wrap-" + q.id).classList.toggle("answered", done);
+      if (done) { partDone++; if (q.id !== "q13" && q.id !== "q12") total++; }
+    });
+    const counter = document.querySelector('[data-part="' + part.title + '"]');
+    counter.textContent = (part.optional || part.bonus)
+      ? (partDone ? "נענתה, תודה" : "רשות, אפשר לדלג")
+      : "נענו " + partDone + " מתוך " + part.questions.length;
+  });
+  const done = total + (samplesDone() ? 1 : 0);
+  const pill = document.getElementById("progress-pill");
+  const txt = done + "/" + (COUNTED + 1) + " הושלמו";
+  if (pill.textContent !== txt) pill.textContent = txt;
+  document.getElementById("progress-bar").style.width = (done / (COUNTED + 1) * 100) + "%";
+}
+
+function buildMarkdown() {
+  const today = new Date().toLocaleDateString("he-IL");
+  let md = '<div dir="rtl">\n\n';
+  md += "# העסק שלי: שאלון ההקמה החד פעמי (עברית)\n\n";
+  md += "> מולא דרך טופס ההקמה בתאריך " + today + ". `/meet-the-boss` קורא את הקובץ פעם\n";
+  md += "> אחת וכותב את ערכת-הקליטה (`core/`). ממלאים **פעם אחת לעסק**.\n\n";
+  PARTS.forEach(part => {
+    const val = id => (store.getItem("misrad-" + id) || "").trim();
+    if (part.optional) {
+      const extra = val("q13");
+      md += "## עוד משהו?\n\n";
+      md += "כל מה שעובד חדש היה צריך לדעת ביום הראשון, ולא שאלנו.\n\n";
+      if (extra) md += extra + "\n\n";
+      return;
+    }
+    md += "## " + part.title.replace(" · ", ": ") + "\n\n";
+    md += "*" + part.intro + "*\n\n";
+    part.questions.forEach(q => {
+      md += q.md + "\n\n";
+      const answer = val(q.id);
+      md += (answer ? answer : "(לא נענה בטופס)") + "\n\n";
+    });
+  });
+  md += "---\n\n";
+  md += "## והדוגמאות: לא כאן!\n\n";
+  md += "הדוגמאות לא נכנסות לקובץ הזה: שמרו לפחות 3 דברים שאתם כתבתם (אין תקרה, כל דוגמה\n";
+  md += "מחדדת) כקבצים נפרדים ב-`knowledge/samples/`, כל אחד בשם שאומר מה הוא\n";
+  md += "(`client-email.md`, `post-launch.md`...). רצוי פיזור: משהו שפרסמתם, מייל או הצעה\n";
+  md += "ששלחתם, סיכום או החלטה שכתבתם, ומסמך עבודה. משם העובד לומד את הקול שלכם.\n\n";
+  md += "## והקבצים הקיימים: גם לא כאן\n\n";
+  md += "מחירון, חוזה, הצעת מחיר ישנה, ההודעה שאתם שולחים שוב ושוב. אל תתארו אותם בטופס:\n";
+  md += "אספו אותם לתיקיית `inbox/`, והעובד יתייק אותם למקום הנכון.\n\n";
+  md += "</div>\n";
+  return md;
+}
+
+function unansweredCount() {
+  let n = 0;
+  PARTS.forEach(p => p.questions.forEach(q => { if (q.id !== "q13" && q.id !== "q12" && !answered(q)) n++; }));
+  return n;
+}
+
+function note(msg) { document.getElementById("action-note").textContent = msg; }
+
+document.addEventListener("DOMContentLoaded", () => {
+  render();
+
+  const chk = document.getElementById("samples-done");
+  chk.checked = samplesDone();
+  chk.addEventListener("change", () => {
+    store.setItem("misrad-samples-done", chk.checked ? "1" : "0");
+    refresh();
+  });
+
+  document.getElementById("btn-download").addEventListener("click", () => {
+    const missing = unansweredCount();
+    const blob = new Blob([buildMarkdown()], { type: "text/markdown;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "my-business-he.md";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    let msg = missing
+      ? "הקובץ ירד. נשארו " + missing + " שאלות פתוחות, אפשר להשלים אותן ישירות בקובץ."
+      : "הקובץ ירד. כל השאלות נענו, העובד הולך להכיר אתכם טוב.";
+    if (!samplesDone()) msg += " ואל תשכחו: תיקיית הדוגמאות.";
+    note(msg);
+  });
+
+  document.getElementById("btn-copy").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(buildMarkdown());
+      note("הקובץ הועתק ללוח. הדביקו אותו לתוך setup/my-business-he.md בתיקיית המשרד.");
+    } catch (e) {
+      note("ההעתקה נחסמה בדפדפן הזה. השתמשו בכפתור ההורדה.");
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ההכנה לסדנה | העובד הראשון שלך</title>
+<meta name="description" content="תשע משימות לפני הסדנה: מנוי, התקנות, בדיקה, שאלון ותיקיית דוגמאות. מגיעים מוכנים, בונים בזום.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5fb;
+    --ink: #16141f;
+    --dim: #55506b;
+    --muted: #6a6584;
+    --line: #e7e5f0;
+    --teal: #0d7d72;
+    --violet: #6d4de0;
+    --grad: linear-gradient(120deg, #0d9484, #6d4de0);
+    --font-body: 'Rubik', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { font-family: var(--font-body); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.8; }
+
+  .topbar { position: sticky; top: 0; z-index: 10; background: rgba(246,245,251,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+  .topbar .brand { font-weight: 700; font-size: 0.95rem; color: var(--ink); text-decoration: none; }
+  .topbar .progress-pill { font-size: 0.85rem; color: var(--dim); }
+  .progress-track { height: 3px; background: var(--line); }
+  .progress-bar { height: 100%; width: 0%; background: var(--grad); transition: width 0.4s ease; }
+
+  main { max-width: 680px; margin: 0 auto; padding: 30px 18px 90px; }
+
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px 22px; margin-bottom: 18px; box-shadow: 0 4px 18px rgba(38,30,80,0.05); animation: rise 0.5s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); font-weight: 700; line-height: 1.25; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .h1-underline { width: 84px; height: 5px; border-radius: 3px; background: var(--grad); margin-bottom: 16px; }
+  .opening p { color: var(--dim); font-size: 1.02rem; margin-bottom: 12px; }
+  .opening p:last-child { margin-bottom: 0; }
+  .opening strong { color: var(--ink); }
+
+  .phase { text-align: center; margin: 26px 0 16px; }
+  .phase span { display: inline-block; font-size: 0.95rem; font-weight: 700; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 22px; }
+
+  .task-head { display: flex; align-items: baseline; gap: 10px; }
+  .task-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--grad); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: 0.95rem; align-self: center; }
+  .task h2 { font-size: 1.12rem; font-weight: 700; flex: 1; }
+  .task .time { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+  .task-body { margin-top: 10px; color: var(--dim); font-size: 0.96rem; }
+  .task-body a { color: var(--violet); font-weight: 500; }
+  .task-body ul { list-style: none; display: grid; gap: 10px; margin-top: 8px; }
+  .task-body ul li { padding-inline-start: 22px; position: relative; }
+  .task-body ul li::before { content: "✦"; position: absolute; inset-inline-start: 0; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; }
+
+  .callout { margin-top: 12px; border: 1px solid var(--line); border-inline-start: 4px solid var(--violet); background: #f8f7fd; border-radius: 12px; padding: 12px 14px; color: var(--dim); font-size: 0.95rem; }
+  .callout strong { color: var(--ink); }
+  .callout.warn { border-inline-start-color: #d97706; background: #fdf8ef; }
+  .callout .w-icon { margin-inline-end: 6px; }
+
+  details.branch { margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; background: #fbfbfd; }
+  details.branch summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: 0.92rem; color: var(--ink); }
+  details.branch summary:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; border-radius: 12px; }
+  details.branch[open] summary { border-bottom: 1px solid var(--line); }
+  details.branch .b-body { padding: 10px 14px; font-size: 0.92rem; color: var(--dim); display: grid; gap: 8px; }
+  details.branch .b-body p strong { color: var(--ink); }
+
+  .check-row { margin-top: 14px; background: #fbfbfd; border: 1px solid #dcd9e8; border-radius: 12px; padding: 12px 14px; }
+  .check-row .how { font-size: 0.88rem; color: var(--teal); margin-bottom: 8px; }
+  .check-row label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 0.98rem; }
+  .check-row input { width: 20px; height: 20px; accent-color: var(--teal); flex-shrink: 0; }
+
+  .big-link { display: inline-block; background: var(--grad); color: #fff !important; font-weight: 700; border-radius: 12px; padding: 12px 26px; text-decoration: none; margin-top: 10px; }
+
+  h2.sec { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+  .support p { color: var(--dim); font-size: 0.96rem; }
+  .support a { color: var(--violet); font-weight: 500; }
+
+  footer { text-align: center; padding: 16px 18px 44px; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">העובד הראשון שלך</a>
+    <span class="progress-pill" id="progress-pill" role="status" aria-live="polite">0/9 הושלמו</span>
+  </div>
+  <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+</div>
+
+<main id="top">
+  <section class="card opening">
+    <h1>מגיעים מוכנים לסדנה</h1>
+    <div class="h1-underline"></div>
+    <p>
+      תראו, יש פה תהליך התקנה לא קצר, אבל באמת שהוא פשוט מאוד ומתאים לכל אחד!<br>
+      זה יכול להישמע קצת מלחיץ, במיוחד כששומעים "קלוד <strong>קוד</strong>",
+      אבל אל תחששו, זה בסך הכול רצף פעולות טכניות שצריך לבצע באופן
+      <strong>חד פעמי</strong>.
+    </p>
+    <div class="callout warn">
+      <span class="w-icon">⚠️</span><strong>חשוב מאוד:</strong><br>
+      מנוי בתשלום חובה. אי אפשר לעבוד עם המנוי החינמי.<br>
+      אני רוצה שבסדנה ממש תעבדו ותבנו על העסק האמיתי שלכם.<br>
+      בשביל זה הכול צריך להיות מותקן, ואתם צריכים להכין את כל החומרים של העסק
+      בתיקייה.
+    </div>
+    <p style="margin-top:12px;">
+      <strong>תתחילו כמה ימים לפני הסדנה</strong>, לא ערב לפני. בלי ההתקנות לא
+      תוכלו לעבוד בסדנה וחבל, זה כל הכיף!<br>
+      יש לנו שלוש שעות ביחד, נרצה להשקיע את כל הזמן בבנייה ולמידה ולא בהתקנות.
+    </p>
+    <p>
+      <strong>לעבוד מהמחשב (ועם אותו מחשב שתגיעו איתו לסדנה!), לא מהפלאפון ולא
+      מהטאבלט.</strong>
+    </p>
+  </section>
+
+  <div class="phase"><span>שלב א׳: החשבון וההתקנות</span></div>
+
+  <!-- ============ Task 1 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">1</div><h2>חשבון Claude בתשלום</h2><span class="time">כ-5 דקות</span></div>
+    <div class="task-body">
+      <p>אני מלמד בסדנה לעבוד עם Claude Code, וזה דורש מנוי בתשלום: Pro
+      (20$ לחודש) ומעלה. למי שבא לעבוד ברצינות, ההמלצה שלי: Max.
+      תזהרו, זה ממכר 😉</p>
+      <ul>
+        <li>נכנסים אל <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> ולוחצים Sign up. נרשמים עם המייל שלכם או עם חשבון Google. רואים: מסך השיחה של Claude, אתם בפנים.</li>
+        <li>פותחים את תפריט החשבון (לוחצים על השם או על סמל הפרופיל), בוחרים Settings, ומחפשים שם Billing או Plan. זה העמוד שמראה על איזה מסלול אתם.</li>
+        <li>כתוב שם Free? לוחצים Upgrade, בוחרים Pro או Max, וממלאים פרטי תשלום. בסיום, באותו עמוד יהיה כתוב Pro או Max.</li>
+      </ul>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם כשבעמוד ה-Billing של claude.ai כתוב Pro או Max.</p>
+      <label><input type="checkbox" data-task="1"><span>יש לי מנוי פעיל</span></label>
+    </div>
+  </section>
+
+  <!-- ============ Task 2 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">2</div><h2>מתקינים את Claude Code</h2><span class="time">כ-10 דקות</span></div>
+    <div class="task-body">
+      <ul>
+        <li>נכנסים אל <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> ולוחצים על כפתור ההורדה ל-Windows. הקובץ יורד לתיקיית Downloads.</li>
+        <li>לוחצים פעמיים על הקובץ שירד ומחכים שההתקנה תסתיים. בסיום Claude נפתח לבד, או שמוצאים אותו בתפריט Start.</li>
+        <li>לוחצים Sign in. נפתח דפדפן עם עמוד התחברות: מתחברים עם החשבון מהמשימה הקודמת ומאשרים. חוזרים לחלון של Claude (אם הוא לא קפץ לבד, לוחצים עליו בשורת המשימות למטה).</li>
+        <li>בחלק העליון של החלון, באמצע, יש שלוש לשוניות: Chat, Cowork, Code. לוחצים על <strong>Code</strong>. נפתח מסך עבודה שמציע לבחור תיקייה, ובלי שום בקשת שדרוג. זה הבית של העובד שלכם.</li>
+      </ul>
+      <details class="branch"><summary>Windows מציג חלון אזהרה כחול על הקובץ?</summary><div class="b-body">
+        <p>זה מסך הבדיקה של Windows (SmartScreen). לוחצים More info ובודקים את
+        שורת המפרסם: <strong>Publisher: Anthropic, PBC</strong>. זה מה שכתוב?
+        לוחצים Run anyway. כתוב שם אחר, או שאין שם מפרסם? עוצרים, לא מריצים,
+        וכותבים לי.</p>
+      </div></details>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם כשלשונית Code נפתחת ומציעה לבחור תיקייה, בלי בקשת שדרוג.</p>
+      <label><input type="checkbox" data-task="2"><span>Claude Code מותקן ומחובר</span></label>
+    </div>
+  </section>
+
+  <!-- ============ Task 3 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">3</div><h2>מתקינים את Obsidian ופותחים Vault</h2><span class="time">כ-10 דקות</span></div>
+    <div class="task-body">
+      <ul>
+        <li>נכנסים אל <a href="https://obsidian.md/download" target="_blank" rel="noopener">obsidian.md/download</a> ולוחצים על כפתור ההורדה ל-Windows.</li>
+        <li>לוחצים על הקובץ שירד. אם נפתחים מסכי התקנה, לוחצים Next בכולם בלי לשנות כלום, ובמסך האחרון Finish. בסיום האפליקציה נפתחת לבד.</li>
+        <li>במסך הפתיחה לוחצים <strong>Create new vault</strong> (כספת היא פשוט תיקייה שבה יחיו הקבצים שלכם).</li>
+        <li>נותנים שם באנגלית ובלי רווחים, למשל: my-office.</li>
+      </ul>
+      <div class="callout warn">
+        <span class="w-icon">⚠️</span>את ה-vault שומרים בתיקיית הבית שלכם במחשב (C:\Users\your-name).<br>
+        <strong>לא</strong> בתוך תיקייה שמסונכרנת לענן כמו OneDrive, Google Drive או iCloud.<br>
+        בהרבה מחשבים תיקיית Documents מסונכרנת ל-OneDrive בלי שיודעים, לכן תיקיית הבית עצמה הכי בטוחה.
+      </div>
+      <ul>
+        <li>בוחרים את המיקום, לוחצים Create, ונפתח vault ריק.<br>
+        זוכרים איפה שמתם אותו: נשתמש בו עוד מעט בבדיקה, וגם בסדנה.</li>
+      </ul>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם כש-Obsidian פתוחה עם ה-vault החדש שלכם (my-office).</p>
+      <label><input type="checkbox" data-task="3"><span>Obsidian מותקנת ויש לי vault</span></label>
+    </div>
+  </section>
+
+  <!-- ============ Task 4 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">4</div><h2>מתקינים את Git</h2><span class="time">כ-5 דקות</span></div>
+    <div class="task-body">
+      <div class="callout warn"><span class="w-icon">⚠️</span>התקנת חובה: בלעדיה לשונית Code לא עובדת על התיקיות שלכם.</div>
+      <ul>
+        <li>נכנסים אל <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">git-scm.com/downloads/win</a> ולוחצים על קישור ההורדה הראשון (Click here to download).</li>
+        <li>מריצים את הקובץ שירד. אם מופיעה אזהרת מפרסם: החותם הרשמי של Git for Windows הוא Johannes Schindelin. זה השם? ממשיכים. שם אחר? עוצרים ושואלים אותי.</li>
+        <li>יגיעו הרבה מסכי אפשרויות בזה אחר זה. לוחצים Next בכולם בלי לשנות כלום, גם במסכים שנראים מסובכים (בחירת עורך, שם ה-branch). בסוף לוחצים Finish.</li>
+        <li>סוגרים את Claude לגמרי ופותחים מחדש, כדי שיזהה את Git. אם נשאר סמל של Claude באזור השעון, קליק ימני עליו ואז Quit לפני הפתיחה מחדש.</li>
+      </ul>
+      <div class="callout">ההתקנה הזו נחשבת זמנית עד שמשימה 7 עוברת: אם הבדיקה
+      שם רצה עד הסוף, Git תקין אצלכם.</div>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם כשההתקנה הגיעה ל-Finish ו-Claude נסגר ונפתח. האימות הסופי: משימה 7.</p>
+      <label><input type="checkbox" data-task="4"><span>Git מותקן (האימות הסופי במשימה 7)</span></label>
+    </div>
+  </section>
+
+  <!-- ============ Task 5 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">5</div><h2>פותחים חשבון GitHub</h2><span class="time">כ-5 דקות</span></div>
+    <div class="task-body">
+      <p>בסדנה נשתמש בחשבון הזה לגיבוי הפרטי של המשרד שלכם. החשבון חינמי.</p>
+      <ul>
+        <li>נכנסים אל <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> וממלאים מייל, סיסמה ושם משתמש.</li>
+        <li>GitHub שולח קוד אימות למייל, מזינים אותו (לא הגיע? בודקים בספאם).</li>
+        <li>אם מוצע לכם להגדיר אימות דו-שלבי (2FA), עוקבים אחרי ההנחיות על המסך ושומרים את קודי הגיבוי במקום בטוח.</li>
+        <li>ולבדיקה שחשובה לסדנה: מתנתקים (Sign out מתפריט הפרופיל) ומתחברים שוב, כולל שלב האימות אם הגדרתם. נכנסתם בלי להיתקע? מצוין.</li>
+      </ul>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם כשהתנתקתם והתחברתם מחדש בהצלחה.</p>
+      <label><input type="checkbox" data-task="5"><span>יש לי חשבון GitHub וההתחברות עובדת</span></label>
+    </div>
+  </section>
+
+  <!-- ============ Task 6 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">6</div><h2>מוודאים שזום מוכן</h2><span class="time">כ-5 דקות</span></div>
+    <div class="task-body">
+      <ul>
+        <li>אין זום במחשב? מורידים מ-<a href="https://zoom.us/download" target="_blank" rel="noopener">zoom.us/download</a> את Zoom Workplace ומתקינים.</li>
+        <li>נכנסים אל <a href="https://zoom.us/test" target="_blank" rel="noopener">zoom.us/test</a> ולוחצים Join. נפתחת פגישת בדיקה שרק אתם בה.</li>
+        <li>עוברים את בדיקת הרמקול והמיקרופון של הפגישה, ובודקים שאתם רואים את עצמכם במצלמה.</li>
+      </ul>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם כשראיתם ושמעתם את עצמכם בפגישת הבדיקה.</p>
+      <label><input type="checkbox" data-task="6"><span>זום עובד אצלי</span></label>
+    </div>
+  </section>
+
+  <div class="phase"><span>שלב ב׳: בדיקה שהכול עובד</span></div>
+
+  <!-- ============ Task 7 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">7</div><h2>הבדיקה: הרגע הראשון עם העובד</h2><span class="time">כ-10 דקות</span></div>
+    <div class="task-body">
+      <p>המשימה הכי חשובה בהכנה. אם היא עוברת, כל המערכת שלכם עובדת: מהמנוי ועד הקובץ ב-Obsidian.</p>
+      <ul>
+        <li>פותחים את Claude ונכנסים ללשונית Code.</li>
+        <li>מוודאים שסביבת העבודה היא <strong>Local</strong> ושמצב האישורים הוא <strong>Manual</strong>. זו ברירת המחדל, אז ברוב המקרים אין מה לשנות.</li>
+        <li>מחפשים את כפתור <strong>Select folder</strong>, לוחצים, ובוחרים את תיקיית ה-vault שיצרתם במשימה 3 (my-office).</li>
+        <li>בתיבת הכתיבה מקלידים בדיוק: צור קובץ בשם hello.md ובתוכו ברכת שלום קצרה בעברית. ולוחצים Enter.</li>
+        <li>קלוד חושב רגע ואז מציג הצעת שינוי: קובץ חדש בשם hello.md והטקסט שהוא רוצה לכתוב, עם כפתורי <strong>Accept</strong> ו-Reject.<br>
+        זה לא תקוע, ככה עובדים איתו: הוא מציע, אתם מאשרים.<br>
+        קוראים את ההצעה ולוחצים Accept עליה. לא מפעילים אישור גורף לכל דבר, גם לא בהמשך.</li>
+        <li>ועכשיו הקסם: פותחים את Obsidian. הקובץ hello.md מופיע ב-vault שלכם, עם הברכה בפנים. זה בדיוק החיבור שנעבוד איתו בסדנה, והוא כבר עובד אצלכם.</li>
+      </ul>
+      <details class="branch"><summary>הודעה שמזכירה Git?</summary><div class="b-body">
+        <p>חוזרים רגע למשימה 4: אתחול מלא למחשב, ואם ההודעה חוזרת, מריצים שוב את
+        מתקין Git עד Finish, סוגרים ופותחים את Claude ומנסים שוב. עדיין תקוע?
+        כתבו לי.</p>
+      </div></details>
+      <details class="branch"><summary>קלוד עצר ולא ממשיך?</summary><div class="b-body">
+        <p>רוב הסיכויים שהוא פשוט מחכה לאישור שלכם. מחפשים על המסך הצעה עם כפתור
+        Accept ולוחצים עליו.</p>
+      </div></details>
+      <details class="branch"><summary>קלוד סיים אבל אין קובץ ב-Obsidian?</summary><div class="b-body">
+        <p>כנראה נבחרה תיקייה אחרת. בודקים איזו תיקייה מוצגת כפעילה בלשונית Code:
+        אם זה לא ה-vault שלכם, לוחצים Select folder, בוחרים אותו, ומבקשים שוב.</p>
+      </div></details>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם, חד וחלק: hello.md מופיע ב-Obsidian ויש בו את הברכה שביקשתם.</p>
+      <label><input type="checkbox" data-task="7"><span>הבדיקה עברה</span></label>
+    </div>
+  </section>
+
+  <div class="phase"><span>שלב ג׳: העסק שלכם</span></div>
+
+  <!-- ============ Task 8 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">8</div><h2>שאלון ההקמה</h2><span class="time">בקצב שלכם</span></div>
+    <div class="task-body">
+      <p>ממלאים שאלון על העסק, ובסוף מורידים קובץ מוכן. ממנו העובד יכיר אתכם.</p>
+      <a class="big-link" href="./questionnaire/">לשאלון ההקמה</a>
+      <ul style="margin-top:12px;">
+        <li>אפשר לעצור באמצע ולחזור להמשיך, באותו מחשב ואותו דפדפן.</li>
+        <li>בסוף לוחצים על כפתור ההורדה. הקובץ my-business-he.md יורד לתיקיית Downloads (לא מוצאים? Ctrl ו-J ביחד פותח את רשימת ההורדות של הדפדפן).</li>
+        <li>מעבירים אותו למקום שקל למצוא, שולחן העבודה מצוין. לא משנים את שם הקובץ, ומביאים אותו לסדנה.</li>
+      </ul>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם כשהקובץ my-business-he.md שמור אצלכם במקום שתמצאו.</p>
+      <label><input type="checkbox" data-task="8"><span>השאלון מולא והקובץ אצלי</span></label>
+    </div>
+  </section>
+
+  <!-- ============ Task 9 ============ -->
+  <section class="card task">
+    <div class="task-head"><div class="task-num">9</div><h2>תיקיית הדוגמאות</h2><span class="time">כ-15 דקות</span></div>
+    <div class="task-body">
+      <p>פותחים תיקייה אחת במחשב ואוספים אליה דברים שאתם כתבתם.<br>
+      מהדוגמאות האלה העובד לומד את הקול שלכם.</p>
+      <div class="callout warn">
+        <span class="w-icon">⚠️</span>כלל אחד שמלווה את כל האיסוף: שם או פרט רגיש
+        של לקוח שלא צריך לחיות בקובץ, מחליפים ל-[שם] כבר עכשיו, בזמן האיסוף.
+      </div>
+      <ul>
+        <li>פוסטים שפרסמתם: פייסבוק, אינסטגרם, לינקדאין.</li>
+        <li>הצעת מחיר ששלחתם.</li>
+        <li>שיחות וואטסאפ עם לקוחות. גם כאן, שם רגיש מחליפים ל-[שם].</li>
+        <li>מיילים ללקוחות, ניוזלטר, סיכום פגישה.</li>
+        <li>וגם קבצים של העסק: מחירון, חוזה, ההודעה שאתם שולחים שוב ושוב.</li>
+      </ul>
+      <p style="margin-top:8px;">לפחות 3, אין תקרה. דוגמה טובה היא טקסט שכתבתם
+      בעצמכם, כמו שהוא, בלי לערוך וליפות. עדיף קובץ טקסט על צילום מסך, ועדיף
+      ייצוא צ'אט על תמונות של השיחה. לא צריך לסדר כלום, בסדנה נלמד את העובד
+      מהכול.</p>
+      <details class="branch"><summary>ייצוא צ'אט מוואטסאפ? ככה:</summary><div class="b-body">
+        <p><strong>באנדרואיד:</strong> פותחים את השיחה, תפריט שלוש הנקודות, More
+        ואז Export chat, בוחרים Without media, ושולחים לעצמכם למייל.<br>
+        <strong>באייפון:</strong> פותחים את השיחה, לוחצים על השם של איש הקשר או
+        הקבוצה למעלה, גוללים ל-Export Chat, ובוחרים Without Media.<br>
+        מורידים את הקובץ מהמייל אל תיקיית הדוגמאות.</p>
+      </div></details>
+    </div>
+    <div class="check-row">
+      <p class="how">סיימתם כשפותחים את התיקייה ורואים בה לפחות 3 דוגמאות שלכם.</p>
+      <label><input type="checkbox" data-task="9"><span>תיקיית הדוגמאות מוכנה</span></label>
+    </div>
+  </section>
+
+  <!-- ============ Support ============ -->
+  <section class="card support">
+    <h2 class="sec">לא לבד</h2>
+    <p>
+      נתקעתם באחת המשימות? כתבו לי <a href="https://wa.me/972503991358?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%90%D7%A0%D7%99%20%D7%91%D7%94%D7%9B%D7%A0%D7%94%20%D7%9C%D7%A1%D7%93%D7%A0%D7%94%20%D7%95%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94">בוואטסאפ</a>
+      מה ניסיתם ומה רואים על המסך (צילום מסך עוזר מאוד).
+      לכל סדנה יש גם קבוצת וואטסאפ, את הקישור תקבלו ממני עם ההרשמה.
+      והזום נפתח חצי שעה לפני הסדנה: מי שרוצה עזרה בהתקנות, בואו מוקדם ונסדר
+      הכול ביחד.
+      ודבר אחרון: מחשב של עבודה שחוסם התקנות? לא נלחמים בו, מדברים עם ה-IT
+      שלכם או איתי.
+    </p>
+  </section>
+</main>
+
+<footer>
+  העובד הראשון שלך · סדנה חיה בזום
+</footer>
+
+<script>
+const store = window.localStorage;
+const TASKS = 9;
+
+function refresh() {
+  let done = 0;
+  document.querySelectorAll("input[data-task]").forEach(c => { if (c.checked) done++; });
+  const pill = document.getElementById("progress-pill");
+  const txt = done === TASKS ? "9/9 מוכנים לסדנה ✔" : done + "/" + TASKS + " הושלמו";
+  if (pill.textContent !== txt) pill.textContent = txt;
+  document.getElementById("progress-bar").style.width = (done / TASKS * 100) + "%";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("input[data-task]").forEach(c => {
+    c.checked = store.getItem("misrad-prep-" + c.dataset.task) === "1";
+    c.addEventListener("change", () => {
+      store.setItem("misrad-prep-" + c.dataset.task, c.checked ? "1" : "0");
+      refresh();
+    });
+  });
+  refresh();
+});
+</script>
+</body>
+</html>
