@@ -331,21 +331,32 @@
     margin-bottom: 0.6rem;
   }
   .hero h1 .h1-say { display: block; text-wrap: balance; }
-  /* the question turns on the reader. It already owns its own line;
-     the colour is the second channel, never the only one, and it carries
-     no underline so it cannot be mistaken for something to press. */
+  /* the H1's second clause: the kick under the claim. It is subordinate by
+     SIZE (0.72 of the H1) so it reads as a rider, never as a second headline -
+     the profile's rule that hierarchy comes from size. Colour is the second
+     channel, never the only one, and it carries no underline so it cannot be
+     mistaken for something to press. */
   .hero h1 .h1-ask {
+    text-wrap: balance;
     display: block;
-    margin-top: 0.12em;
+    font-size: 0.72em;
+    line-height: 1.2;
+    margin-top: 0.34em;
+    letter-spacing: -0.02em;
     color: var(--acc);
     text-decoration: none;
   }
 
+  /* a number and its unit, and the H1's last two words, never split across
+     lines - at 390px the violet clause was orphaning its final word. */
+  .nb { white-space: nowrap; }
+
   /* below the headline: what the thing actually is. Grey, so it reads as
      the fact line it is and never competes with the spoken paragraph.
      It is bound TIGHT to the H1 and opens a real gap under itself, so it
-     reads as a caption on the headline and never as a clause interrupting
-     `ואצלך?` and the verb chain it governs. */
+     reads as a caption on the headline. It also carries the disambiguation:
+     the H1 names a monthly price, and סדנה plus בזום are what stop the page
+     reading as a subscription sold here. */
   .fold-what {
     font-size: 1.15rem;
     font-weight: 500;
@@ -695,10 +706,10 @@
       <div class="wrap">
         <p class="eyebrow rev">בלי לכתוב שורת קוד, ובלי להיות איש מחשבים</p>
         <h1>
-          <span class="h1-say">העסק שלי כבר לא נמצא רק אצלי בראש, הוא בתיקייה על המחשב.</span>
-          <span class="h1-ask">ואצלך?</span>
+          <span class="h1-say">אתה באמת יכול לקבל עובד מצטיין במחיר של <span class="nb">100 דולר</span> בחודש.</span>
+          <span class="h1-ask">יותר זול מבנאדם ויותר מהר <span class="nb">ללמד אותו.</span></span>
         </h1>
-        <p class="fold-what rev">סדנה של שלוש שעות בזום</p>
+        <p class="fold-what rev">סדנה של שלוש שעות בזום, ואתה לומד איך לגייס את העובד שלך.</p>
         <p class="said rev">
           <span class="b-frag">פותח צ'אט, מסביר, מעתיק, מדביק.</span>
           <span class="b-pain">הוא כבר מכיר אותך, הדברים עובדים, אבל משהו עדיין לא 100, הוא לא באמת <strong>עובד איתך</strong> או <strong>בשבילך</strong>, אתה כל הזמן אומר לו מה לעשות.</span>
