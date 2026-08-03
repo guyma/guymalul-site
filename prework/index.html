@@ -8,78 +8,113 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+  /* ===========================================================
+     The locked brand language (core/design in guy-hq is the truth).
+     Flat white ground, ONE warm coral - the fill means "you can
+     press this", coloured TEXT is always the dark accent. Colour
+     that cannot be pressed is a mark and a line. Cards are the
+     discrete completable things (the tasks); everything else sits
+     on the ground. A workshop-prep page: desktop first.
+     =========================================================== */
   :root {
-    --bg: #f6f5fb;
-    --ink: #16141f;
-    --dim: #55506b;
-    --muted: #6a6584;
-    --line: #e7e5f0;
-    --teal: #0d7d72;
-    --violet: #6d4de0;
-    --grad: linear-gradient(120deg, #0d9484, #6d4de0);
-    --font-body: 'Rubik', sans-serif;
+    --ground: #ffffff;
+    --tone:   #fef0ec;   /* groups; here it holds the support panel */
+    --ink:    #2b1f1c;   /* ~15:1 on white */
+    --body:   #6b5a55;   /* ~6.3:1 */
+    --muted:  #7d6e69;   /* ~5:1 */
+    --line:      #eee6e3;
+    --line-tone: #f4d8d0;
+    --acc:      #d4654e;   /* fills only; white on it is the brand's one AA exception */
+    --acc-d:    #a84634;   /* ~5.6:1 on white - coloured TEXT and hover */
+    --acc-tint: #fdeae4;   /* flat wash, never a gradient */
+    --acc-line: #f0c4b8;
+    --elev-1: 0 3px 10px rgba(212,101,78,.12);  /* the locked soft card shadow */
+    --font: 'Rubik', system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { overflow-x: hidden; }
-  body { font-family: var(--font-body); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.8; }
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { overflow-x: hidden; max-width: 100%; }
+  body { font-family: var(--font); font-size: 17px; background: var(--ground); color: var(--body); -webkit-font-smoothing: antialiased; line-height: 1.75; overflow-wrap: break-word; }
+  ::selection { background: var(--acc-tint); }
+  :focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
 
-  .topbar { position: sticky; top: 0; z-index: 10; background: rgba(246,245,251,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-  .topbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
-  .topbar .brand { font-weight: 700; font-size: 0.95rem; color: var(--ink); text-decoration: none; }
-  .topbar .progress-pill { font-size: 0.85rem; color: var(--dim); }
+  strong { color: var(--ink); font-weight: 700; }
+  a { color: var(--acc-d); font-weight: 500; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+
+  /* the top bar: flat white, a hairline, and the one flat coral progress fill */
+  .topbar { position: sticky; top: 0; z-index: 10; background: var(--ground); border-bottom: 1px solid var(--line); }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 12px 20px; }
+  .topbar .brand { font-weight: 700; font-size: 0.95rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .topbar .progress-pill { font-size: 0.85rem; color: var(--muted); }
   .progress-track { height: 3px; background: var(--line); }
-  .progress-bar { height: 100%; width: 0%; background: var(--grad); transition: width 0.4s ease; }
+  .progress-bar { height: 100%; width: 0%; background: var(--acc); transition: width 0.4s ease; }
 
-  main { max-width: 680px; margin: 0 auto; padding: 30px 18px 90px; }
+  main { max-width: 720px; margin: 0 auto; padding: 40px 20px 90px; }
 
-  .card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 26px 22px; margin-bottom: 18px; box-shadow: 0 4px 18px rgba(38,30,80,0.05); animation: rise 0.5s ease both; }
-  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  /* the task card: 16px corners, the tinted hairline, the locked soft shadow.
+     Not pressable, so it never lifts and never wears the fill. */
+  .card { background: var(--ground); border: 1px solid var(--line-tone); border-radius: 16px; padding: 28px 24px; margin-bottom: 20px; box-shadow: var(--elev-1); }
 
-  h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); font-weight: 700; line-height: 1.25; margin-bottom: 6px; letter-spacing: -0.01em; }
-  .h1-underline { width: 84px; height: 5px; border-radius: 3px; background: var(--grad); margin-bottom: 16px; }
-  .opening p { color: var(--dim); font-size: 1.02rem; margin-bottom: 12px; }
+  /* the opening is a section, not a choosable thing - no card clothes */
+  .card.opening { border: none; box-shadow: none; border-radius: 0; padding: 8px 0 6px; margin-bottom: 8px; }
+
+  h1 { color: var(--ink); font-size: clamp(1.9rem, 4.5vw, 2.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.02em; text-wrap: balance; }
+  /* under the H1: the mark - a solid accent rule, none of the button's clothes */
+  .h1-underline { width: 44px; height: 5px; border-radius: 0; background: var(--acc); margin-bottom: 18px; }
+  .opening p { margin-bottom: 12px; }
   .opening p:last-child { margin-bottom: 0; }
-  .opening strong { color: var(--ink); }
 
-  .phase { text-align: center; margin: 26px 0 16px; }
-  .phase span { display: inline-block; font-size: 0.95rem; font-weight: 700; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 22px; }
+  /* the phase marker: the kicker signature - mark and line, never a pill */
+  .phase { display: flex; align-items: center; gap: 10px; margin: 44px 0 18px; }
+  .phase::before { content: ""; flex: none; width: 22px; height: 4px; background: var(--acc); }
+  .phase span { font-size: 15px; font-weight: 500; color: var(--acc-d); }
 
-  .task-head { display: flex; align-items: baseline; gap: 10px; }
-  .task-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--grad); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: 0.95rem; align-self: center; }
-  .task h2 { font-size: 1.12rem; font-weight: 700; flex: 1; }
+  .task-head { display: flex; align-items: baseline; gap: 12px; }
+  .task-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--acc); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: 0.95rem; align-self: center; }
+  .task h2 { color: var(--ink); font-size: 19px; font-weight: 700; flex: 1; }
   .task .time { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
-  .task-body { margin-top: 10px; color: var(--dim); font-size: 0.96rem; }
-  .task-body a { color: var(--violet); font-weight: 500; }
+  .task-body { margin-top: 12px; font-size: 0.96rem; }
   .task-body ul { list-style: none; display: grid; gap: 10px; margin-top: 8px; }
-  .task-body ul li { padding-inline-start: 22px; position: relative; }
-  .task-body ul li::before { content: "✦"; position: absolute; inset-inline-start: 0; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; }
+  .task-body ul li { padding-inline-start: 24px; position: relative; }
+  /* the list marker echoes the mark: a small solid accent rule, flat */
+  .task-body ul li::before { content: ""; position: absolute; inset-inline-start: 0; top: 0.62em; width: 12px; height: 3px; background: var(--acc); }
 
-  .callout { margin-top: 12px; border: 1px solid var(--line); border-inline-start: 4px solid var(--violet); background: #f8f7fd; border-radius: 12px; padding: 12px 14px; color: var(--dim); font-size: 0.95rem; }
-  .callout strong { color: var(--ink); }
-  .callout.warn { border-inline-start-color: #d97706; background: #fdf8ef; }
+  /* the plain note: an aside - an indent and a hairline, never a box */
+  .callout { margin-top: 14px; padding-inline-start: 1.1rem; border-inline-start: 2px solid var(--line); color: var(--ink); font-size: 0.95rem; }
+  /* the constraint: the tint frame with the accent spine; the icon and the
+     bold opening word carry the meaning, the colour only sets temperature */
+  .callout.warn { padding: 13px 16px; border: 1px solid var(--acc-line); border-inline-start: 4px solid var(--acc); background: var(--acc-tint); border-radius: 16px; }
   .callout .w-icon { margin-inline-end: 6px; }
 
-  details.branch { margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; background: #fbfbfd; }
-  details.branch summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: 0.92rem; color: var(--ink); }
-  details.branch summary:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; border-radius: 12px; }
+  details.branch { margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--ground); }
+  details.branch summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: 0.92rem; color: var(--ink); }
+  details.branch summary:focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; border-radius: 12px; }
   details.branch[open] summary { border-bottom: 1px solid var(--line); }
-  details.branch .b-body { padding: 10px 14px; font-size: 0.92rem; color: var(--dim); display: grid; gap: 8px; }
-  details.branch .b-body p strong { color: var(--ink); }
+  details.branch .b-body { padding: 10px 14px; font-size: 0.92rem; color: var(--body); display: grid; gap: 8px; }
 
-  .check-row { margin-top: 14px; background: #fbfbfd; border: 1px solid #dcd9e8; border-radius: 12px; padding: 12px 14px; }
-  .check-row .how { font-size: 0.88rem; color: var(--teal); margin-bottom: 8px; }
-  .check-row label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 0.98rem; }
-  .check-row input { width: 20px; height: 20px; accent-color: var(--teal); flex-shrink: 0; }
+  /* the completion line: a hairline over the card's foot, no box. The "how you
+     know you're done" line is coloured text, so it is the dark accent. */
+  .check-row { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-tone); }
+  .check-row .how { font-size: 0.9rem; font-weight: 500; color: var(--acc-d); margin-bottom: 8px; }
+  .check-row label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 500; font-size: 1rem; color: var(--ink); }
+  .check-row input { width: 20px; height: 20px; accent-color: var(--acc); flex-shrink: 0; }
 
-  .big-link { display: inline-block; background: var(--grad); color: #fff !important; font-weight: 700; border-radius: 12px; padding: 12px 26px; text-decoration: none; margin-top: 10px; }
+  /* the pressable signature: flat solid fill, 12px rounded rectangle */
+  .big-link { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; background: var(--acc); color: #fff !important; font-weight: 500; border-radius: 12px; padding: 10px 26px; text-decoration: none; margin-top: 10px; transition: background-color 0.15s ease; }
+  .big-link:hover, .big-link:focus-visible { background: var(--acc-d); }
 
-  h2.sec { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
-  .support p { color: var(--dim); font-size: 0.96rem; }
-  .support a { color: var(--violet); font-weight: 500; }
+  h2.sec { color: var(--ink); font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+  /* the support panel: the one tone ground, grouping the close */
+  .card.support { background: var(--tone); border: none; box-shadow: none; }
+  .support p { font-size: 0.96rem; }
 
   footer { text-align: center; padding: 16px 18px 44px; color: var(--muted); font-size: 0.9rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
 </style>
 </head>
 <body>

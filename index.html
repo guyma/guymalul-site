@@ -27,28 +27,28 @@
 <meta name="twitter:image" content="https://guymalul.co.il/og-card.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   /* ===========================================================
-     The ground is flat and it never moves. ONE hue, and it means
-     one thing: you can press this. It arrives as whole blocks with
-     hard edges, never as a tint over the page. Hierarchy comes from
-     size and space, not from hue and not from weight 800.
-     Anything coloured that you CANNOT press carries no fill and no
-     frame - it is a mark and a line.
+     The locked brand language (core/design in guy-hq is the truth).
+     The ground is flat white and never moves. ONE warm coral, and it
+     means one thing: you can press this. It arrives as whole blocks
+     with generous rounded corners, never as a tint over the page.
+     Hierarchy comes from size and space. Anything coloured that you
+     CANNOT press carries no fill and no frame - a mark and a line.
      =========================================================== */
   :root {
     --ground: #ffffff;
-    --tone:   #f4f2ff;   /* one second tone, to GROUP two sections */
-    --ink:    #0a0a0a;   /* 19.8:1 on white */
-    --body:   #5a5a5a;   /* 6.9:1  */
-    --muted:  #6e6e6e;   /* 5.1:1 - the secondary greys have to clear AA too */
-    --line:   #e6e6e6;
-    --line-tone: #ddd8fb;
-    --acc:      #3b1cf0;   /* white on it 8.0:1; on white 8.0:1 */
-    --acc-d:    #2e13c4;   /* 10.5:1 on white - label text and hover */
-    --acc-tint: #eae5fe;   /* a flat wash, never a gradient */
-    --acc-line: #cec3fc;
+    --tone:   #fef0ec;   /* one second tone, to GROUP two sections */
+    --ink:    #2b1f1c;   /* ~15:1 on white */
+    --body:   #6b5a55;   /* ~6.3:1 */
+    --muted:  #7d6e69;   /* ~5:1 - the secondary greys have to clear AA too */
+    --line:   #eee6e3;
+    --line-tone: #f4d8d0;
+    --acc:      #d4654e;   /* fills only; white on it is the brand's one AA exception */
+    --acc-d:    #a84634;   /* ~5.6:1 on white - coloured TEXT and hover */
+    --acc-tint: #fdeae4;   /* a flat wash, never a gradient */
+    --acc-line: #f0c4b8;
     --font: 'Rubik', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     --bar: 52px;
@@ -77,7 +77,7 @@
   /* ---------- structure ---------- */
   main { position: relative; }
   /* the skip link IS pressable, so it wears the page's pressable signature -
-     the fill and the 4px corner. Off-screen until focused, first tab stop. */
+     the fill and the 12px rounded corner. Off-screen until focused, first tab stop. */
   .skip {
     position: fixed;
     inset-inline-start: var(--pad-x);
@@ -87,7 +87,7 @@
     align-items: center;
     min-height: 44px;
     padding: 0.55rem 1.15rem;
-    border-radius: 4px;
+    border-radius: 12px;
     background: var(--acc);
     color: #ffffff;
     font-size: 0.95rem;
@@ -114,7 +114,7 @@
   /* ---------- type ---------- */
   h1, h2 {
     color: var(--ink);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.025em;
     line-height: 1.12;
   }
@@ -128,9 +128,9 @@
 
   p { margin-bottom: 1.15rem; }
   p:last-child { margin-bottom: 0; }
-  strong { color: var(--ink); font-weight: 600; }
+  strong { color: var(--ink); font-weight: 700; }
 
-  a { color: var(--acc); font-weight: 500; }
+  a { color: var(--acc-d); font-weight: 500; }
   .body-link {
     display: inline-block;
     padding: 0.9rem 0.25rem;
@@ -151,7 +151,7 @@
   /* the line a section lands on */
   .verdict {
     font-size: 1.28rem;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.4;
     color: var(--ink);
     margin: 1.7rem 0 1.5rem;
@@ -176,7 +176,7 @@
     text-wrap: balance;
   }
   .pull-key {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.12em;
     letter-spacing: -0.035em;
   }
@@ -213,7 +213,7 @@
     align-items: center;
     min-height: 44px;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--ink);
     text-decoration: none;
@@ -224,7 +224,7 @@
     justify-content: center;
     min-height: 40px;
     padding: 0.3rem 0.95rem;
-    border-radius: 4px;
+    border-radius: 12px;
     background: var(--acc);
     color: #ffffff;
     font-weight: 500;
@@ -238,9 +238,9 @@
      at every real phone width there is room and it stays on one line. */
   .topbar .brand, .topbar .topbar-btn { min-width: 0; }
 
-  /* ---------- buttons: flat solid fill, hard corner, no gradient, no glow ----------
-     The 4px corner plus a saturated fill is the page's ONE pressable signature.
-     Nothing that cannot be pressed is allowed to wear it. */
+  /* ---------- buttons: flat solid fill, rounded rectangle, no gradient, no glow ----------
+     The 12px corner plus a saturated fill is the page's ONE pressable signature -
+     never a pill. Nothing that cannot be pressed is allowed to wear it. */
   .btn {
     display: flex;
     align-items: center;
@@ -249,7 +249,7 @@
     max-width: 420px;
     min-height: 54px;
     padding: 0.85rem 1.8rem;
-    border-radius: 4px;
+    border-radius: 12px;
     background: var(--acc);
     color: #ffffff;
     font-size: 1.06rem;
@@ -270,7 +270,7 @@
     min-height: 46px;
     padding: 0.65rem 1.25rem;
     border: 1.5px solid var(--acc);
-    border-radius: 4px;
+    border-radius: 12px;
     background: var(--acc);
     color: #ffffff;
     font-size: 0.95rem;
@@ -370,7 +370,7 @@
   .said { font-size: 1.0625rem; line-height: 1.65; margin-bottom: 0; }
   .said .b-frag { display: block; color: var(--ink); font-weight: 500; margin-bottom: 0.5rem; }
   .said .b-pain { display: block; }
-  .said .b-punch { display: block; color: var(--ink); font-weight: 600; margin-top: 0.75rem; }
+  .said .b-punch { display: block; color: var(--ink); font-weight: 700; margin-top: 0.75rem; }
 
   /* the turn: the fold's second movement, and its payoff. It sits on WHITE -
      the full-colour panel that used to carry it was rejected as too strong and
@@ -385,7 +385,7 @@
      answers - and the colour panel had been hiding that. */
   .turn .brand-peak {
     font-size: clamp(2.3rem, 10.2vw, 3.3rem);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.1;
     color: var(--ink);
@@ -406,9 +406,9 @@
   .turn .method { margin-bottom: 0; font-size: 1.12rem; }
   .turn .cta-row { margin-top: 2.4rem; }
   /* on the closing colour block the button inverts: white is what you press there */
-  .final .btn { background: #ffffff; color: var(--acc); }
-  .final .btn:hover, .final .btn:focus-visible { background: #e6e0fe; }
-  .final .soft-line { color: #cec3fc; }
+  .final .btn { background: #ffffff; color: var(--acc-d); }
+  .final .btn:hover, .final .btn:focus-visible { background: var(--acc-tint); }
+  .final .soft-line { color: #ffe0d6; }
   .final .soft-line a { color: #ffffff; }
 
   /* ---------- the pair table: hairline rows, hierarchy in ink ---------- */
@@ -453,7 +453,7 @@
     padding: 1rem 1.15rem 1.05rem;
     border: 1px solid var(--co-line);
     border-inline-start: 3px solid var(--co-edge);
-    border-radius: 4px;
+    border-radius: 16px;
     background: var(--co-bg);
     color: var(--ink);
   }
@@ -462,7 +462,7 @@
   .callout .co-label {
     display: block;
     font-size: 0.76rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.05em;
     line-height: 1.5;
     color: var(--co-text);
@@ -500,7 +500,7 @@
     background: var(--acc);
     color: #ffffff;
     font-size: 0.72rem;
-    font-weight: 600;
+    font-weight: 700;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -517,7 +517,7 @@
     border: 1.5px solid #c4c4c4;
     color: var(--ink);
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 700;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -532,7 +532,7 @@
     background: var(--acc);
     color: #ffffff;
     font-size: 0.72rem;
-    font-weight: 600;
+    font-weight: 700;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -544,7 +544,7 @@
   .price-figure {
     display: block;
     font-size: clamp(3.2rem, 15vw, 4.6rem);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.045em;
     line-height: 1.1;
     color: var(--acc);
@@ -553,14 +553,15 @@
   .offer {
     background: var(--ground);
     border: 1px solid var(--acc-line);
-    border-radius: 4px;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(212, 101, 78, 0.12);
     padding: clamp(1.3rem, 5vw, 1.9rem);
     margin-bottom: 1.6rem;
   }
   .offer .gets { margin: 0.9rem 0 0; }
   .offer .gets li { border-color: var(--line); }
   .offer .gets li:last-child { border-bottom: none; padding-bottom: 0; }
-  .stack-title { color: var(--ink); font-weight: 600; margin-bottom: 0; }
+  .stack-title { color: var(--ink); font-weight: 700; margin-bottom: 0; }
 
   /* ---------- FAQ ---------- */
   .faq-list { margin-top: 0.4rem; }
@@ -602,7 +603,7 @@
   section.final { background: var(--acc); border-top: none; }
   .final h2 { color: #ffffff; }
   .final .lead { color: #ffffff; font-size: 1.18rem; font-weight: 500; line-height: 1.55; }
-  .final .after { margin-top: 1.2rem; margin-bottom: 0; color: #e6e0fe; }
+  .final .after { margin-top: 1.2rem; margin-bottom: 0; color: #ffe0d6; }
 
   footer {
     padding: 2.4rem var(--pad-x) 3rem;
@@ -706,10 +707,10 @@
       <div class="wrap">
         <p class="eyebrow rev">בלי לכתוב שורת קוד, ובלי להיות איש מחשבים</p>
         <h1>
-          <span class="h1-say">אתה באמת יכול לקבל עובד מצטיין במחיר של <span class="nb">100 דולר</span> בחודש.</span>
-          <span class="h1-ask">יותר זול מבנאדם ויותר מהר <span class="nb">ללמד אותו.</span></span>
+          <span class="h1-say">מספיק להאכיל את הצ'אט <span class="nb">בכפית.</span></span>
+          <span class="h1-ask">בסדנה אחת אתה לומד לגייס עובד AI שמכיר את <span class="nb">העסק שלך.</span></span>
         </h1>
-        <p class="fold-what rev">סדנה של שלוש שעות בזום, ואתה לומד איך לגייס את העובד שלך.</p>
+        <p class="fold-what rev">סדנה של שלוש שעות בזום.</p>
         <p class="said rev">
           <span class="b-frag">פותח צ'אט, מסביר, מעתיק, מדביק.</span>
           <span class="b-pain">הוא כבר מכיר אותך, הדברים עובדים, אבל משהו עדיין לא 100, הוא לא באמת <strong>עובד איתך</strong> או <strong>בשבילך</strong>, אתה כל הזמן אומר לו מה לעשות.</span>
@@ -777,8 +778,8 @@
         בפנים יושבים קבצים, ובקבצים האלה יושב מה שהעובד יודע עליך.</p>
         <p class="verdict rev">זה הכל. ובגלל זה זה עובד.</p>
 
-        <p class="rev">ואל תדאג, הכנתי לך מדריך מפורט ומסודר, שעתיים של הכנה לפני שאתה מתחיל.<br>
-        חוץ ממנו צריך רק מחשב Windows שאיתו אתה מגיע לזום, ומנוי Claude בתשלום.</p>
+        <p class="rev">ואל תדאג, הכנתי לך מדריך מפורט ומסודר. בערך שעתיים של עבודה, פרושות על כמה ימים לפני הסדנה.<br>
+        חוץ ממנו <strong>צריך מחשב Windows</strong>, איתו אתה מגיע לזום, ומנוי Claude בתשלום. העסק שלך על מק? כתוב לי לפני שנקבע.</p>
 
         <div class="callout callout--warn rev">
           <svg class="co-ic" aria-hidden="true"><use href="#ic-warn"/></svg>
@@ -951,7 +952,8 @@
           </details>
           <details class="rev">
             <summary><span>כמה זה עולה לי מעבר למחיר הסדנה?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">מנוי Claude בתשלום. Pro זה 20 דולר לחודש, Max יותר נוח ויותר יקר.<br>
+            <div class="faq-body">מנוי Claude בתשלום. Pro זה 20 דולר לחודש, ומספיק להתחיל.<br>
+            Max בסביבות 100 דולר בחודש, ואיתו עובדים בלי לחשוב על מכסות. עדיין יותר זול מבנאדם.<br>
             עם החינמי אי אפשר לעבוד, וזה לא הערה קטנה, זה תנאי סף.<br>
             שאר ההתקנות לא עולות כלום.</div>
           </details>
@@ -966,6 +968,12 @@
             <div class="faq-body">הקבצים יושבים במחשב שלך, בתיקייה שלך. לא אצלי ולא בשרת שלי.<br>
             מה שאתה שולח ל-Claude עובר ל-Claude, בדיוק כמו בצ'אט שאתה עובד איתו היום.<br>
             לי אין גישה לקבצים שלך, לא בסדנה ולא אחריה.</div>
+          </details>
+          <details class="rev">
+            <summary><span>מי מחליט מה הוא עושה?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">אתה. הוא קורא וממליץ, ולא נוגע בלי אישור שלך.<br>
+            מייל שיוצא, שינוי, מחיקה, הכל מחכה למילה שלך.<br>
+            אתה המנהל. הוא העובד.</div>
           </details>
           <details class="rev">
             <summary><span>הכלים משתנים כל חודש. מה יישאר לי בעוד שנה?</span><span class="tog" aria-hidden="true">+</span></summary>

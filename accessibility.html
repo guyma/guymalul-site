@@ -9,22 +9,24 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  /* The locked site theme, unchanged: white ground, one electric violet,
-     hard 4px corners, Rubik in three weights, hierarchy from size.
-     A secondary page carries no colour block and no animation. */
+  /* The locked brand language (core/design in guy-hq is the truth):
+     white ground, one warm coral - the fill means "you can press this",
+     coloured TEXT is always the dark accent - Rubik 400/500/700, 12px
+     corners on every pressable. A secondary page carries no colour
+     block and no animation. */
   :root {
     --ground: #ffffff;
-    --tone:   #f4f2ff;
-    --ink:    #0a0a0a;   /* 19.8:1 on white */
-    --body:   #5a5a5a;   /* 6.9:1  */
-    --muted:  #6e6e6e;   /* 5.1:1  */
-    --line:   #e6e6e6;
-    --acc:      #3b1cf0;   /* 8.0:1 on white, both ways */
-    --acc-d:    #2e13c4;   /* 10.5:1 on white */
-    --acc-tint: #eae5fe;
-    --acc-line: #cec3fc;
+    --tone:   #fef0ec;
+    --ink:    #2b1f1c;   /* ~15:1 on white */
+    --body:   #6b5a55;   /* ~6.3:1 */
+    --muted:  #7d6e69;   /* ~5:1   */
+    --line:   #eee6e3;
+    --acc:      #d4654e;   /* fills only; white on it is the brand's one AA exception */
+    --acc-d:    #a84634;   /* ~5.6:1 on white - coloured TEXT and hover */
+    --acc-tint: #fdeae4;
+    --acc-line: #f0c4b8;
     --font: 'Rubik', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     --bar: 52px;
@@ -52,7 +54,7 @@
 
   ::selection { background: var(--acc-tint); }
 
-  a { color: var(--acc); font-weight: 500; }
+  a { color: var(--acc-d); font-weight: 500; }
 
   /* the skip link IS pressable, so it wears the pressable signature */
   .skip {
@@ -64,7 +66,7 @@
     align-items: center;
     min-height: 44px;
     padding: 0.55rem 1.15rem;
-    border-radius: 4px;
+    border-radius: 12px;
     background: var(--acc);
     color: #ffffff;
     font-size: 0.95rem;
@@ -92,7 +94,7 @@
     align-items: center;
     min-height: 44px;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--ink);
     text-decoration: none;
@@ -103,7 +105,7 @@
     justify-content: center;
     min-height: 40px;
     padding: 0.3rem 0.95rem;
-    border-radius: 4px;
+    border-radius: 12px;
     background: var(--acc);
     color: #ffffff;
     font-weight: 500;
@@ -122,7 +124,7 @@
     align-items: center;
     gap: 0.45rem;
     min-height: 44px;
-    color: var(--acc);
+    color: var(--acc-d);
     font-weight: 500;
     font-size: 0.95rem;
     text-decoration: underline;
@@ -135,7 +137,7 @@
 
   h1 {
     font-size: clamp(2.4rem, 11vw, 3.4rem);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.1;
     color: var(--ink);
@@ -146,8 +148,8 @@
 
   h2 {
     font-size: clamp(1.35rem, 5.6vw, 1.65rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    letter-spacing: -0.025em;
     line-height: 1.2;
     color: var(--ink);
     margin-bottom: 1.2rem;
