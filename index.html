@@ -506,8 +506,16 @@
     justify-content: center;
   }
 
-  .nots { list-style: none; display: grid; gap: 1rem; margin: 1.2rem 0 1.5rem; }
-  .nots li { display: flex; gap: 0.75rem; align-items: flex-start; }
+  .nots { list-style: none; margin: 1.3rem 0 1.6rem; }
+  .nots li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .nots li:last-child { border-bottom: 1px solid var(--line); }
+  .tone .nots li { border-color: var(--line-tone); }
   .no {
     flex: none;
     width: 1.4rem;
@@ -522,6 +530,14 @@
     align-items: center;
     justify-content: center;
   }
+  /* the build/not-build pair: two titled lists, stacked on phone, side by side from tablet */
+  .duo { margin: 1.8rem 0 1.6rem; }
+  .duo-title { color: var(--ink); font-weight: 700; margin-bottom: 0; }
+  .duo .gets, .duo .nots { margin: 0.5rem 0 0; }
+  .duo .gets li:last-child, .duo .nots li:last-child { border-bottom: none; }
+  .duo-col + .duo-col { margin-top: 1.8rem; }
+  .tone .duo .gets li { border-color: var(--line-tone); }
+
   .yes-line { display: flex; gap: 0.75rem; align-items: flex-start; margin-top: 1.6rem; }
   .yes-line .yes {
     flex: none;
@@ -661,6 +677,9 @@
     }
     .tw td::before { display: none; }
     .tw td.cell-emp { margin-top: 0; }
+
+    .duo { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.4rem; align-items: start; }
+    .duo-col + .duo-col { margin-top: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -713,7 +732,7 @@
         <p class="fold-what rev">סדנה של שלוש שעות בזום.</p>
         <p class="said rev">
           <span class="b-frag">פותח צ'אט, מסביר, מעתיק, מדביק.</span>
-          <span class="b-pain">הוא כבר מכיר אותך, הדברים עובדים, אבל משהו עדיין לא 100, הוא לא באמת <strong>עובד איתך</strong> או <strong>בשבילך</strong>, אתה כל הזמן אומר לו מה לעשות.</span>
+          <span class="b-pain">הוא מכיר את השיחות איתך, הדברים עובדים, אבל משהו עדיין לא 100. אין לו סביבת עבודה משלו ואין לו שיטה, אז הוא לא באמת <strong>עובד איתך</strong> או <strong>בשבילך</strong>, אתה כל הזמן אומר לו מה לעשות.</span>
           <span class="b-punch">הלו. זה בדיוק הפער.</span>
         </p>
 
@@ -731,27 +750,27 @@
     <!-- ===== הכאב, כלי מול עובד ===== -->
     <section>
       <div class="wrap">
-        <h2 class="rev-h">אבל תשים לב מי מתחיל כל דבר.</h2>
+        <h2 class="rev-h">אבל תראה לאן זה יכול להגיע.</h2>
 
         <table class="tw">
           <thead>
             <tr>
-              <th scope="col">איך אתה עובד עם כלי</th>
-              <th scope="col">איך עובדים עם עובד</th>
+              <th scope="col">היום, עם הצ'אט</th>
+              <th scope="col">היעד, עם עובד</th>
             </tr>
           </thead>
           <tbody>
             <tr class="rev">
-              <td data-label="איך אתה עובד עם כלי">אתה מבקש שיעזור לך לנסח פוסט</td>
-              <td class="cell-emp" data-label="איך עובדים עם עובד">הוא כותב אותו מהשיחה שהייתה לך ביום חמישי</td>
+              <td data-label="היום, עם הצ'אט">אתה מבקש שיעזור לך לנסח פוסט</td>
+              <td class="cell-emp" data-label="היעד, עם עובד">הוא כותב אותו מהשיחה שהייתה לך ביום חמישי</td>
             </tr>
             <tr class="rev">
-              <td data-label="איך אתה עובד עם כלי">אתה מבקש שיסדר לך את רשימת המשימות</td>
-              <td class="cell-emp" data-label="איך עובדים עם עובד">הוא יודע מה אמרת שהכי חשוב, ולפני כמה ימים</td>
+              <td data-label="היום, עם הצ'אט">אתה מבקש שיסדר לך את רשימת המשימות</td>
+              <td class="cell-emp" data-label="היעד, עם עובד">הוא יודע מה אמרת שהכי חשוב, ולפני כמה ימים</td>
             </tr>
             <tr class="rev">
-              <td data-label="איך אתה עובד עם כלי">אתה מבקש שיסדר קובץ חשבוניות שהעלית</td>
-              <td class="cell-emp" data-label="איך עובדים עם עובד">הוא אומר לך אילו ארבע חסרות, ומאיזה ספק</td>
+              <td data-label="היום, עם הצ'אט">אתה מבקש שיסדר קובץ חשבוניות שהעלית</td>
+              <td class="cell-emp" data-label="היעד, עם עובד">הוא אומר לך אילו ארבע חסרות, ומאיזה ספק</td>
             </tr>
           </tbody>
         </table>
@@ -761,8 +780,10 @@
 
         <p class="verdict rev">זה ההבדל בין כלי לעובד.</p>
 
+        <p class="lede rev">ככה נראה היעד. לא בונים את כל זה בשלוש שעות: בסדנה אתה בונה את הבסיס, עושה לעובד חפיפה ראשונה, ולומד איך ממשיכים לבנות אותו בשבועות שאחרי.</p>
+
         <p class="rev">מגייסים אותו, עושים לו חפיפה על העסק, מלמדים אותו מי אנחנו ואיך אנחנו אוהבים לעבוד.</p>
-        <p class="rev">לא מחזיקים לו את היד. לא צריך להגיד לו מה לבנות, צריך ללמד אותו איך אנחנו עובדים, הוא יבנה לבד.</p>
+        <p class="rev">לא מחזיקים לו את היד. לא צריך להגיד לו מה לבנות, צריך ללמד אותו איך אנחנו עובדים, והוא ממשיך משם.</p>
         <p class="rev">וזה לא הבדל של טכנולוגיה, זה הבדל של איך אתה מלמד אותו.</p>
       </div>
     </section>
@@ -771,15 +792,14 @@
     <section>
       <div class="wrap">
         <h2 class="rev-h">יש שלב לפני הראשון, ואף אחד לא הסביר לך אותו.</h2>
-        <p class="rev">יש מי שקורא לזה סוכן, יש מי שקורא לזה עוזר אישי, ויש מי שקורא לזה יד ימיני.<br>
-        איך שלא תקרא לזה, השאלה הראשונה היא איפה הדבר הזה יושב אצלך.</p>
-        <p class="rev">חיפשת איפה לוחצים ולא מצאת? אין מסך שכתוב עליו "סוכנים", ואין כפתור כזה, וזאת הסיבה.</p>
+        <p class="rev">מה שמשתנה אצל עובד זה לא הכלי, זו סביבת העבודה.<br>
+        חיפשת איפה לוחצים ולא מצאת? אין מסך שכתוב עליו "סוכנים", ואין כפתור כזה, וזאת הסיבה.</p>
         <p class="rev">יש תיקייה, והיא במחשב שלך, ואתה יוצר אותה.<br>
         בפנים יושבים קבצים, ובקבצים האלה יושב מה שהעובד יודע עליך.</p>
-        <p class="verdict rev">זה הכל. ובגלל זה זה עובד.</p>
+        <p class="verdict rev">זה הבסיס. ובגלל זה זה עובד.</p>
 
         <p class="rev">ואל תדאג, הכנתי לך מדריך מפורט ומסודר. בערך שעתיים של עבודה, פרושות על כמה ימים לפני הסדנה.<br>
-        חוץ ממנו <strong>צריך מחשב Windows</strong>, איתו אתה מגיע לזום, ומנוי Claude בתשלום. העסק שלך על מק? כתוב לי לפני שנקבע.</p>
+        חוץ ממנו: <strong>המדריך והסדנה בנויים למחשב Windows</strong>, איתו אתה מגיע לזום, ומנוי Claude בתשלום. על מק? כתוב לי לפני שנקבע.</p>
 
         <div class="callout callout--warn rev">
           <svg class="co-ic" aria-hidden="true"><use href="#ic-warn"/></svg>
@@ -824,7 +844,7 @@
     <section>
       <div class="wrap">
         <h2 class="rev-h">אתה סוגר את הזום, ויש לך ממה להתחיל.</h2>
-        <p class="lede rev">"המשרד". אני נותן לך את התיקייה שאני עובד בה, והיא נשארת אצלך גם אם לא תראה אותי יותר לעולם.</p>
+        <p class="lede rev">"המשרד". בונוס: אני נותן לך את גרסת ההתחלה של התיקייה שאני עובד בה, והיא נשארת אצלך גם אם לא תראה אותי יותר לעולם.</p>
 
         <p class="rev">בפנים תיקיות וקבצים, וכתוב בהם מה אתה עושה ואיך אתה עובד.<br>
         יש שם סקילים שכבר עובדים, ויש קבצים שמחכים ריקים בכוונה, כי הם מתמלאים כשהעובד פוגש אותך.</p>
@@ -837,9 +857,7 @@
         להרכיב דבר כזה מאפס זה סיוט.</p>
 
         <div class="aside rev">
-          <p>ובוא נדייק, כי זו סדנה ראשונה ואני לא הולך לייפות:<br>
-          אתה לא מקבל את כל המשרד. הוא נבנה לאט לאט.<br>
-          מה שאתה כן מקבל זה בסיס שעובד, ואת הידיעה המדויקת איך להמשיך לבנות אותו.</p>
+          <p>מה שאתה מקבל זה בסיס שעובד, ואת הידיעה המדויקת איך להמשיך לבנות אותו.</p>
         </div>
       </div>
     </section>
@@ -862,12 +880,10 @@
         <p class="rev">אני רוצה שכל מי שנכנס לסדנה ייצא עם ערך אמיתי.</p>
         <p class="rev">יש מצבים שבהם הסדנה הזאת לא תיתן לך את מה שאתה מחפש, לפחות לא עכשיו:</p>
         <ul class="reqs">
-          <li class="rev">אם עוד לא עבדת עם AI, הסדנה מתחילה מהתקרה של מי שכבר עובד עם צ'אט, ולא מהיסודות. יהיה פה בלוג עם התכנים הבסיסיים בדיוק בשביל השלב הזה, ועד אז כתוב לי ואני אגיד לך מאיפה להתחיל.</li>
-          <li class="rev">אם באת ללמוד AI ברמה טכנית, זו לא הסדנה, ולא כותבים פה שורת קוד אחת.</li>
-          <li class="rev">אם אתה מחפש שמישהו פשוט יבנה לך את זה, זה לא מה שאני מוכר. השיטה היא המוצר, ואתה בונה אותו.</li>
-          <li class="rev">אם העסק שלך רץ רק מהטלפון, צריך מחשב, ובלי זה אי אפשר.</li>
-          <li class="rev">אם אין לך אנגלית בסיסית, יהיה לך קשה.</li>
+          <li class="rev">אם עוד לא עבדת עם AI, הסדנה מתחילה מהתקרה של מי שכבר עובד עם צ'אט, ולא מהיסודות. כתוב לי ואני אגיד לך מאיפה להתחיל.</li>
           <li class="rev">ואם אתה כבר בונה לעצמך סוכנים ומערכות, הסדנה הזאת כנראה תרגיש לך בסיסית.</li>
+          <li class="rev">אם אתה מחפש שמישהו פשוט יבנה לך את זה, זה לא מה שאני מוכר. השיטה היא המוצר, ואתה בונה אותו.</li>
+          <li class="rev">וצריך מחשב, אנגלית בסיסית, ואהבה ללמוד דברים חדשים. עסק שרץ רק מהטלפון יתקשה פה.</li>
         </ul>
         <div class="yes-line rev"><span class="yes" aria-hidden="true">✓</span><span>וזה כן בשבילך אם אתה כבר עובד עם AI כל יום, מוצף, מרגיש שיש שם הרבה יותר, ובאת ללמוד לבנות בעצמך.</span></div>
         <p class="rev after-yes">בשביל זה יש שיחת התאמה לפני שנתחיל. אני רוצה לדעת מראש שאני הולך לתת לך ערך אמיתי, ואם זה לא הזמן, אני אגיד לך את זה ואגיד לך מה כן יקדם אותך עכשיו.</p>
@@ -882,19 +898,28 @@
       <div class="wrap">
         <h2 class="rev-h">לפני שנמשיך למחיר, שיהיה על השולחן.</h2>
         <p class="rev">שלוש שעות נותנות לך שני דברים: אתה מבין איך השיטה עובדת, ואתה יודע איך לגייס את העובד הראשון שלך.<br>
-        הן לא נותנות עסק שרץ לבד.<br>
-        הבנייה האמיתית קורית אחרי, אצלך, ולוקחת שבועות.</p>
-        <p class="rev">וכן, זו דרך מהירה וזולה יותר מלגייס עובד אמיתי.</p>
+        הן לא נותנות עסק שרץ לבד.</p>
 
-        <p class="rev">מה לא יהיה, שלא תגלה את זה בזום:</p>
-        <ul class="nots">
-          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי חיבורי API.</span></li>
-          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי אינטגרציות למערכות שיש לך היום.</span></li>
-          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי שרתי MCP.</span></li>
-          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי חיבור לוואטסאפ.</span></li>
-          <li class="rev"><span class="no" aria-hidden="true">✕</span><span>בלי אוטומציות שרצות לפי שעון, ובלי עובד שרץ 24/7. את זה לא בונים בשלוש שעות.</span></li>
-        </ul>
-        <p class="rev">כל אלה קיימים בעולם, והם לא חלק מהסדנה. בשלוש שעות בונים בסיס שעובד.</p>
+        <div class="duo">
+          <div class="duo-col rev">
+            <p class="duo-title">בסדנה בונים</p>
+            <ul class="gets">
+              <li><span class="yes" aria-hidden="true">✓</span><span>סביבת עבודה קבועה לעסק שלך</span></li>
+              <li><span class="yes" aria-hidden="true">✓</span><span>חפיפה ראשונה ותפקיד ראשון לעובד</span></li>
+              <li><span class="yes" aria-hidden="true">✓</span><span>שיטה להוסיף לו ידע ותפקידים</span></li>
+              <li><span class="yes" aria-hidden="true">✓</span><span>בסיס להמשך בנייה, אצלך, בשבועות שאחרי</span></li>
+            </ul>
+          </div>
+          <div class="duo-col rev">
+            <p class="duo-title">לא בונים בשלוש שעות</p>
+            <ul class="nots">
+              <li><span class="no" aria-hidden="true">✕</span><span>חיבור לוואטסאפ ולמערכות חיצוניות</span></li>
+              <li><span class="no" aria-hidden="true">✕</span><span>חיבורי API ושרתי MCP</span></li>
+              <li><span class="no" aria-hidden="true">✕</span><span>אוטומציות שרצות לפי שעון, ועובד 24/7</span></li>
+              <li><span class="no" aria-hidden="true">✕</span><span>מערכת שמישהו אחר בונה בשבילך</span></li>
+            </ul>
+          </div>
+        </div>
 
         <div class="callout callout--info rev">
           <svg class="co-ic" aria-hidden="true"><use href="#ic-info"/></svg>
@@ -922,13 +947,18 @@
           <ul class="gets">
             <li><span class="yes" aria-hidden="true">✓</span><span>הסדנה עצמה. 3 שעות בזום, עד 20 אנשים.</span></li>
             <li><span class="yes" aria-hidden="true">✓</span><span>איך מגייסים את העובד הראשון שלך, על העסק שלך ואיתי בחדר.</span></li>
-            <li><span class="yes" aria-hidden="true">✓</span><span>בונוס: "המשרד", התיקייה שאני עובד בה. נשארת אצלך.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>בונוס: גרסת ההתחלה של "המשרד", התיקייה שאני עובד בה. נשארת אצלך.</span></li>
             <li><span class="yes" aria-hidden="true">✓</span><span>שאלון הכנה והוראות התקנה מסודרות.</span></li>
             <li><span class="yes" aria-hidden="true">✓</span><span>קבוצת הבוגרים, שנשארת פתוחה גם אחרי.</span></li>
           </ul>
         </div>
 
         <p class="rev">מעבר לזה יש לך מנוי Claude, 20 דולר לחודש ומעלה. הוא לא עובר דרכי ואני לא מרוויח ממנו.</p>
+
+        <p class="rev"><strong>הסדנאות בימי ראשון ורביעי, 10:00 עד 13:00.</strong> כל המועדים: <a class="body-link" href="dates.html">עמוד המועדים</a>.</p>
+        <div class="cta-row rev">
+          <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+        </div>
       </div>
     </section>
 
@@ -939,7 +969,7 @@
         <div class="faq-list">
           <details class="rev">
             <summary><span>למה דווקא Claude Code, ולא הכלי שאני עובד איתו היום?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">כי הוא עובד על הקבצים שבמחשב שלך, ולא בתוך טאב בדפדפן.<br>
+            <div class="faq-body">כי הוא עובד על הקבצים שבמחשב שלך: סביבת עבודה קבועה שנשארת, ולא שיחה שמתאדה.<br>
             זה ההבדל שמאפשר לעובד להתקיים בכלל, ולא רק לענות לך.<br>
             השיטה עצמה עוברת לכל כלי. הכלים מתחלפים, המבנה נשאר.<br>
             אבל הסדנה עצמה בנויה על Claude Code, וכל ההכנה שלה היא בשבילו.</div>
@@ -971,8 +1001,8 @@
           </details>
           <details class="rev">
             <summary><span>מי מחליט מה הוא עושה?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">אתה. הוא קורא וממליץ, ולא נוגע בלי אישור שלך.<br>
-            מייל שיוצא, שינוי, מחיקה, הכל מחכה למילה שלך.<br>
+            <div class="faq-body">אתה. ככה מגדירים את זה בסדנה: הוא קורא וממליץ.<br>
+            ופעולות רגישות, מייל שיוצא, שינוי, מחיקה, מחכות לאישור שלך.<br>
             אתה המנהל. הוא העובד.</div>
           </details>
           <details class="rev">
