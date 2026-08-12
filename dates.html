@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>מועדי סדנאות | העובד הראשון שלך | גיא מלול</title>
-<meta name="description" content="המועדים הקבועים של הסדנה &quot;העובד הראשון שלך&quot;: כל יום ראשון וכל יום רביעי, 10:00 עד 13:00.">
+<meta name="description" content="המועדים הקרובים של הסדנה &quot;העובד הראשון שלך&quot;. שלוש שעות בזום, 10:00 עד 13:00. בוחרים מועד ונרשמים.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <!-- absolute URLs, final domain; they change if this goes up on github.io first -->
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="גיא מלול">
 <meta property="og:url" content="https://guymalul.co.il/dates.html">
 <meta property="og:title" content="מועדי סדנאות | העובד הראשון שלך">
-<meta property="og:description" content="כל יום ראשון וכל יום רביעי, 10:00 עד 13:00. מקום נסגר רק אחרי שיחת התאמה.">
+<meta property="og:description" content="שלוש שעות בזום, 10:00 עד 13:00. בוחרים מועד ונרשמים.">
 <meta property="og:image" content="https://guymalul.co.il/og-card-v4.png">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
@@ -176,18 +176,36 @@
   .date-list { list-style: none; margin: 0 0 1.3rem; }
   .date-row {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.7rem 1rem;
     flex-wrap: wrap;
-    padding: 1rem 0;
+    padding: 1.1rem 0;
     border-top: 1px solid var(--line);
   }
   .date-row:last-child { border-bottom: 1px solid var(--line); }
-  .date-day { color: var(--ink); font-weight: 500; font-size: 1.18rem; }
+  .date-day { flex: 1 1 9rem; color: var(--ink); font-weight: 500; font-size: 1.18rem; }
   .date-when { flex: none; color: var(--body); font-size: 1.02rem; }
+  /* the button belongs to its row, never the page-level CTA detached by 2rem */
+  .date-row .btn { flex: none; margin-top: 0; min-height: 46px; padding: 0.6rem 1.5rem; font-size: 1rem; }
+  @media (min-width: 560px) { .date-row .btn { width: auto; } }
 
   .gate-line { color: var(--ink); font-weight: 700; font-size: 1.18rem; margin-bottom: 0.5rem; }
+
+  /* the four things a buyer must know, as items and not as a wall of prose */
+  .truth { list-style: none; margin: 0; }
+  .truth li { position: relative; padding-right: 1.15rem; margin-bottom: 0.85rem; }
+  .truth li:last-child { margin-bottom: 0; }
+  .truth li::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--acc);
+  }
 
   /* the one pressable signature: flat solid fill, hard 4px corner */
   .btn {
@@ -254,7 +272,7 @@
 
   <header class="topbar">
     <a class="brand" href="index.html">העובד הראשון שלך</a>
-    <a class="topbar-btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+    <a class="topbar-btn" href="#gate-h">לבחירת מועד</a>
   </header>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -270,29 +288,45 @@
       <a class="back-link" href="index.html"><svg aria-hidden="true"><use href="#ic-back"/></svg><span>חזרה לעמוד הסדנה</span></a>
 
       <h1>מועדי סדנאות</h1>
-      <p class="sub">"העובד הראשון שלך". סדנה של שלוש שעות בזום, עד 5 משתתפים. קבוצה קטנה בכוונה.</p>
+      <p class="sub">"העובד הראשון שלך". שלוש שעות בזום, קבוצה של עד 5 אנשים, 1,000 ש"ח למשתתף.</p>
 
-      <section class="block" aria-labelledby="fixed-h">
-        <h2 id="fixed-h">המועדים הקבועים</h2>
-        <ul class="date-list">
-          <li class="date-row">
-            <span class="date-day">כל יום ראשון</span>
-            <span class="date-when">10:00 עד 13:00</span>
-          </li>
-          <li class="date-row">
-            <span class="date-day">כל יום רביעי</span>
-            <span class="date-when">10:00 עד 13:00</span>
-          </li>
+      <section class="block" aria-labelledby="honest-h">
+        <h2 id="honest-h">לפני שבוחרים מועד, שיהיה על השולחן.</h2>
+        <ul class="truth">
+          <li>לפני הסדנה ממלאים שאלון ומתקינים כמה תוכנות, בערך שעתיים. <strong>מתחילים כמה ימים לפני, לא בערב שלפני</strong>, מניסיון. בלי זה אי אפשר לעבוד בסדנה.</li>
+          <li>בסדנה לומדים את העקרונות ומתאמנים עליהם בתוך מערכת שכבר עובדת. את העובד עצמו בונים אחרי, על העסק שלך.</li>
+          <li>אחרי הסדנה אני לא מלווה אישית. יש קבוצת בוגרים, והיא נשארת פתוחה.</li>
+          <li>אנחנו חמישה בחדר, אז כיסא שמתפנה ברגע האחרון פשוט נשאר ריק. מזה מגיעה מדיניות הביטול.</li>
         </ul>
-        <p>הסדנה חוזרת כל שבוע, באותם מועדים. אם פספסת אחת, יש את הבאה.</p>
       </section>
 
       <section class="block" aria-labelledby="gate-h">
-        <h2 id="gate-h">איך נסגר מקום</h2>
-        <p class="gate-line">אין הרשמה ישירה.</p>
-        <p>מקום נסגר רק אחרי שיחת התאמה קצרה, בלי התחייבות. בשיחה אנחנו מאפיינים יחד את העסק והתהליכים שלך, ובודקים אם הסדנה באמת תקדם אותך.</p>
-        <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
-        <p class="soft-line">או לכל שאלה, <a href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
+        <h2 id="gate-h">המועדים הקרובים</h2>
+        <p class="gate-line">בוחרים מועד ומשלמים. זהו.</p>
+        <ul class="date-list">
+          <li class="date-row">
+            <span class="date-day">יום שני, 17.8</span>
+            <span class="date-when">10:00 עד 13:00</span>
+            <a class="btn" href="https://pay.sumit.co.il/116dead/118637f/118630q/payment">להרשמה</a>
+          </li>
+          <li class="date-row">
+            <span class="date-day">יום רביעי, 19.8</span>
+            <span class="date-when">10:00 עד 13:00</span>
+            <a class="btn" href="https://pay.sumit.co.il/116dead/118635t/1186387/payment">להרשמה</a>
+          </li>
+          <li class="date-row">
+            <span class="date-day">יום שני, 24.8</span>
+            <span class="date-when">10:00 עד 13:00</span>
+            <a class="btn" href="https://pay.sumit.co.il/116dead/118635y/118638a/payment">להרשמה</a>
+          </li>
+          <li class="date-row">
+            <span class="date-day">יום רביעי, 26.8</span>
+            <span class="date-when">10:00 עד 13:00</span>
+            <a class="btn" href="https://pay.sumit.co.il/116dead/118635z/118638b/payment">להרשמה</a>
+          </li>
+        </ul>
+        <p>1,000 ש"ח למשתתף. אפשר לבטל עד יומיים לפני, ושישי ושבת לא נספרים. כל התנאים <a href="index.html#faq">בעמוד הסדנה</a>.</p>
+        <p class="soft-line">אף מועד לא מתאים, או שאתם רוצים לדבר קודם? <a href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
       </section>
     </div>
   </main>

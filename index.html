@@ -58,6 +58,10 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  /* NOT scroll-behavior: smooth here. With overflow-x:hidden on html and body
+     (the line below), Chrome silently no-ops smooth fragment scrolling - the
+     hash changes and the page does not move. Measured 12.8: auto lands at
+     5,818, smooth lands at 0. The instant jump is the working behaviour. */
   html { -webkit-text-size-adjust: 100%; }
   html, body { overflow-x: hidden; max-width: 100%; }
 
@@ -445,6 +449,11 @@
      carry it and none of them is hue: the shape of the icon (triangle vs
      circle), the label word, and the frame itself. The colour only tunes the
      temperature. Five framed blocks would be five unframed blocks. */
+  /* a callout that ENDS a section adds its own 2rem on top of the section's
+     96px, and because it closes on a hard border the space reads bigger than
+     it measures. Nothing follows it inside the section, so the margin is
+     redundant there. */
+  .callout:last-child { margin-bottom: 0; }
   .callout {
     display: flex;
     align-items: flex-start;
@@ -693,7 +702,7 @@
 
   <header class="topbar">
     <a class="brand" href="#top">העובד הראשון שלך</a>
-    <a class="topbar-btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+    <a class="topbar-btn" href="#straight">להצטרף לסדנה</a>
   </header>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -740,9 +749,9 @@
           <p class="brand-peak rev">העובד הראשון שלך.</p>
           <p class="method rev">לומדים איך לגייס אותו.</p>
           <div class="cta-row">
-            <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+            <a class="btn" href="#straight">להצטרף לסדנה</a>
           </div>
-          <p class="soft-line">או לכל שאלה, <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
+          <p class="soft-line">יש שאלה? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
         </div>
       </div>
     </section>
@@ -886,15 +895,15 @@
           <li class="rev">וצריך מחשב, אנגלית בסיסית, ואהבה ללמוד דברים חדשים. עסק שרץ רק מהטלפון יתקשה פה.</li>
         </ul>
         <div class="yes-line rev"><span class="yes" aria-hidden="true">✓</span><span>וזה כן בשבילך אם אתה כבר עובד עם AI כל יום, מוצף, מרגיש שיש שם הרבה יותר, ובאת ללמוד לבנות בעצמך.</span></div>
-        <p class="rev after-yes">בשביל זה יש שיחת התאמה לפני שנתחיל. אני רוצה לדעת מראש שאני הולך לתת לך ערך אמיתי, ואם זה לא הזמן, אני אגיד לך את זה ואגיד לך מה כן יקדם אותך עכשיו.</p>
+        <p class="rev after-yes">ואם אתה לא בטוח, כתוב לי לפני שאתה נרשם. אני מעדיף להגיד לך שזה לא הזמן, מאשר שתשב בסדנה ותרגיש שהיא לא בשבילך.</p>
         <div class="cta-row rev">
-          <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+          <a class="btn-ghost" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%A4%D7%A0%D7%99%20%D7%A9%D7%90%D7%A0%D7%99%20%D7%A0%D7%A8%D7%A9%D7%9D."><span>בוא נבדוק אם זה מתאים לך</span></a>
         </div>
       </div>
     </section>
 
     <!-- ===== תיאום ציפיות ===== -->
-    <section class="tone">
+    <section class="tone" id="straight">
       <div class="wrap">
         <h2 class="rev-h">לפני שנמשיך למחיר, שיהיה על השולחן.</h2>
         <p class="rev">שלוש שעות נותנות לך שני דברים: אתה מבין איך השיטה עובדת, ואתה יודע איך לגייס את העובד הראשון שלך.<br>
@@ -925,18 +934,17 @@
           <svg class="co-ic" aria-hidden="true"><use href="#ic-info"/></svg>
           <div class="co-body">
             <span class="co-label">איך זה עובד</span>
-            <p>ועוד דבר: אין הרשמה ישירה.<br>
-            כל מי שמגיע לסדנה עובר קודם שיחת התאמה קצרה, בלי התחייבות.<br>
-            אני יודע איך זה נשמע, כי בדרך כלל פשוט משלמים ונכנסים.<br>
-            אנחנו מאפיינים יחד את העסק והתהליכים שלך, ובודקים אם הסדנה באמת תקדם אותך.<br>
-            גם אם נגלה שלא, לא תצא מהשיחה בידיים ריקות.</p>
+            <p>בוחר מועד, משלם, ומקבל את מדריך ההכנה.<br>
+            ואם בכל זאת תגיע בלי שהכול מוכן, אתה מוזמן להישאר, להקשיב, ולקחת את כל החומרים.<br>
+            פשוט לא נוכל לעבוד יחד באותו יום, ואין על זה החזר או מעבר למועד אחר.<br>
+            המדריך מגיע אליך כמה ימים מראש בדיוק בשביל זה.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== מחיר ===== -->
-    <section class="tone">
+    <section class="tone" id="price">
       <div class="wrap">
         <h2 class="rev-h">ועכשיו למחיר.</h2>
         <strong class="price-figure">1,000 ש"ח.</strong>
@@ -951,21 +959,23 @@
             <li><span class="yes" aria-hidden="true">✓</span><span>שאלון הכנה והוראות התקנה מסודרות.</span></li>
             <li><span class="yes" aria-hidden="true">✓</span><span>קבוצת הבוגרים, שנשארת פתוחה גם אחרי.</span></li>
           </ul>
+          <p class="rev">ומה שאין: ליווי אישי שלי אחרי הסדנה. יש קבוצת בוגרים, והיא נשארת פתוחה. אני מעדיף להגיד את זה מראש.</p>
         </div>
 
         <p class="rev">מעבר לזה יש לך מנוי Claude, 20 דולר לחודש ומעלה. הוא לא עובר דרכי ואני לא מרוויח ממנו.</p>
 
-        <p class="rev"><strong>הסדנאות בימי ראשון ורביעי, 10:00 עד 13:00.</strong> כל המועדים: <a class="body-link" href="dates.html">עמוד המועדים</a>.</p>
+        <p class="rev"><strong>הסדנאות בימי שני ורביעי, 10:00 עד 13:00.</strong></p>
         <div class="cta-row rev">
-          <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+          <a class="btn" href="dates.html">לבחירת מועד</a>
         </div>
+        <p class="rev">אפשר לבטל עד יומיים לפני, ושישי ושבת לא נספרים. דמי ביטול 50 ש"ח.</p>
       </div>
     </section>
 
     <!-- ===== שאלות ששואלים אותי ===== -->
     <section>
       <div class="wrap">
-        <h2 class="rev-h">בטח נשארו לך שאלות.</h2>
+        <h2 class="rev-h" id="faq">בטח נשארו לך שאלות.</h2>
         <div class="faq-list">
           <details class="rev">
             <summary><span>למה דווקא Claude Code, ולא הכלי שאני עובד איתו היום?</span><span class="tog" aria-hidden="true">+</span></summary>
@@ -989,8 +999,7 @@
           </details>
           <details class="rev">
             <summary><span>מתי הסדנה הבאה? תהיה הקלטה?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">כל המועדים בעמוד המועדים: <a class="body-link" href="dates.html">עמוד המועדים</a>.<br>
-            מקום נסגר רק אחרי שיחת התאמה.<br>
+            <div class="faq-body">ימי שני ורביעי, 10:00 עד 13:00. כל המועדים: <a class="body-link" href="dates.html">עמוד המועדים</a>.<br>
             אין הקלטה. הסדנה חוזרת, אז אם פספסת אחת, יש את הבאה.</div>
           </details>
           <details class="rev">
@@ -1010,6 +1019,15 @@
             <div class="faq-body">גם עם טכנולוגיה מלפני שנה, אם תעבוד בשיטה שאני מלמד, אתה תגיע לתוצאות יותר טובות ממי שעובד עם הטכנולוגיה שיצאה היום.<br>
             כשהכלי מתקדם, אתה לא רודף אחריו. אתה מקבל במתנה עובד יותר חכם.</div>
           </details>
+          <details class="rev">
+            <summary><span>ואם אני צריך לבטל או להחליף מועד?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">החדר הוא חמישה אנשים, וכיסא שמתפנה ברגע האחרון פשוט נשאר ריק. משם כל מה שכתוב פה.<br><br>
+            אם אני מבטל, מסיבה בריאותית או מכל סיבה אחרת, אתה בוחר: כל הכסף חזרה, או מעבר למועד הבא בלי תוספת.<br><br>
+            עד יומיים לפני הסדנה אפשר לבטל, בדמי ביטול של 50 ש"ח, שהם 5% מהמחיר. שישי ושבת לא נספרים. החלפת מועד באותו טווח היא בחינם, לפי מקום פנוי.<br><br>
+            מיומיים לפני ואילך, כולל אי הגעה, אין החזר ואין מעבר. רוצה בכל זאת להחליף מועד ברגע האחרון? נשתדל, בחצי ממחיר הכרטיס, לפי מקום פנוי.<br><br>
+            החזר כספי מגיע אליך תוך 7 ימי עבודה, בהעברה בנקאית ממני.<br><br>
+            קרה משהו? כתוב לי לפני שאתה מחליט. אני קורא הכול.</div>
+          </details>
         </div>
       </div>
     </section>
@@ -1017,14 +1035,14 @@
     <!-- ===== הכפתור ===== -->
     <section class="final">
       <div class="wrap">
-        <h2 class="rev-h">ואם זה מדבר אליך, בוא נדבר.</h2>
-        <p class="lead rev">שלוש שעות, נקודת פתיחה אמיתית, והבנייה שלך משם.<br>
-        אשמח לספר בדיוק איך זה עובד 🙏</p>
+        <h2 class="rev-h">ואם זה מדבר אליך, בוא נתחיל.</h2>
+        <p class="lead rev">אותה סדנה בכל המועדים. תבחר מה שמתאים לך.</p>
         <div class="cta-row">
-          <a class="btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
+          <a class="btn" href="dates.html">לבחירת מועד</a>
         </div>
-        <p class="after rev">אתה כותב לי בוואטסאפ, אני חוזר אליך, וקובעים שיחה קצרה.</p>
-        <p class="soft-line">או לכל שאלה, <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
+        <p class="after rev">1,000 ש"ח למשתתף. הקבוצה עד 5 אנשים.<br>
+        אפשר לבטל עד יומיים לפני, ושישי ושבת לא נספרים. דמי ביטול 50 ש"ח.</p>
+        <p class="soft-line">אף מועד לא מתאים, או שאתה רוצה לדבר קודם? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתוב לי</a></p>
       </div>
     </section>
 
