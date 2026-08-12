@@ -170,6 +170,7 @@
     </p>
     <ul class="hero-notes">
       <li>ממלאים פעם אחת לעסק.</li>
+      <li><strong>עונים במילים שלכם, לא עם AI.</strong> מהתשובות האלה העובד לומד איך אתם נשמעים, ואם AI כתב אותן, הוא ילמד להישמע כמו AI, לא כמוכם.</li>
       <li>שום תשובה לא נשלחת לשום מקום. הקובץ נוצר אצלכם ויורד ישירות למחשב שלכם.</li>
     </ul>
   </section>
@@ -220,10 +221,13 @@
 </main>
 
 <footer>
-  נתקעתם? <a href="https://wa.me/972503991358?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%90%D7%A0%D7%99%20%D7%91%D7%A9%D7%90%D7%9C%D7%95%D7%9F%20%D7%94%D7%94%D7%A7%D7%9E%D7%94%20%D7%95%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94">כתבו לי בוואטסאפ</a>
+  נתקעתם? <a href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%90%D7%A0%D7%99%20%D7%91%D7%A9%D7%90%D7%9C%D7%95%D7%9F%20%D7%94%D7%94%D7%A7%D7%9E%D7%94%20%D7%95%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94">כתבו לי בוואטסאפ</a>
 </footer>
 
 <script>
+// Each question carries `md` - the exact block that goes into the downloaded file.
+// tools/sync-intake.mjs in the office repo fetches this page and rebuilds the kit's
+// intake from these fields, so the questions have one home.
 const PARTS = [
   {
     title: "חלק א' · אתם",
