@@ -304,22 +304,22 @@
         <h2 id="gate-h">המועדים הקרובים</h2>
         <p class="gate-line">בוחרים מועד ומשלמים. זהו.</p>
         <ul class="date-list">
-          <li class="date-row">
+          <li class="date-row" data-ends="2026-08-17T13:00">
             <span class="date-day">יום שני, 17.8</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118637f/118630q/payment">להרשמה</a>
           </li>
-          <li class="date-row">
+          <li class="date-row" data-ends="2026-08-19T13:00">
             <span class="date-day">יום רביעי, 19.8</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118635t/1186387/payment">להרשמה</a>
           </li>
-          <li class="date-row">
+          <li class="date-row" data-ends="2026-08-24T13:00">
             <span class="date-day">יום שני, 24.8</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118635y/118638a/payment">להרשמה</a>
           </li>
-          <li class="date-row">
+          <li class="date-row" data-ends="2026-08-26T13:00">
             <span class="date-day">יום רביעי, 26.8</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118635z/118638b/payment">להרשמה</a>
@@ -337,6 +337,20 @@
       <a href="accessibility.html"><span>הצהרת נגישות</span></a>
     </div>
   </footer>
+
+  <script>
+    /* A date whose end time has passed stops being offered - here, in the
+       browser, correct every second. The update-workshop-dates routine keeps
+       the list topped up; this is what makes a list that went stale HARMLESS
+       instead of dangerous. The two layers are deliberate: if the routine
+       never runs, the page shows fewer dates. It never sells a dead one. */
+    (function () {
+      var now = Date.now();
+      document.querySelectorAll('.date-row[data-ends]').forEach(function (row) {
+        if (new Date(row.dataset.ends).getTime() < now) row.hidden = true;
+      });
+    })();
+  </script>
 
 </body>
 </html>
