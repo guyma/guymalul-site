@@ -183,6 +183,9 @@
     padding: 1.1rem 0;
     border-top: 1px solid var(--line);
   }
+  /* display:flex on a class beats the browser's own [hidden] rule, so without
+     this the script sets the attribute and the dead row stays on screen. */
+  .date-row[hidden] { display: none; }
   .date-row:last-child { border-bottom: 1px solid var(--line); }
   .date-day { flex: 1 1 9rem; color: var(--ink); font-weight: 500; font-size: 1.18rem; }
   .date-when { flex: none; color: var(--body); font-size: 1.02rem; }
@@ -304,11 +307,6 @@
         <h2 id="gate-h">המועדים הקרובים</h2>
         <p class="gate-line">בוחרים מועד ומשלמים. זהו.</p>
         <ul class="date-list">
-          <li class="date-row" data-ends="2026-08-17T13:00">
-            <span class="date-day">יום שני, 17.8</span>
-            <span class="date-when">10:00 עד 13:00</span>
-            <a class="btn" href="https://pay.sumit.co.il/116dead/118637f/118630q/payment">להרשמה</a>
-          </li>
           <li class="date-row" data-ends="2026-08-20T13:00">
             <span class="date-day">יום חמישי, 20.8</span>
             <span class="date-when">10:00 עד 13:00</span>
@@ -323,6 +321,11 @@
             <span class="date-day">יום רביעי, 26.8</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118635z/118638b/payment">להרשמה</a>
+          </li>
+          <li class="date-row" data-ends="2026-08-31T13:00">
+            <span class="date-day">יום שני, 31.8</span>
+            <span class="date-when">10:00 עד 13:00</span>
+            <a class="btn" href="https://pay.sumit.co.il/116dead/118637f/118630q/payment">להרשמה</a>
           </li>
         </ul>
         <p>1,000 ש"ח למשתתף. אפשר לבטל עד יומיים לפני, ושישי ושבת לא נספרים. כל התנאים <a href="index.html#faq">בעמוד הסדנה</a>.</p>
