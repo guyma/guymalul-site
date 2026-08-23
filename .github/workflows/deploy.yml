@@ -1,0 +1,64 @@
+# Deploy the site to GitHub Pages.
+#
+# COMMITTED BUT NOT IN EFFECT. GitHub Pages is still serving the `main` branch
+# directly (build_type: legacy). This workflow only takes over when the Pages
+# source is switched to "GitHub Actions" - one API call, reversible, and it is
+# the OWNER'S to make. `workflows/build.md`: this recipe never deploys.
+#
+# VERSIONS VERIFIED against the official Astro deploy guide on 23.8.2026, and
+# all three were behind: checkout was v4 (guide says v7), withastro/action was
+# v3 (v6), deploy-pages was v4 (v5). Do not bump these from memory - open
+# https://docs.astro.build/en/guides/deploy/github/ and match it.
+#
+# The CNAME file at the repo root is deliberately kept. Under Actions publishing
+# it is inert - GitHub's own docs: "any existing CNAME file is ignored and is
+# not required" - and the custom domain is stored in the REPOSITORY SETTINGS,
+# verified live 23.8: the Pages API returns cname "guymalul.co.il" and an
+# approved certificate for both the apex and www. So the switch cannot drop the
+# domain. The file is kept because rolling BACK to branch publishing needs it.
+#
+# `base` is deliberately NOT set in astro.config. That option is for a site
+# served from a sub-path like /repo-name/; this one is served from the root of a
+# custom domain, and a base would break every URL on it.
+#
+# No node-version is pinned: withastro/action defaults to a Node that clears
+# Astro 7's >=22.12 floor.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Not in the official sample, and added on purpose: `update-workshop-dates`
+# pushes to main after every workshop, and two overlapping deploys of the page
+# that sells is a race nobody would ever see. Queue them; never cancel one in
+# flight, because a cancelled deploy can leave the live site mid-swap.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install, build, and upload the site
+        uses: withastro/action@v6
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

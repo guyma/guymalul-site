@@ -1,0 +1,89 @@
+---
+// The blog index.
+//
+// Empty sections HIDE rather than rendering an empty shell - his ruling 21.8,
+// for a blog that goes public with one post. A "related posts" grid with
+// nothing in it reads as unfinished; its absence reads as new.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+// A draft is not published. A PREVIEW build opts in explicitly with
+// INCLUDE_DRAFTS=true, so 'draft: true' can stay true while the text is
+// still being fixed and the owner can still look at it behind the gate.
+const SHOW_DRAFTS = import.meta.env.INCLUDE_DRAFTS === 'true';
+const posts = (await getCollection('blog', ({ data }) => SHOW_DRAFTS || !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const fmt = (d: Date) =>
+  new Intl.DateTimeFormat('he-IL', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+---
+
+<Base
+  title="הבלוג | גיא מלול"
+  description="איך באמת עובדים עם AI בעסק קטן. מה שנלמד מהשולחן, בלי הייפ."
+>
+  <main class="blog-index">
+    <header>
+      <p class="kicker">הבלוג</p>
+      <h1>מה שנלמד מהשולחן</h1>
+      <p class="lede">איך באמת עובדים עם AI בעסק קטן. דברים של עבודה, בלי הייפ.</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="soon">הפוסט הראשון בדרך.</p>
+    ) : (
+      <ul class="list">
+        {posts.map((p) => (
+          <li>
+            <a href={`/blog/${p.id}/`}>
+              {p.data.kicker && <span class="k">{p.data.kicker}</span>}
+              <h2>{p.data.title}</h2>
+              <p class="dek">{p.data.description}</p>
+              <p class="meta">
+                <time datetime={p.data.pubDate.toISOString()}>{fmt(p.data.pubDate)}</time>
+                {p.data.readingTime && <> · {p.data.readingTime} דקות קריאה</>}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</Base>
+
+<style is:global>
+  /* The blog pages do not inherit the converted pages' hand-written CSS, so
+     they need their own reset. Without it this page rendered in Times New
+     Roman with the browser's default 8px body margin - caught by rendering it,
+     not by reading it. */
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); }
+
+  .blog-index { max-width: 46rem; margin: 0 auto; padding: clamp(2rem, 7vw, 4.5rem) var(--pad-x) 5rem; }
+  .blog-index header { margin-bottom: 3rem; }
+  .blog-index .kicker {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--acc-d); font-weight: 500; font-size: .95rem; margin: 0 0 .75rem;
+  }
+  .blog-index .kicker::before {
+    content: ""; width: 26px; height: 3px; background: var(--acc); border-radius: 2px; flex: none;
+  }
+  .blog-index h1 {
+    font-size: clamp(2rem, 5.2vw, 2.9rem); line-height: 1.12; font-weight: 700;
+    margin: 0 0 .8rem; color: var(--ink);
+  }
+  .blog-index .lede { font-size: 1.15rem; line-height: 1.6; color: var(--body); margin: 0; max-width: 34rem; }
+
+  .blog-index .list { list-style: none; margin: 0; padding: 0; }
+  .blog-index .list li { border-top: 1px solid var(--line); }
+  .blog-index .list a { display: block; padding: 1.8rem 0; text-decoration: none; }
+  .blog-index .list a:hover h2 { color: var(--acc-d); }
+  .blog-index .list .k { color: var(--acc-d); font-size: .85rem; font-weight: 500; }
+  .blog-index .list h2 {
+    font-size: 1.5rem; line-height: 1.3; font-weight: 700; color: var(--ink);
+    margin: .35rem 0 .5rem; transition: color .15s;
+  }
+  .blog-index .list .dek { color: var(--body); line-height: 1.7; margin: 0 0 .6rem; max-width: 34rem; }
+  .blog-index .list .meta { color: var(--muted); font-size: .88rem; margin: 0; }
+
+  .blog-index .soon { color: var(--muted); }
+</style>

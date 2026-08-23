@@ -1,0 +1,38 @@
+{
+  "name": "guymalul-site",
+  "version": "1.0.0",
+  "description": "Every public page of the business, served by GitHub Pages at guymalul.co.il.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "convert": "node tools/convert-page.mjs",
+    "prove": "node tools/prove-conversion.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guyma/guymalul-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guyma/guymalul-site/issues"
+  },
+  "homepage": "https://github.com/guyma/guymalul-site#readme",
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
+    "puppeteer-core": "^25.8.0",
+    "typescript": "^6.0.3"
+  },
+  "type": "module"
+}

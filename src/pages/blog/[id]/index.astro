@@ -1,0 +1,26 @@
+---
+// The post route.
+//
+// `[id]/index.astro`, NOT `[id].astro`. The research built both: the flat form
+// emits a .html FILE rather than a directory, and every blog-index and RSS link
+// pointing at /blog/<id>/ then 404s. This shape is correct under every
+// build.format, so nothing depends on remembering which one is configured.
+import { getCollection, render } from 'astro:content';
+import Post from '../../../layouts/Post.astro';
+
+export async function getStaticPaths() {
+// A draft is not published. A PREVIEW build opts in explicitly with
+// INCLUDE_DRAFTS=true, so 'draft: true' can stay true while the text is
+// still being fixed and the owner can still look at it behind the gate.
+const SHOW_DRAFTS = import.meta.env.INCLUDE_DRAFTS === 'true';
+  const posts = await getCollection('blog', ({ data }) => SHOW_DRAFTS || !data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Post post={post}>
+  <Content />
+</Post>

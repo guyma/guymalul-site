@@ -1,0 +1,47 @@
+/* tokens.css - THE one copy.
+ *
+ * Extracted 21.8.2026 from the six hand-written pages, which each carried their
+ * own :root block. Five distinct blocks existed, but that was five different
+ * SUBSETS - every token appearing on more than one page held the identical
+ * value everywhere, so this union changes nothing about how any page renders.
+ * Verified before extraction: 17 token names, zero value conflicts.
+ *
+ * The master for the brand values is guy-hq/core/design/design-system.css.
+ * NOTE: that file uses different NAMES for the same values (--accent vs --acc,
+ * --hairline vs --line). Reconciling the two vocabularies is its own decision
+ * and is deliberately not made here - this file preserves the site's names so
+ * the conversion changes nothing.
+ */
+
+:root {
+  /* ground and ink */
+  --ground: #ffffff;
+  --tone: #fef0ec;        /* one second tone, to GROUP two sections */
+  --ink: #2b1f1c;         /* ~15:1 on white */
+  --body: #6b5a55;        /* ~6.3:1 */
+  --muted: #7d6e69;       /* ~5:1 - the secondary greys have to clear AA too */
+
+  /* lines */
+  --line: #eee6e3;
+  --line-tone: #f4d8d0;
+
+  /* the one accent */
+  --acc: #d4654e;         /* fills only; white on it is the brand's one AA exception */
+  --acc-d: #a84634;       /* ~5.6:1 on white - coloured TEXT and hover */
+  --acc-tint: #fdeae4;    /* a flat wash, never a gradient */
+  --acc-line: #f0c4b8;
+
+  /* type */
+  --font: 'Rubik', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* the questionnaire page names the same stack --font-body. Kept as an alias
+     so that page converts without touching its rules. */
+  --font-body: var(--font);
+
+  /* rhythm */
+  --bar: 52px;
+  --pad-x: clamp(1.25rem, 5vw, 2rem);
+  --sec-y: clamp(3.6rem, 12vw, 6rem);
+
+  /* elevation - only prework/index used this, kept for it */
+  --elev-1: 0 3px 10px rgba(212, 101, 78, .12);
+}

@@ -1,0 +1,120 @@
+---
+/**
+ * Base.astro - the head and the shell every page shares.
+ *
+ * DELIBERATELY does NOT impose a header or a footer. Measured 21.8: the six
+ * pages carry six DIFFERENT footers (index has name/mail/LinkedIn, the
+ * questionnaire says "נתקעתם? כתבו לי בוואטסאפ", dates says the workshop name)
+ * and only four of six have a header at all. Unifying them changes what pages
+ * SAY, which is content and the owner's call - not something a migration
+ * decides on its way past. Each page keeps its own chrome until he rules.
+ *
+ * What this layout does own: <html dir/lang>, the meta and share card, the
+ * fonts, and the ONE import of tokens.css.
+ */
+import '../styles/tokens.css';
+
+export interface Props {
+  title: string;
+  /** optional: thanks/ genuinely has no description meta, and adding one
+   *  would be a change rather than a conversion */
+  description?: string;
+  /** absolute, e.g. https://guymalul.co.il/dates/ */
+  canonical?: string;
+  /** filename in public/, or an absolute URL */
+  ogImage?: string;
+  ogImageAlt?: string;
+  /** the share card carries its OWN wording on this site - dates.html has an
+   *  og:title and og:description that differ from the page's. Never derive
+   *  these from `title`/`description`. */
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  ogType?: 'website' | 'article';
+  /** the questionnaire and thanks pages are not for the index */
+  noindex?: boolean;
+  /** Two pages carry their OWN inline data-URI favicon - a rocket on /prework/
+   *  and a clipboard on the questionnaire. Forcing the site favicon onto them
+   *  is a visible browser-tab change, and no pixel or body-DOM diff can see it. */
+  favicon?: string;
+  /** Emitted ONLY where the source page had one. Three pages - /prework/, the
+   *  questionnaire and /thanks/ - carry no touch icon, and adding one is the
+   *  same silent change as the OG card that shipped onto four pages. */
+  appleTouchIcon?: string;
+  /** emit the OG/Twitter share card. Off by default: three of the six pages
+   *  never carried one, and adding tags they did not have is a change. */
+  share?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = 'og-card-v4.png',
+  ogImageAlt,
+  ogTitle,
+  ogDescription,
+  twitterTitle,
+  twitterDescription,
+  ogType = 'website',
+  noindex = false,
+  share = false,
+  favicon,
+  appleTouchIcon,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://guymalul.co.il');
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, site).href;
+---
+
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={canonicalUrl} />
+  {noindex && <meta name="robots" content="noindex" />}
+
+  {favicon && <link rel="icon" href={favicon} type="image/svg+xml" />}
+  {appleTouchIcon && <link rel="apple-touch-icon" href={appleTouchIcon} />}
+
+  {/* Most of this funnel arrives through WhatsApp, so a shared link IS the
+      first impression. og:image and og:url must be ABSOLUTE - a relative path
+      shows no image at all. */}
+  {share && (<>
+  <meta property="og:type" content={ogType} />
+  <meta property="og:locale" content="he_IL" />
+  <meta property="og:site_name" content="גיא מלול" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:title" content={ogTitle ?? title} />
+  {(ogDescription ?? description) && <meta property="og:description" content={ogDescription ?? description} />}
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="2400" />
+  <meta property="og:image:height" content="1260" />
+  {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+  <meta name="twitter:card" content="summary_large_image" />
+  {twitterTitle && <meta name="twitter:title" content={twitterTitle} />}
+  {twitterDescription && <meta name="twitter:description" content={twitterDescription} />}
+  <meta name="twitter:image" content={ogImageUrl} />
+  </>)}
+
+  {/* Kept on Google for now - his ruling 21.8. Self-hosting is a later,
+      atomic change across every page at once, so a visitor moving between
+      pages never loads Rubik twice from two sources. */}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <slot name="head" />
+</head>
+<body>
+  <slot />
+</body>
+</html>
