@@ -6,6 +6,8 @@
 // nothing in it reads as unfinished; its absence reads as new.
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 
 // A draft is not published. A PREVIEW build opts in explicitly with
 // INCLUDE_DRAFTS=true, so 'draft: true' can stay true while the text is
@@ -22,6 +24,8 @@ const fmt = (d: Date) =>
   title="הבלוג | גיא מלול"
   description="איך באמת עובדים עם AI בעסק קטן. מה שנלמד מהשולחן, בלי הייפ."
 >
+  <SiteHeader current="blog" />
+
   <main class="blog-index">
     <header>
       <p class="kicker">הבלוג</p>
@@ -49,6 +53,8 @@ const fmt = (d: Date) =>
       </ul>
     )}
   </main>
+
+  <SiteFooter />
 </Base>
 
 <style is:global>
@@ -56,9 +62,18 @@ const fmt = (d: Date) =>
      they need their own reset. Without it this page rendered in Times New
      Roman with the browser's default 8px body margin - caught by rendering it,
      not by reading it. */
-  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font);
+    /* the footer sits at the bottom even on a short page */
+    min-height: 100svh; display: flex; flex-direction: column;
+  }
 
-  .blog-index { max-width: 46rem; margin: 0 auto; padding: clamp(2rem, 7vw, 4.5rem) var(--pad-x) 5rem; }
+  /* padding-top clears the FIXED header; without it the kicker sits under the bar */
+  .blog-index {
+    flex: 1 0 auto;
+    max-width: 46rem; margin: 0 auto;
+    padding: calc(var(--bar) + clamp(2rem, 7vw, 4.5rem)) var(--pad-x) 5rem;
+  }
   .blog-index header { margin-bottom: 3rem; }
   .blog-index .kicker {
     display: flex; align-items: center; gap: 10px;

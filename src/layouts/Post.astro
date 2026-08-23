@@ -25,6 +25,8 @@ import avatar from '../assets/guy.png';
  * article). The pull quote is ours: 5 of 7 competitors have no blockquote at all.
  */
 import Base from './Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props { post: CollectionEntry<'blog'> }
@@ -61,6 +63,8 @@ const jsonLd = {
     {/* set:html, not a JSON string in the body - so Hebrew stays Hebrew */}
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
+
+  <SiteHeader current="blog" />
 
   <article class="post">
     <header class="masthead">
@@ -102,6 +106,8 @@ const jsonLd = {
 
     <p class="back"><a href="/blog/">כל הפוסטים</a></p>
   </article>
+
+  <SiteFooter />
 
 <script is:inline>
   // Wrap every prompt box and give it a copy control. Done in the browser rather
@@ -173,9 +179,17 @@ const jsonLd = {
 </Base>
 
 <style is:global>
-  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font);
+    min-height: 100svh; display: flex; flex-direction: column;
+  }
 
-  .post { max-width: 46rem; margin: 0 auto; padding: clamp(2rem, 7vw, 4.5rem) var(--pad-x) 5rem; }
+  /* padding-top clears the FIXED header */
+  .post {
+    flex: 1 0 auto;
+    max-width: 46rem; margin: 0 auto;
+    padding: calc(var(--bar) + clamp(2rem, 7vw, 4.5rem)) var(--pad-x) 5rem;
+  }
 
   /* the kicker: a small coral label. 4 of 7 competitors carry one */
   .kicker {

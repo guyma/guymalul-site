@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 ---
 
 <Base
@@ -74,45 +76,6 @@ import Base from '../../layouts/Base.astro';
   .skip:focus { top: 0.4rem; }
   #main:focus { outline: 2px solid var(--acc); outline-offset: -4px; }
 
-  .topbar {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-    min-height: var(--bar);
-    padding: 0.35rem var(--pad-x);
-    background: var(--ground);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar .brand {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .topbar .topbar-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 0.3rem 0.95rem;
-    border-radius: 12px;
-    background: var(--acc);
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 0.88rem;
-    line-height: 1.2;
-    text-align: center;
-    text-decoration: none;
-  }
-  .topbar .brand, .topbar .topbar-btn { min-width: 0; }
 
   main { flex: 1 0 auto; padding: calc(var(--bar) + 2.6rem) var(--pad-x) 3.5rem; }
   .wrap { max-width: 620px; margin: 0 auto; }
@@ -181,28 +144,6 @@ import Base from '../../layouts/Base.astro';
   .channels svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
   .channels .label { color: var(--ink); font-weight: 500; }
 
-  footer {
-    flex: none;
-    padding: 2.4rem var(--pad-x) 3rem;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.92rem;
-  }
-  footer .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 1.3rem; }
-  footer a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    min-height: 44px;
-    min-width: 0;
-    text-decoration: underline;
-    text-underline-offset: 0.22em;
-    text-decoration-thickness: 1px;
-  }
-  footer a:hover, footer a:focus-visible { text-decoration-thickness: 2px; }
-  footer a span { overflow-wrap: anywhere; }
-  footer svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
-  footer .foot-name { color: var(--ink); font-weight: 500; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -210,10 +151,7 @@ import Base from '../../layouts/Base.astro';
 </style>
 <a class="skip" href="#main">דלג לתוכן</a>
 
-  <header class="topbar">
-    <a class="brand" href="/">העובד הראשון שלך</a>
-    <a class="topbar-btn" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94.">לקבוע שיחת התאמה</a>
-  </header>
+  <SiteHeader ctaLabel="לקבוע שיחת התאמה" ctaHref="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." />
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -274,12 +212,6 @@ import Base from '../../layouts/Base.astro';
     </div>
   </main>
 
-  <footer>
-    <div class="wrap">
-      <span class="foot-name">גיא מלול</span>
-      <a href="mailto:guy@guymalul.co.il"><svg aria-hidden="true"><use href="#ic-mail"/></svg><span>guy@guymalul.co.il</span></a>
-      <a href="/"><span>עמוד הסדנה</span></a>
-    </div>
-  </footer>
+  <SiteFooter />
 
 </Base>

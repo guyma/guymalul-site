@@ -1,0 +1,264 @@
+---
+/**
+ * The site's one header, arranged the way avilevi's is - the reference the
+ * owner measured this against:
+ *
+ *   MENU on the RIGHT, where Hebrew starts. Brand and the page's own call to
+ *   action on the LEFT.
+ *
+ * In RTL the first DOM child lands on the right, so `.bar-start` holds the menu
+ * and `.bar-end` holds the brand. The 7-competitor sweep recorded the OPPOSITE
+ * arrangement and the study says both are coherent; his word chose this one.
+ * Do not "fix" the order back without his ruling.
+ *
+ * WHY `position: fixed` AND NOT `sticky`, which the field research asks for:
+ * five pages set `html, body { overflow-x: hidden }` to stop RTL sideways
+ * scroll, and that silently kills `position: sticky` for every descendant.
+ * The site's existing bars are `fixed` and pin correctly; this keeps that.
+ * Moving to sticky means removing that overflow rule first, and proving no
+ * page scrolls sideways without it.
+ *
+ * Each page keeps its OWN call to action - the landing page sells the workshop,
+ * the dates page sends you to the list, the thank-you page opens WhatsApp.
+ * Unifying the structure must not flatten what a page SAYS.
+ */
+interface Props {
+  /** where the brand points. The landing page passes '#top' so it does not reload. */
+  brandHref?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  /** 'home' | 'blog' | 'dates' - marks the current page in the nav */
+  current?: string;
+}
+
+const {
+  brandHref = '/',
+  ctaLabel = 'לבחירת מועד',
+  ctaHref = '/dates/',
+  current = '',
+} = Astro.props;
+
+const NAV = [
+  { key: 'home',  label: 'בית',    href: '/' },
+  { key: 'blog',  label: 'הבלוג',  href: '/blog/' },
+  { key: 'dates', label: 'מועדים', href: '/dates/' },
+];
+---
+
+<header class="topbar">
+  {/* NAV FIRST. In RTL the first child lands on the RIGHT, where Hebrew starts.
+      Measured on avilevi at 390px: burger x352 (right), brand x110 (left) -
+      `knowledge/research/hebrew-web-study.md` sec. 8. The 7-competitor sweep
+      recorded the opposite arrangement (logo right, CTA left) and the study
+      says plainly that both are coherent. His ruling picks this one:
+      "ההמבורגר גם בצד השני... עשית ממש לא כמוהו." */}
+  <div class="bar-start">
+    <button
+      class="burger"
+      type="button"
+      aria-label="תפריט"
+      aria-expanded="false"
+      aria-controls="site-menu"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+
+    <nav class="nav-wide" aria-label="ניווט ראשי">
+      {NAV.map((n) => (
+        <a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="bar-end">
+    <a class="brand" href={brandHref}>העובד הראשון שלך</a>
+    <a class="topbar-btn" href={ctaHref}>{ctaLabel}</a>
+  </div>
+</header>
+
+<div class="menu" id="site-menu" hidden>
+  <nav aria-label="ניווט">
+    {NAV.map((n) => (
+      <a href={n.href} aria-current={current === n.key ? 'page' : undefined}>{n.label}</a>
+    ))}
+    <a href="mailto:guy@guymalul.co.il">כתבו לי</a>
+  </nav>
+</div>
+
+<style>
+  .topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    /* The field measures 64-90px (avilevi 69). Ours rendered 56 on some pages
+       and 64 on others, depending on what happened to sit in the bar.
+       box-sizing matters here: without it min-height is the CONTENT box and
+       the padding lands on top, which measured 76px instead of 64. */
+    box-sizing: border-box;
+    min-height: max(var(--bar), 64px);
+    padding: 0.35rem var(--pad-x);
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .bar-start,
+  .bar-end { display: flex; align-items: center; gap: 0.55rem; min-width: 0; }
+
+  .topbar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.3rem 0.95rem;
+    border-radius: 12px;
+    background: var(--acc);
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.88rem;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* The wide nav. Hidden on a phone, where the menu button carries it. */
+  .nav-wide { display: none; align-items: center; gap: 1.25rem; }
+  .nav-wide a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.92rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-wide a:hover { border-bottom-color: var(--acc-line); }
+  /* The current page is marked by WEIGHT and a RULE, never by colour alone. */
+  .nav-wide a[aria-current="page"] {
+    font-weight: 700;
+    border-bottom-color: var(--acc);
+  }
+
+  .burger {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    cursor: pointer;
+  }
+  .burger span {
+    display: block;
+    width: 17px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--ink);
+  }
+  .burger:hover { background: var(--acc-tint); }
+  .burger:focus-visible,
+  .brand:focus-visible,
+  .topbar-btn:focus-visible,
+  .nav-wide a:focus-visible {
+    outline: 2px solid var(--acc);
+    outline-offset: 2px;
+  }
+
+  .menu {
+    position: fixed;
+    /* opens flush under the bar, which is taller than the raw token */
+    inset: max(var(--bar), 64px) 0 auto 0;
+    z-index: 49;
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 10px 24px rgba(43, 31, 28, 0.08);
+  }
+  .menu[hidden] { display: none; }
+  .menu nav { display: flex; flex-direction: column; padding: 0.4rem var(--pad-x) 0.9rem; }
+  .menu a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .menu a:last-child { border-bottom: 0; }
+  .menu a[aria-current="page"] { font-weight: 700; }
+  .menu a[aria-current="page"]::after {
+    content: "כאן";
+    margin-inline-start: 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--acc-d);
+    border: 1px solid var(--acc-line);
+    border-radius: 999px;
+    padding: 1px 7px;
+  }
+
+  /* Wide enough for the nav to sit in the bar: show it, drop the button. */
+  @media (min-width: 720px) {
+    .nav-wide { display: flex; }
+    .burger { display: none; }
+    .menu { display: none !important; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('.topbar .burger');
+    var menu = document.getElementById('site-menu');
+    if (!btn || !menu) return;
+
+    function setOpen(open) {
+      menu.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    btn.addEventListener('click', function () {
+      setOpen(menu.hidden);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !menu.hidden) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (menu.hidden) return;
+      if (menu.contains(e.target) || btn.contains(e.target)) return;
+      setOpen(false);
+    });
+
+    // Widening past the breakpoint leaves the panel open behind the wide nav.
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 720 && !menu.hidden) setOpen(false);
+    });
+  })();
+</script>

@@ -1,0 +1,80 @@
+---
+/**
+ * The site's one footer.
+ *
+ * It carries the way home, the blog, the way to reach him, and the
+ * accessibility statement - the last one is an Israeli legal requirement and
+ * is never optional.
+ *
+ * `note` exists because unifying the six hand-written footers would otherwise
+ * have DELETED things pages needed to say: the questionnaire's footer is
+ * "נתקעתם? כתבו לי בוואטסאפ", which is support exactly where someone stuck
+ * needs it. Structure is shared; a page that has something of its own to say
+ * still says it.
+ */
+interface Props {
+  /** an extra line this page needs, above the links */
+  note?: string;
+  noteHref?: string;
+  noteLinkLabel?: string;
+}
+
+const { note, noteHref, noteLinkLabel } = Astro.props;
+---
+
+<footer>
+  <div class="wrap">
+    {note && (
+      <p class="note">
+        {note}
+        {noteHref && noteLinkLabel && <a class="note-link" href={noteHref}>{noteLinkLabel}</a>}
+      </p>
+    )}
+
+    <nav class="links" aria-label="ניווט תחתון">
+      <span class="foot-name">גיא מלול</span>
+      <a href="/">העובד הראשון שלך</a>
+      <a href="/blog/">הבלוג</a>
+      <a href="/dates/">מועדים</a>
+      <a href="mailto:guy@guymalul.co.il">guy@guymalul.co.il</a>
+      <a href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/accessibility/">הצהרת נגישות</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  footer {
+    flex: none;
+    padding: 2.4rem var(--pad-x) 3rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; }
+
+  .note { margin: 0 0 1rem; }
+  .note-link { margin-inline-start: 0.4rem; }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 1.3rem;
+  }
+  .foot-name { font-weight: 600; color: var(--ink); }
+  footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 0;
+    color: inherit;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+  footer a:hover,
+  footer a:focus-visible { text-decoration-thickness: 2px; }
+  footer a:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+</style>

@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 ---
 
 <Base
@@ -186,49 +188,6 @@ import Base from '../layouts/Base.astro';
     margin-bottom: 1rem;
   }
 
-  /* ---------- the top bar: flat, hairline, one flat solid button ---------- */
-  .topbar {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-    min-height: var(--bar);
-    padding: 0.35rem var(--pad-x);
-    background: var(--ground);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar .brand {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .topbar .topbar-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 0.3rem 0.95rem;
-    border-radius: 12px;
-    background: var(--acc);
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 0.88rem;
-    line-height: 1.2;
-    text-decoration: none;
-    text-align: center;
-  }
-  /* no nowrap and no shrink floor: overflow-x is hidden, so a label that runs
-     past the edge is unrecoverable. At 200% zoom it wraps instead of clipping;
-     at every real phone width there is room and it stays on one line. */
-  .topbar .brand, .topbar .topbar-btn { min-width: 0; }
 
   /* ---------- buttons: flat solid fill, rounded rectangle, no gradient, no glow ----------
      The 12px corner plus a saturated fill is the page's ONE pressable signature -
@@ -618,32 +577,6 @@ import Base from '../layouts/Base.astro';
   .final .lead { color: #ffffff; font-size: 1.18rem; font-weight: 500; line-height: 1.55; }
   .final .after { margin-top: 1.2rem; margin-bottom: 0; color: #ffe0d6; }
 
-  footer {
-    padding: 2.4rem var(--pad-x) 3rem;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.92rem;
-  }
-  footer .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 1.3rem; }
-  /* the footer's links carry the resting underline like every other link on the
-     page. Without it they read as accent text with no underline, which is this
-     page's signal for emphasis, not for a destination. */
-  footer a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    min-height: 44px;
-    text-decoration: underline;
-    text-underline-offset: 0.22em;
-    text-decoration-thickness: 1px;
-  }
-  footer a:hover, footer a:focus-visible { text-decoration-thickness: 2px; }
-  /* the address is one unbreakable token; let it break rather than run off the
-     clipped edge at high zoom */
-  footer a { min-width: 0; }
-  footer a span { overflow-wrap: anywhere; }
-  footer svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
-  footer .foot-name { color: var(--ink); font-weight: 500; }
 
   /* ---------- from tablet up ---------- */
   @media (min-width: 640px) {
@@ -685,10 +618,7 @@ import Base from '../layouts/Base.astro';
 </style>
 <a class="skip" href="#main">דלג לתוכן</a>
 
-  <header class="topbar">
-    <a class="brand" href="#top">העובד הראשון שלך</a>
-    <a class="topbar-btn" href="#straight">להצטרף לסדנה</a>
-  </header>
+  <SiteHeader current="home" brandHref="#top" ctaLabel="להצטרף לסדנה" ctaHref="#straight" />
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -1033,14 +963,7 @@ import Base from '../layouts/Base.astro';
 
   </main>
 
-  <footer>
-    <div class="wrap">
-      <span class="foot-name">גיא מלול</span>
-      <a href="mailto:guy@guymalul.co.il"><svg aria-hidden="true"><use href="#ic-mail"/></svg><span>guy@guymalul.co.il</span></a>
-      <a href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ic-in"/></svg><span>LinkedIn</span></a>
-      <a href="/accessibility/"><span>הצהרת נגישות</span></a>
-    </div>
-  </footer>
+  <SiteFooter />
   <script is:inline>
     /* The page's only animation: the brand name rises once out of its clipping
        edge. No library - CSS does the motion, this just decides when.

@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 ---
 
 <Base
@@ -80,45 +82,6 @@ import Base from '../../layouts/Base.astro';
   .skip:focus { top: 0.4rem; }
   #main:focus { outline: 2px solid var(--acc); outline-offset: -4px; }
 
-  .topbar {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-    min-height: var(--bar);
-    padding: 0.35rem var(--pad-x);
-    background: var(--ground);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar .brand {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .topbar .topbar-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 0.3rem 0.95rem;
-    border-radius: 12px;
-    background: var(--acc);
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 0.88rem;
-    line-height: 1.2;
-    text-align: center;
-    text-decoration: none;
-  }
-  .topbar .brand, .topbar .topbar-btn { min-width: 0; }
 
   main { flex: 1 0 auto; padding: calc(var(--bar) + 2.6rem) var(--pad-x) 3.5rem; }
   .wrap { max-width: 620px; margin: 0 auto; }
@@ -231,25 +194,6 @@ import Base from '../../layouts/Base.astro';
     text-decoration-thickness: 1px;
   }
 
-  footer {
-    flex: none;
-    padding: 2.4rem var(--pad-x) 3rem;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.92rem;
-  }
-  footer .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 1.3rem; }
-  footer a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    min-width: 0;
-    text-decoration: underline;
-    text-underline-offset: 0.22em;
-    text-decoration-thickness: 1px;
-  }
-  footer a:hover, footer a:focus-visible { text-decoration-thickness: 2px; }
-  footer a span { overflow-wrap: anywhere; }
 
   @media (min-width: 640px) {
     .btn { width: auto; display: inline-flex; }
@@ -261,10 +205,7 @@ import Base from '../../layouts/Base.astro';
 </style>
 <a class="skip" href="#main">דלג לתוכן</a>
 
-  <header class="topbar">
-    <a class="brand" href="/">העובד הראשון שלך</a>
-    <a class="topbar-btn" href="#gate-h">לבחירת מועד</a>
-  </header>
+  <SiteHeader current="dates" ctaLabel="לבחירת מועד" ctaHref="#gate-h" />
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -322,12 +263,7 @@ import Base from '../../layouts/Base.astro';
     </div>
   </main>
 
-  <footer>
-    <div class="wrap">
-      <a href="/"><span>העובד הראשון שלך</span></a>
-      <a href="/accessibility/"><span>הצהרת נגישות</span></a>
-    </div>
-  </footer>
+  <SiteFooter />
   <script is:inline>
     /* A date whose end time has passed stops being offered - here, in the
        browser, correct every second. The update-workshop-dates routine keeps

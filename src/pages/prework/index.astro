@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 ---
 
 <Base
@@ -108,7 +110,6 @@ import Base from '../../layouts/Base.astro';
   .card.support { background: var(--tone); border: none; box-shadow: none; }
   .support p { font-size: 0.96rem; }
 
-  footer { text-align: center; padding: 16px 18px 44px; color: var(--muted); font-size: 0.9rem; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -457,9 +458,7 @@ import Base from '../../layouts/Base.astro';
   </section>
 </main>
 
-<footer>
-  העובד הראשון שלך · סדנה בזום
-</footer>
+  <SiteFooter />
   <script is:inline>
 const store = window.localStorage;
 const TASKS = 10;

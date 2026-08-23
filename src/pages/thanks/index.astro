@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 ---
 
 <Base
@@ -42,13 +44,6 @@ import Base from '../../layouts/Base.astro';
   strong { color: var(--ink); font-weight: 700; }
   a { color: var(--acc-d); font-weight: 500; }
 
-  .topbar {
-    position: sticky; top: 0; z-index: 40; height: var(--bar);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 var(--pad-x);
-    background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
   .brand { color: var(--ink); font-weight: 700; text-decoration: none; font-size: 0.98rem; }
   .topbar-btn {
     border: 1px solid var(--acc-line); border-radius: 12px;
@@ -95,18 +90,8 @@ import Base from '../../layouts/Base.astro';
   .signoff img { width: auto; height: 118px; display: block; }
   .signoff .sign { margin: 0; color: var(--ink); font-weight: 500; font-size: 1.05rem; }
 
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 1.1rem var(--pad-x) 2.4rem;
-    color: var(--muted); font-size: 0.9rem;
-  }
-  footer .wrap { max-width: 660px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 0.35rem 1.3rem; }
-  footer a { color: var(--muted); }
 </style>
-<header class="topbar">
-    <a class="brand" href="#">העובד הראשון שלך</a>
-    <a class="topbar-btn" href="https://wa.me/972559526627">כתבו לי</a>
-  </header>
+  <SiteHeader ctaLabel="כתבו לי" ctaHref="https://wa.me/972559526627" />
 
   <main>
     <h1>המקום שמור. מתחילים היום, לא בערב שלפני.</h1>
@@ -131,11 +116,6 @@ import Base from '../../layouts/Base.astro';
       </div>
   </main>
 
-  <footer>
-    <div class="wrap">
-      <a href="https://guymalul.co.il/">העובד הראשון שלך</a>
-      <a href="https://guymalul.co.il/accessibility/">הצהרת נגישות</a>
-    </div>
-  </footer>
+  <SiteFooter />
 
 </Base>
