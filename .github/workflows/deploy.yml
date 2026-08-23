@@ -1,9 +1,15 @@
 # Deploy the site to GitHub Pages.
 #
-# COMMITTED BUT NOT IN EFFECT. GitHub Pages is still serving the `main` branch
-# directly (build_type: legacy). This workflow only takes over when the Pages
-# source is switched to "GitHub Actions" - one API call, reversible, and it is
-# the OWNER'S to make. `workflows/build.md`: this recipe never deploys.
+# LIVE. This workflow builds and publishes the site. Pages was switched to
+# `build_type: workflow` on 23.8.2026 on the owner's word, and every deploy since
+# has gone through here.
+#
+# TO ROLL BACK it takes TWO calls, not one - the PUT alone leaves the site frozen
+# on its last Actions build:
+#   gh api -X PUT repos/{owner}/{repo}/pages -f 'build_type=legacy' \
+#     -f 'source[branch]=main' -f 'source[path]=/'
+#   gh api -X POST repos/{owner}/{repo}/pages/builds
+# The PUT answers 204 with no body; that is success, not a failure.
 #
 # VERSIONS VERIFIED against the official Astro deploy guide on 23.8.2026, and
 # all three were behind: checkout was v4 (guide says v7), withastro/action was

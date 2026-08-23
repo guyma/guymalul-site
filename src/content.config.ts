@@ -33,7 +33,11 @@ const blog = defineCollection({
     readingTime: z.number().optional(),
 
     draft: z.boolean().default(false),
-  }),
+  
+    // the closing block, per post. Optional: a post without one gets none,
+    // which is what stops one post's summary appearing under another.
+    payoff: z.object({ title: z.string(), items: z.array(z.string()) }).optional(),
+}),
 });
 
 export const collections = { blog };

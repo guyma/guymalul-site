@@ -3,6 +3,23 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
+  // Highlighting stays ON, and PLAINTEXT is excluded from it.
+  //
+  // The problem it solves: this blog's fenced blocks are Hebrew PROMPTS, and
+  // Shiki was theming them - writing background-color:#24292e; color:#e1e4e8
+  // INLINE on every <pre>. No stylesheet beats an inline style without
+  // !important on every property, so the prompts shipped light-grey on light.
+  // Only a SCREENSHOT showed it; every DOM check passed.
+  //
+  // The first fix was syntaxHighlight:false, and it was too wide: it left every
+  // <pre> bare, so the RTL prompt styling in Post.astro would have applied to
+  // real code forever. excludeLangs is the narrow one. Verified by building
+  // both kinds of block:
+  //   untagged fence -> <pre>                          (a prompt; styled RTL)
+  //   ```js          -> <pre data-language="js" ...>   (code; left alone)
+  // Post.astro keys its prompt styling off exactly that distinction, so adding
+  // a code block to a future post needs no change here.
+  markdown: { syntaxHighlight: { type: 'shiki', excludeLangs: ['plaintext'] } },
   site: 'https://guymalul.co.il',
 
   // ONE url shape, Astro's own. The owner's ruling 21.8: the site used to mix

@@ -1,4 +1,9 @@
 ---
+import { Image } from 'astro:assets';
+// the byline avatar was a 1,846KB 1024x1024 PNG drawn at 48px - twenty-one
+// times its rendered size, on every post page. astro:assets resizes and
+// converts it at build time, so the reader downloads what is actually shown.
+import avatar from '../assets/guy.png';
 /**
  * Post.astro - the article template.
  *
@@ -64,7 +69,7 @@ const jsonLd = {
       {d.standfirst && <p class="standfirst">{d.standfirst}</p>}
 
       <div class="byline">
-        <img class="ava" src="/img/guy.png" alt="גיא מלול" width="96" height="96" loading="eager" />
+        <Image class="ava" src={avatar} alt="גיא מלול" width={96} height={96} loading="eager" />
         <div>
           <span class="who">גיא מלול</span>
           <span class="meta">
@@ -79,14 +84,17 @@ const jsonLd = {
       <slot />
     </div>
 
-    <aside class="payoff">
-      <p class="payh">שלוש שאלות, לפני שאתה מבקש</p>
-      <ol>
-        <li>מה השיחה הזאת</li>
-        <li>מה אני רוצה לקחת ממנה</li>
-        <li>איך אני אדע שיצא טוב</li>
-      </ol>
-    </aside>
+    {/* The closing block is PER POST and optional. It used to be hardcoded
+        here with post #1's three questions, which meant two things at once:
+        it went stale the moment that post changed, and every future post
+        would have carried another post's summary. A post supplies its own
+        via frontmatter, or gets none. */}
+    {d.payoff && (
+      <aside class="payoff">
+        <p class="payh">{d.payoff.title}</p>
+        <ol>{d.payoff.items.map((x) => <li>{x}</li>)}</ol>
+      </aside>
+    )}
 
     {d.tags.length > 0 && (
       <p class="tags">{d.tags.map((t) => <span class="tag">{t}</span>)}</p>
@@ -94,6 +102,74 @@ const jsonLd = {
 
     <p class="back"><a href="/blog/">כל הפוסטים</a></p>
   </article>
+
+<script is:inline>
+  // Wrap every prompt box and give it a copy control. Done in the browser rather
+  // than in the markdown so the post source stays plain text a person can read.
+  //
+  // ONLY prompts. A fence with a language is real code (Shiki gives it
+  // data-language); it keeps its own styling and gets no "copy the prompt"
+  // button, because that button would be lying about what it copies.
+  document.querySelectorAll('.prose pre:not([data-language])').forEach(function (pre) {
+    if (pre.parentElement.classList.contains('box')) return;
+    var box = document.createElement('div');
+    box.className = 'box';
+    pre.parentNode.insertBefore(box, pre);
+    box.appendChild(pre);
+
+    var IDLE = 'העתקה', OK = 'הועתק', FAIL = 'לא הצליח';
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'copy';
+    // The accessible name is kept IN STEP with the visible text. A fixed
+    // aria-label would override it, so a screen reader would hear "copy the
+    // prompt" forever and never learn whether the copy worked.
+    var say = function (text, label) {
+      b.textContent = text;
+      b.setAttribute('aria-label', label);
+    };
+    b.setAttribute('aria-live', 'polite');
+    say(IDLE, 'להעתיק את הפרומפט');
+    box.appendChild(b);
+
+    var timer;
+    var reset = function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        say(IDLE, 'להעתיק את הפרומפט');
+        b.removeAttribute('data-done');
+      }, 1800);
+    };
+    var done = function () { say(OK, 'הפרומפט הועתק'); b.setAttribute('data-done', ''); reset(); };
+    var failed = function () { say(FAIL, 'ההעתקה לא הצליחה'); b.removeAttribute('data-done'); reset(); };
+
+    b.addEventListener('click', function () {
+      var text = (pre.querySelector('code') || pre).innerText;
+
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:absolute;left:-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        // execCommand is deprecated and astro check says so. It is kept on
+        // purpose as a fallback for a non-secure context and older browsers.
+        // It RETURNS A BOOLEAN and can fail WITHOUT throwing, so the return
+        // value is what decides - a try/catch alone reports success on failure.
+        var ok = false;
+        try { ok = document.execCommand('copy') !== false; }
+        catch (err) { ok = false; }
+        document.body.removeChild(ta);
+        if (ok) done(); else failed();
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else fallback();
+    });
+  });
+</script>
 </Base>
 
 <style is:global>
@@ -161,16 +237,89 @@ const jsonLd = {
 
   .prose hr { border: 0; border-top: 1px solid var(--line); margin: 3rem 0 2rem; }
 
-  .prose code {
+  /* INLINE code only - a Latin technical token inside a sentence. This rule
+     used to hit <code> inside <pre> too, which is what broke the prompt boxes:
+     the block inherited a light text colour from Astro's dark <pre> theme and
+     then sat on this light background, so the text was invisible, and it
+     inherited direction:ltr, so Hebrew rendered with its punctuation at the
+     start of the line. Caught by SCREENSHOTTING the page, never by a check. */
+  .prose :not(pre) > code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: .92em; background: var(--acc-tint);
     padding: 1px 6px; border-radius: 6px;
+    direction: ltr; unicode-bidi: isolate; display: inline-block;
   }
-  /* a Latin technical token must not flip in RTL */
-  .prose code, .prose kbd, .prose samp { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+  .prose kbd, .prose samp { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+  /* THE PROMPT BOX. hebrew-writing law 20c: this is text the reader PASTES,
+     so it is judged as a prompt - clarity to the model beats cadence. Its
+     content here is Hebrew, so it reads right-to-left like the rest of the
+     page, and it must never inherit a syntax theme meant for code. */
+  /* A PROMPT is a fence with no language; astro.config excludes plaintext from
+     Shiki, so it arrives as a bare <pre>. Real code arrives with data-language
+     and Shiki's own theme, and must not be dressed as a prompt or flipped RTL. */
+  .prose pre:not([data-language]) {
+    background: var(--tone, #fef0ec);
+    color: var(--ink, #2b1f1c);
+    direction: rtl;
+    text-align: start;
+    padding: 1.15rem 1.3rem;
+    border-radius: 14px;
+    border: 1px solid var(--acc-line, #f0c4b8);
+    margin: 1.8rem 0;
+    line-height: 1.75;
+    font-size: .92rem;
+    /* No !important here on purpose. Shiki used to write background-color
+       INLINE on every <pre>, and the first fix was to out-shout it. The real fix
+       was excluding plaintext from the highlighter in astro.config; once the root
+       cause was gone the override was left behind as dead weight. A workaround
+       kept after its cause is removed teaches the next reader the wrong lesson. */
+    /* and a long Hebrew line was being CLIPPED on a phone rather than wrapped.
+       overflow-x:auto scrolls a block nobody thinks to scroll sideways. */
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  /* real code: Shiki's theme, left-to-right, and its own sideways scroll */
+  .prose pre[data-language] {
+    margin: 1.8rem 0; padding: 1.15rem 1.3rem; border-radius: 14px;
+    direction: ltr; text-align: left; font-size: .92rem; line-height: 1.7;
+    overflow-x: auto;
+  }
+  .prose pre:not([data-language]) code {
+    background: none; padding: 0; border-radius: 0; font-size: inherit;
+    color: inherit; direction: inherit; unicode-bidi: normal; display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
 
   /* the conversion block. 7 of 7 competitors carry one; not one ends the
      article at the article */
+
+  /* THE COPY BUTTON. Measured across the seven Hebrew sites in the field study:
+     a copy-to-clipboard control on a prompt or code block is 0 of 7. Nobody
+     does it. On a post whose whole point is "copy this and run it", that is an
+     opening rather than a reason to skip it. */
+  .prose .box { position: relative; }
+  .prose .box .copy {
+    position: absolute; top: 10px; inset-inline-end: 10px;
+    background: var(--ground); color: var(--acc-d);
+    border: 1px solid var(--acc-line); border-radius: 999px;
+    font-family: var(--font); font-size: .8rem; font-weight: 500;
+    padding: 5px 13px; cursor: pointer; line-height: 1;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  /* A thumb needs about 44px and the pill is 25. The visible pill stays small;
+     an invisible pseudo-element carries the touch target around it. */
+  .prose .box .copy::after {
+    content: ""; position: absolute; top: -11px; bottom: -11px; left: -8px; right: -8px;
+  }
+  .prose .box .copy:hover { background: var(--acc-tint); }
+  .prose .box .copy:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+  .prose .box .copy[data-done] { color: var(--ink); border-color: var(--line); }
+  /* the button sits over the first line, so the box makes room for it */
+  .prose .box pre { padding-top: 2.9rem; }
+  @media (prefers-reduced-motion: no-preference) { .prose .box .copy { transition: background .15s; } }
+
   .payoff {
     max-width: 44rem; margin-top: 3.4rem; padding-top: 1.6rem;
     border-top: 3px solid var(--acc);
