@@ -100,6 +100,21 @@ const jsonLd = {
       </aside>
     )}
 
+  {/* E2 in the field spec: one conversion block after the body. 7 of 7
+      competitors carry one and not one ends the article at the article.
+      It is STANDING, not per-post: a post that ends with nowhere to go was
+      the state this post shipped in, and the only outbound link in it was
+      back to the index.
+
+      Facts pulled from core/business-profile.md line 20 and the live dates
+      page: three hours on Zoom, a group of up to five, 1,000 shekels. The
+      price stays on the destination, which leads with it. */}
+  <aside class="next">
+    <p class="next-q">רוצה לעשות את זה על העסק שלך?</p>
+    <p class="next-b">זאת הסדנה. שלוש שעות בזום, קבוצה של עד חמישה, ואתה יוצא מהיום הזה עם עובד שמכיר את העסק שלך.</p>
+    <a class="next-cta" href="/dates/">לבחירת מועד</a>
+  </aside>
+
     {d.tags.length > 0 && (
       <p class="tags">{d.tags.map((t) => <span class="tag">{t}</span>)}</p>
     )}
@@ -350,4 +365,25 @@ const jsonLd = {
 
   .back { margin-top: 2.6rem; font-size: .95rem; }
   .back a { color: var(--acc-d); font-weight: 500; }
+
+  /* the conversion block. Warm ground so it reads as a different surface from
+     the article, not as one more paragraph the eye slides past. */
+  .next {
+    max-width: 46rem;
+    margin: 0 auto 4rem;
+    padding: 1.9rem var(--pad-x);
+    background: var(--acc-tint);
+    border: 1px solid var(--acc-line);
+    border-radius: 16px;
+  }
+  .next-q { margin: 0 0 .6rem; font-size: 1.18rem; font-weight: 700; color: var(--ink); }
+  .next-b { margin: 0 0 1.3rem; font-size: 1rem; line-height: 1.7; color: var(--body, #4a3a35); }
+  .next-cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 48px; padding: .55rem 1.6rem;
+    border-radius: 12px; background: var(--acc); color: #fff;
+    font-weight: 500; text-decoration: none;
+  }
+  .next-cta:focus-visible { outline: 2px solid var(--acc-d); outline-offset: 3px; }
+  @media (max-width: 46rem) { .next { margin-inline: var(--pad-x); border-radius: 14px; } }
 </style>
