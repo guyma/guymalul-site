@@ -23,6 +23,13 @@ const LIVE = 'https://guymalul.co.il';
 const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe',
   'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'].find((p) => fs.existsSync(p));
 
+// WHAT THIS PROVES NOW IS NARROWER THAN WHAT IT WAS BUILT FOR. 23.8: the six
+// hand-written pages were deleted, so "a visitor sees nothing change" no
+// longer has a baseline - the live site IS this build. What survives is still
+// worth running: it proves the LOCAL build matches what is actually deployed,
+// which catches a broken build before it is pushed and a deploy that silently
+// did not land. The legacy stub entries below still matter for the same reason
+// they always did - those URLs are in WhatsApp threads and old mail.
 // built path -> the live URL it must match
 const PAGES = [
   ['/',                          '/'],
