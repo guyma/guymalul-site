@@ -5,7 +5,7 @@ pubDate: 2026-08-24
 kicker: "שאלה מהקבוצה"
 standfirst: "שאלה שעלתה בקבוצה, ונשמעת טכנית ולא באמת: כשאני רוצה שמישהו מסוים במשרד יעשה את העבודה, אני חייב לקרוא לו בשם? או שמספיק להעלות את המשימה וקלוד כבר ידע למי להעביר?"
 readingTime: 5
-draft: true
+draft: false
 tags: ["סקילים", "עבודה עם AI", "המשרד"]
 # v1, 24.8 - from his own answer in the graduates' group
 # (knowledge/samples/group-answer-student-question.md). The asker is described
