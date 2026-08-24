@@ -13,7 +13,7 @@ tags: ["תמלול", "סיכומי שיחה", "עבודה עם AI"]
 # Every finding and what it means: guy-hq/knowledge/voice-corrections.md
 # The process record: guy-hq/desk/2026-08-20-blog-post-1/13-his-draft.md
 # Checks run and clean: strip-ai-tells, check-bidi, and the padding checklist.
-# Still draft: PUBLISHING IS HIS WORD.
+# PUBLISHED on his word 23.8.
 ---
 
 לפני שאני שולח בקשה, אני עוצר ושואל שאלה אחת: **אם היה עומד מולי עכשיו עובד חדש, בן אדם, הוא היה מבין בדיוק מה אני רוצה?**

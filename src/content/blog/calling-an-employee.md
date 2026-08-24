@@ -13,7 +13,7 @@ tags: ["סקילים", "עבודה עם AI", "המשרד"]
 # public content. The explanation window is his instruction the same day - the
 # blog has no time pressure, so it explains the mechanism the workshop only
 # gestures at. The chain: desk/2026-08-23-blog-post-2/
-# Still draft: PUBLISHING IS HIS WORD.
+# PUBLISHED on his word 24.8.
 ---
 
 בגדול אפשר גם וגם.
