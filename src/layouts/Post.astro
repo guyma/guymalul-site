@@ -316,11 +316,35 @@ const jsonLd = {
   }
   .prose pre:not([data-language]) code {
     background: none; padding: 0; border-radius: 0; font-size: inherit;
-    color: inherit; direction: inherit; unicode-bidi: normal; display: block;
+    color: inherit; direction: inherit; display: block;
+    /* The text lives HERE, not on the <pre>, so plaintext has to be here too.
+       It was `normal`, which overrode the parent and painted `/dale` as
+       `dale/`. Each line now takes direction from its own first strong
+       character: a Hebrew prompt line stays RTL, a command line goes LTR. */
+    unicode-bidi: plaintext;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
 
 
+
+  /* THE EXPLANATION WINDOW - the house's `.aside-strong` from design-system.css:
+     tone ground, an accent spine on the reading edge, and it takes a heading.
+     It is for the mechanism BEHIND a thing, set apart from the argument so a
+     reader who already knows it can skip the whole block by its edge. */
+  .prose .explain {
+    background: var(--acc-tint);
+    border-inline-start: 4px solid var(--acc);
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+    margin: 2.2rem 0;
+  }
+  .prose .explain > :first-child { margin-top: 0; }
+  .prose .explain > :last-child { margin-bottom: 0; }
+  .prose .explain h3 {
+    margin: 0 0 .9rem;
+    font-size: 1.05rem;
+    color: var(--acc-d);
+  }
   /* the conversion block. 7 of 7 competitors carry one; not one ends the
      article at the article */
 
