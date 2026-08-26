@@ -140,6 +140,12 @@ import SiteFooter from '../../components/SiteFooter.astro';
   /* display:flex on a class beats the browser's own [hidden] rule, so without
      this the script sets the attribute and the dead row stays on screen. */
   .date-row[hidden] { display: none; }
+  .date-closed {
+    flex: none; min-height: 46px; display: flex; align-items: center;
+    justify-content: center; padding: 0.6rem 1.5rem; font-size: 1rem;
+    color: var(--muted); font-weight: 500;
+  }
+  @media (min-width: 560px) { .date-closed { width: auto; } }
   .date-row:last-child { border-bottom: 1px solid var(--line); }
   .date-day { flex: 1 1 9rem; color: var(--ink); font-weight: 500; font-size: 1.18rem; }
   .date-when { flex: none; color: var(--body); font-size: 1.02rem; }
@@ -236,22 +242,22 @@ import SiteFooter from '../../components/SiteFooter.astro';
         <h2 id="gate-h">המועדים הקרובים</h2>
         <p class="gate-line">בוחרים מועד ומשלמים. זהו.</p>
         <ul class="date-list">
-          <li class="date-row" data-ends="2026-08-31T13:00">
+          <li class="date-row" data-closes="2026-08-31T09:00" data-ends="2026-08-31T13:00">
             <span class="date-day">יום שני, 31.8</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118637f/118630q/payment">להרשמה</a>
           </li>
-          <li class="date-row" data-ends="2026-09-02T13:00">
+          <li class="date-row" data-closes="2026-09-02T09:00" data-ends="2026-09-02T13:00">
             <span class="date-day">יום רביעי, 2.9</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118635t/1186387/payment">להרשמה</a>
           </li>
-          <li class="date-row" data-ends="2026-09-07T13:00">
+          <li class="date-row" data-closes="2026-09-07T09:00" data-ends="2026-09-07T13:00">
             <span class="date-day">יום שני, 7.9</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118635y/118638a/payment">להרשמה</a>
           </li>
-          <li class="date-row" data-ends="2026-09-09T13:00">
+          <li class="date-row" data-closes="2026-09-09T09:00" data-ends="2026-09-09T13:00">
             <span class="date-day">יום רביעי, 9.9</span>
             <span class="date-when">10:00 עד 13:00</span>
             <a class="btn" href="https://pay.sumit.co.il/116dead/118635z/118638b/payment">להרשמה</a>
@@ -265,16 +271,48 @@ import SiteFooter from '../../components/SiteFooter.astro';
 
   <SiteFooter />
   <script is:inline>
-    /* A date whose end time has passed stops being offered - here, in the
-       browser, correct every second. The update-workshop-dates routine keeps
-       the list topped up; this is what makes a list that went stale HARMLESS
-       instead of dangerous. The two layers are deliberate: if the routine
-       never runs, the page shows fewer dates. It never sells a dead one. */
+    /* THREE states, in the browser, correct every thirty seconds. The
+       update-workshop-dates routine keeps the list topped up; this is what
+       makes a list that went stale HARMLESS instead of dangerous - if the
+       routine never runs, the page shows fewer dates and never sells a dead one.
+
+         before data-closes   sells
+         data-closes reached  the row STAYS and says registration has closed.
+                              Nobody can join a session already in progress, so
+                              the seat shuts an hour before the room opens - and
+                              a row that simply vanished would tell a reader
+                              nothing at all.
+         data-ends reached    hidden
+
+       It re-runs on a timer rather than once on load, because a reader can be
+       sitting on this page when the hour passes, and a button that stays live
+       under them is the exact thing this closes. */
     (function () {
-      var now = Date.now();
-      document.querySelectorAll('.date-row[data-ends]').forEach(function (row) {
-        if (new Date(row.dataset.ends).getTime() < now) row.hidden = true;
-      });
+      var CLOSED_LINE = 'אזלו המקומות לסדנה';   /* his ruling 26.8 */
+
+      function apply() {
+        var now = Date.now();
+        document.querySelectorAll('.date-row[data-ends]').forEach(function (row) {
+          var ends = new Date(row.dataset.ends).getTime();
+          if (ends < now) { row.hidden = true; return; }
+          /* a row with no data-closes falls back to its end hour, so an older
+             rendered page keeps the behaviour it already had */
+          var closes = row.dataset.closes ? new Date(row.dataset.closes).getTime() : ends;
+          if (closes <= now && !row.classList.contains('is-closed')) {
+            row.classList.add('is-closed');
+            var btn = row.querySelector('a.btn');
+            if (btn) {
+              var said = document.createElement('span');
+              said.className = 'date-closed';
+              said.textContent = CLOSED_LINE;
+              btn.replaceWith(said);
+            }
+          }
+        });
+      }
+
+      apply();
+      setInterval(apply, 30000);
     })();
   </script>
 </Base>
