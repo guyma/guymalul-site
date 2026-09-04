@@ -50,7 +50,11 @@ import SiteFooter from '../../components/SiteFooter.astro';
     padding: 0.3rem 0.85rem; font-size: 0.85rem; text-decoration: none; color: var(--acc-d);
   }
 
-  main { flex: 1 0 auto; width: 100%; max-width: 660px; margin: 0 auto; padding: 2.6rem var(--pad-x) 0; }
+  /* The topbar is fixed, so main must start BELOW it - the same
+     calc every other page with the bar uses. Without it the h1 is
+     drawn under the bar and its first line is cut off. Note the bar
+     is not var(--bar): SiteHeader sets min-height max(var(--bar), 64px). */
+  main { flex: 1 0 auto; width: 100%; max-width: 660px; margin: 0 auto; padding: calc(var(--bar) + 2.6rem) var(--pad-x) 0; }
 
   h1 {
     color: var(--ink);
