@@ -121,7 +121,6 @@ import SiteFooter from '../../../components/SiteFooter.astro';
   .btn:active { transform: scale(0.99); }
   .btn:hover, .btn:focus-visible { background: var(--acc-d); }
   .btn-primary { display: block; width: 100%; font-size: 1.05rem; padding: 15px 28px; margin-bottom: 12px; }
-  .btn-secondary { display: inline-block; font-size: 0.95rem; padding: 10px 20px; margin-bottom: 12px; }
   .action-note { font-size: 0.9rem; color: var(--body); min-height: 1.4em; }
 
   .steps { list-style: none; counter-reset: step; display: grid; gap: 14px; margin-top: 10px; }
@@ -175,8 +174,9 @@ import SiteFooter from '../../../components/SiteFooter.astro';
   <section class="card fineprint">
     <p><strong>ועוד הכנה אחת, חשובה באמת: אספו דוגמאות כתיבה שלכם.</strong></p>
     <p style="margin-top:8px;">
-      מהדוגמאות האלה העובד לומד את הקול שלכם, איך אתם באמת נשמעים. פתחו תיקייה אחת
-      במחשב ואספו אליה כל מה שתמצאו. לפחות 3, ואין תקרה: כל דוגמה מחדדת.
+      מהדוגמאות האלה העובד לומד את הקול שלכם, איך אתם באמת נשמעים. בתוך <bdi>my-office</bdi>,
+      התיקייה מהבדיקה במשימה 4 בדף ההכנה, פותחים תיקייה בשם <strong><bdi>my-samples</bdi></strong>
+      ואוספים אליה כל מה שתמצאו. לפחות 3, ואין תקרה: כל דוגמה מחדדת.
     </p>
     <ul class="hero-notes" style="margin-top:10px;">
       <li>פוסטים שפרסמתם: פייסבוק, אינסטגרם, לינקדאין.</li>
@@ -200,7 +200,6 @@ import SiteFooter from '../../../components/SiteFooter.astro';
 
   <section class="card actions">
     <button class="btn btn-primary" id="btn-download">להוריד את הקובץ המוכן</button>
-    <button class="btn btn-secondary" id="btn-copy">להעתיק את הקובץ ללוח</button>
     <p class="action-note" id="action-note" role="status" aria-live="polite"></p>
   </section>
 
@@ -208,8 +207,8 @@ import SiteFooter from '../../../components/SiteFooter.astro';
     <h2 class="part-title">מה עושים עם הקובץ?</h2>
     <ol class="steps">
       <li>מורידים את הקובץ <code>my-business-he.md</code> מהכפתור למעלה.</li>
-      <li>שומרים אותו במקום שקל למצוא, למשל שולחן העבודה.</li>
-      <li>מביאים אותו לסדנה. שם העובד החדש שלכם יקרא אותו ויכיר אתכם.</li>
+      <li>מעבירים אותו לתוך <bdi>my-office</bdi>, התיקייה מהבדיקה במשימה 4 בדף ההכנה, ולא משנים את שם הקובץ.</li>
+      <li>בסדנה <bdi>Claude</bdi> מעביר אותו למקום שלו במשרד, והעובד החדש שלכם קורא אותו ומכיר אתכם.</li>
     </ol>
   </section>
 
@@ -470,15 +469,6 @@ document.addEventListener("DOMContentLoaded", () => {
       : "הקובץ ירד. כל השאלות נענו, העובד הולך להכיר אתכם טוב.";
     if (!samplesDone()) msg += " ואל תשכחו: תיקיית הדוגמאות.";
     note(msg);
-  });
-
-  document.getElementById("btn-copy").addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(buildMarkdown());
-      note("הקובץ הועתק ללוח. הדביקו אותו לתוך setup/my-business-he.md בתיקיית המשרד.");
-    } catch (e) {
-      note("ההעתקה נחסמה בדפדפן הזה. השתמשו בכפתור ההורדה.");
-    }
   });
 });
 </script>
