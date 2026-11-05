@@ -90,19 +90,20 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, site)
   <script is:inline>
     (function () {
       var ID = 'G-W2DB6FTQV2';
+      // /thanks/ is where the payment page sends a buyer; whatever a payment
+      // provider appends to that address is dropped from the address bar first,
+      // for every visitor - a refuser who later accepts elsewhere would otherwise
+      // carry it to Google as the referrer. A page_location override on config
+      // was tried and proved live (5.11) not to reach the hits.
+      if (/^\/thanks\/(index\.html)?$/.test(location.pathname) && location.search) {
+        history.replaceState(null, '', location.pathname + location.hash);
+      }
       var choice = null;
       try { choice = localStorage.getItem('gm-analytics'); } catch (e) {}
       window.dataLayer = window.dataLayer || [];
       window.gtag = function () { dataLayer.push(arguments); };
       if (choice === 'denied') { window['ga-disable-' + ID] = true; return; }
       if (!/^(www\.)?guymalul\.co\.il$/.test(location.hostname)) return;
-      // /thanks/ is where the payment page sends a buyer; whatever a payment
-      // provider appends to that address is dropped from the address bar
-      // before Google loads. A page_location override on config was tried and
-      // proved live (5.11) not to reach the hits: Google reads the address itself.
-      if (/^\/thanks\/(index\.html)?$/.test(location.pathname) && location.search) {
-        history.replaceState(null, '', location.pathname + location.hash);
-      }
       var s = document.createElement('script');
       s.async = true;
       s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
