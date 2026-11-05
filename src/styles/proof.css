@@ -1,0 +1,198 @@
+/* The home page's proof section (src/components/Proof.astro): the WhatsApp inbox, the strip of
+   what alumni built, the numbers, and the sheet a card opens. Tokens come from the page. */
+
+/* ---------- the section ---------- */
+.p2 { overflow-x: clip; }
+.p2-h3 { font-size: 1.35rem; line-height: 1.35; margin: 2.6rem 0 1rem; color: var(--ink); }
+.p2 .honest { font-size: 13.5px; color: var(--muted); text-align: center; margin: 12px 0 0; }
+.p2 .p2-note { font-size: 0.95rem; color: var(--muted); margin-top: 14px; }
+.p2 svg { display: block; }
+
+/* ---------- cards: white, hairline, 16px, a whisper of the warm shadow ---------- */
+.p2 .card {
+  appearance: none; font: inherit; color: inherit; text-align: start; cursor: pointer;
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(43,31,28,.04), 0 8px 24px rgba(212,101,78,.07);
+  padding: 20px 20px 16px; display: flex; flex-direction: column; gap: 12px;
+  transition: border-color 150ms;
+}
+.p2 .card:hover { border-color: var(--acc-line); }
+.p2 .card:focus-visible, .p2 button:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.p2 .bcard { flex: 0 0 280px; width: 280px; box-sizing: border-box; }
+.p2 .bc-text { font-size: 16.5px; line-height: 1.55; color: var(--ink); }
+.p2 .who { display: flex; align-items: center; gap: 10px; }
+.p2 .av { width: 40px; height: 40px; border-radius: 50%; background: var(--acc-tint); color: var(--acc-d);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px; flex: 0 0 auto; }
+.p2 .who-t { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+.p2 .nm { font-weight: 700; color: var(--ink); font-size: 15px; }
+.p2 .tr { font-size: 13.5px; color: var(--muted); }
+/* "open the message": underlined words and an arrow */
+.p2 .go { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--acc-d); font-weight: 500; }
+.p2 .go-link > span:first-child { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+/* ---------- the strip: a real sideways scroller a finger can move; JS drifts it slowly ---------- */
+.p2 .drift {
+  margin-inline: calc(50% - 50vw); width: 100vw; box-sizing: border-box;
+  display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  padding: 6px max(var(--pad-x), calc(50vw - 330px)) 16px;
+}
+.p2 .drift::-webkit-scrollbar { display: none; }
+.p2 .drift-track, .p2 .drift-set { display: contents; }
+.p2 .drift.js-armed {
+  display: block; padding-inline: 0; cursor: grab;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.p2 .drift.js-armed.is-dragging { cursor: grabbing; user-select: none; }
+.p2 .drift.js-armed .drift-track { display: flex; width: max-content; }
+.p2 .drift.js-armed .drift-set { display: flex; gap: 14px; padding-inline-end: 14px; align-items: flex-start; }
+.p2 .drift .card { align-self: flex-start; }
+
+/* ---------- the numbers ---------- */
+.p2 .nums { list-style: none; padding: 0; margin: 0 0 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.p2 .num button {
+  appearance: none; font: inherit; color: inherit; text-align: start; cursor: pointer; width: 100%; height: 100%; box-sizing: border-box;
+  display: flex; flex-direction: column; gap: 8px; padding: 18px 16px 14px;
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(43,31,28,.04), 0 8px 24px rgba(212,101,78,.07);
+}
+.p2 .n { font-size: 2.6rem; font-weight: 700; line-height: 1; color: var(--acc-d); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.p2 .n small { font-size: 1rem; font-weight: 500; margin-inline-start: 6px; color: var(--ink); }
+.p2 .num-t { font-size: 15px; line-height: 1.45; color: var(--body); }
+.p2 .num-who { margin-top: auto; font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- WhatsApp ---------- */
+.wa { --wa-green: #1daa61; --wa-ink: #111b21; --wa-sub: #667781; --wa-line: #e9edef;
+  position: relative; height: 520px; max-width: 400px; scroll-margin-top: 72px; margin: 0 auto; overflow: hidden; background: #fff;
+  border: 1px solid var(--line); border-radius: 22px; isolation: isolate;
+  box-shadow: 0 1px 2px rgba(43,31,28,.05), 0 12px 32px rgba(212,101,78,.10);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: var(--wa-ink); text-align: start; }
+.wa button { appearance: none; background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: start; }
+.wa svg { display: block; }
+.wa-screen { position: absolute; inset: 0; display: flex; flex-direction: column; background: #fff; }
+.wa-screen[hidden] { display: none; }
+.wa-list { transition: transform 350ms cubic-bezier(.2,.7,.2,1); }
+.wa.in-chat .wa-list { transform: translateX(18%); }
+.wa-chat { z-index: 2; transform: translateX(-100%); transition: transform 350ms cubic-bezier(.2,.7,.2,1);
+  background-color: #efeae2; background-image: radial-gradient(rgba(84,101,111,.07) 1px, transparent 1.6px); background-size: 16px 16px; }
+.wa-chat.is-open { transform: none; }
+.wa.no-anim .wa-chat, .wa.no-anim .wa-list { transition: none; }
+.wa-ic { display: grid; place-items: center; width: 36px; height: 36px; color: #54656f; }
+.wa-ic svg { width: 22px; height: 22px; }
+
+.wa-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 6px 10px; }
+.wa-brand { font-size: 22px; font-weight: 600; color: var(--wa-green); letter-spacing: -.01em; }
+.wa-icons { display: flex; align-items: center; color: #54656f; }
+.wa-search { display: flex; align-items: center; gap: 10px; margin: 4px 18px 10px; padding: 0 14px; height: 42px; border-radius: 22px; background: #f0f2f5; color: #667781; font-size: 15px; }
+.wa-search svg { width: 20px; height: 20px; }
+.wa-chips { display: flex; gap: 8px; padding: 0 18px 8px; font-size: 13.5px; overflow: hidden; white-space: nowrap; }
+.wa-chips span { padding: 6px 12px; border-radius: 16px; background: #f0f2f5; color: #54656f; }
+.wa-chips .on { background: #d8fdd2; color: #15603e; font-weight: 600; }
+.wa-chips b { font-weight: 600; }
+.wa-rows { flex: 1; overflow-y: auto; list-style: none; margin: 0; padding: 0; }
+.wa .wa-row { position: relative; overflow: hidden; display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; padding: 10px 18px; }
+.wa-row:hover { background: #f5f6f6; }
+.wa-row:focus-visible { outline: 2px solid var(--wa-green); outline-offset: -2px; }
+.wa-av { width: 50px; height: 50px; border-radius: 50%; background: #dfe5e7; flex: 0 0 auto; display: grid; place-items: center; overflow: hidden; }
+.wa-av svg { width: 100%; height: 100%; }
+.wa-av.sm { width: 38px; height: 38px; }
+.wa-mid { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.wa-l1, .wa-l2 { display: flex; align-items: center; gap: 8px; }
+.wa-name { flex: 1; min-width: 0; font-size: 16.5px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wa-time { font-size: 12px; color: var(--wa-sub); flex: 0 0 auto; }
+.wa-row.is-unread .wa-time { color: var(--wa-green); font-weight: 600; }
+.wa-pv { flex: 1; min-width: 0; font-size: 14.5px; color: var(--wa-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wa-pv .wa-tk { display: inline-block; vertical-align: -1px; margin-inline-end: 4px; color: #53bdeb; }
+.wa-badge { flex: 0 0 auto; min-width: 20px; height: 20px; padding: 0 6px; box-sizing: border-box; border-radius: 10px; background: var(--wa-green); color: #fff;
+  font-size: 12px; font-weight: 600; display: grid; place-items: center; transition: transform 150ms, opacity 150ms; }
+.wa-nav { display: flex; justify-content: space-around; border-top: 1px solid var(--wa-line); padding: 6px 0 10px; font-size: 12px; color: #54656f; }
+.wa-nav span { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.wa-nav i { display: grid; place-items: center; width: 56px; height: 30px; border-radius: 15px; }
+.wa-nav svg { width: 22px; height: 22px; }
+.wa-nav .on { color: var(--wa-ink); font-weight: 600; }
+.wa-nav .on i { background: #d8fdd2; color: #15603e; }
+
+.wa-head { display: flex; align-items: center; gap: 8px; padding: 8px 10px 8px 8px; background: #fff; box-shadow: 0 1px 0 var(--wa-line); }
+.wa-back { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: var(--wa-ink); }
+.wa-back svg { width: 22px; height: 22px; }
+.wa-back:focus-visible { outline: 2px solid var(--wa-green); }
+.wa-hid { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.wa-hname { font-size: 16px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wa-hsub { font-size: 12.5px; color: var(--wa-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wa-head .wa-ic { width: 34px; }
+.wa-body { flex: 1; overflow-y: auto; position: relative; display: flex; flex-direction: column; padding: 10px 18px 12px; }
+.wa-body:focus-visible { outline: 2px solid var(--wa-green); outline-offset: -2px; }
+.wa-date { align-self: center; margin: 10px 0 4px; }
+.wa-date span { display: block; background: #fff; color: #54656f; font-size: 12px; padding: 4px 10px; border-radius: 8px; box-shadow: 0 1px .5px rgba(11,20,26,.13); }
+.wa-msg { position: relative; max-width: 84%; box-sizing: border-box; margin-top: 2px; padding: 6px 9px 8px; border-radius: 8px;
+  font-size: 14.5px; line-height: 1.4; box-shadow: 0 1px .5px rgba(11,20,26,.13); overflow-wrap: anywhere; }
+.wa-msg.tail { margin-top: 8px; }
+.wa-msg.in { align-self: flex-start; background: #fff; }
+.wa-msg.out { align-self: flex-end; background: #d9fdd3; }
+.wa-msg.in.tail { border-start-start-radius: 0; }
+.wa-msg.out.tail { border-start-end-radius: 0; }
+.wa-msg.tail::before { content: ""; position: absolute; top: 0; width: 8px; height: 13px; }
+.wa-msg.in.tail::before { inset-inline-start: -8px; background: linear-gradient(to bottom right, #fff 50%, transparent 50%); }
+.wa-msg.out.tail::before { inset-inline-end: -8px; background: linear-gradient(to bottom left, #d9fdd3 50%, transparent 50%); }
+.wa-from { display: block; font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.wa-text { white-space: pre-wrap; }
+.wa-text::after { content: ""; display: inline-block; width: 44px; }
+.wa-msg.out .wa-text::after { width: 64px; }
+.wa-meta { position: absolute; inset-inline-end: 8px; bottom: 4px; font-size: 11px; color: var(--wa-sub); display: inline-flex; flex-direction: row-reverse; align-items: center; gap: 3px; }
+.wa-meta .wa-tk { color: #53bdeb; }
+.wa-tk svg { width: 16px; height: 10px; }
+.wa-msg.flash::before { opacity: 0; }
+.wa-msg.flash { animation: waflash 1.8s ease-out; }
+@keyframes waflash { 0%, 35% { background: #fde9a8; } 100% { } }
+.wa-input { display: flex; align-items: center; gap: 6px; padding: 6px 12px 12px; }
+.wa-field { flex: 1; display: flex; align-items: center; gap: 2px; height: 44px; padding: 0 6px; border-radius: 24px; background: #fff; color: #54656f; font-size: 15.5px; box-shadow: 0 1px .5px rgba(11,20,26,.13); }
+.wa-field .wa-ic { width: 34px; }
+.wa-ph { flex: 1; color: #8696a0; }
+.wa-mic { width: 44px; height: 44px; border-radius: 50%; background: var(--wa-green); display: grid; place-items: center; }
+.wa-mic svg { width: 22px; height: 22px; }
+
+/* In a group, the sender's face beside the first message of a run; a real face once consented. */
+.wa-chat[data-chat="group"] .wa-msg.in { margin-inline-start: 34px; }
+.wa-gav { position: absolute; top: 0; inset-inline-start: -42px; width: 30px; height: 30px; border-radius: 50%; overflow: hidden; background: #dfe5e7; }
+.wa-gav svg { width: 100%; height: 100%; display: block; }
+/* Photos taken off a profile carry its round white rim; a slight zoom inside the circle hides it. */
+.wa-av img, .wa-gav img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.14); }
+
+/* the one-time tap demonstration: a finger, a press, a ripple on the row */
+.wa-hand { position: absolute; z-index: 8; font-size: 48px; line-height: 1; pointer-events: none; opacity: 0;
+  transform: translate(-50%, 10%); filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+.wa-hand.go { animation: p2hand 1.6s ease-in-out 2; }
+@keyframes p2hand {
+  0% { opacity: 0; transform: translate(-50%, 45%); }
+  25% { opacity: 1; transform: translate(-50%, 10%); }
+  38% { transform: translate(-50%, 10%) scale(.84); }
+  50% { transform: translate(-50%, 10%) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 10%); }
+}
+.wa-row.wa-tap::after { content: ""; position: absolute; left: 45%; top: 50%; width: 24px; height: 24px; margin: -12px;
+  border-radius: 50%; background: rgba(17,27,33,.16); animation: p2ripple 650ms ease-out forwards; }
+@keyframes p2ripple { from { transform: scale(0); opacity: 1; } to { transform: scale(16); opacity: 0; } }
+
+/* On the page the phone is one screen tall and scrolls inside; at its end the swipe carries on
+   to the page (scroll chaining), so it never traps a finger. Only the modal sheet contains it. */
+.inbox-wrap .wa { height: min(560px, calc(100svh - var(--bar, 52px) - 40px)); }
+.wa-sheet .wa-rows, .wa-sheet .wa-body { overscroll-behavior: contain; }
+
+/* the sheet a card opens */
+.wa-sheet { padding: 0; border: 0; background: transparent; width: min(420px, calc(100vw - 16px)); max-width: none; max-height: none;
+  height: min(86vh, 720px); margin: auto auto 0; overflow: visible; }
+.wa-sheet::backdrop { background: rgba(20,14,12,.5); }
+.wa-sheet .wa { height: 100%; max-width: none; border-radius: 20px 20px 0 0; border: 0; }
+.wa-sheet[open] .wa { animation: p2up 350ms cubic-bezier(.2,.7,.2,1); }
+@keyframes p2up { from { transform: translateY(48px); opacity: 0; } }
+@media (min-width: 760px) { .wa-sheet { margin: auto; } .wa-sheet .wa { border-radius: 20px; } }
+
+/* the closing line above the last button, on the coral block */
+.final .fq { margin: 0 0 22px; color: #fff; }
+.final .fq q { display: block; font-size: 1.15rem; font-weight: 500; line-height: 1.5; quotes: "\"" "\""; }
+.final .fq span { display: block; margin-top: 6px; font-size: .95rem; opacity: .9; }
+
+@media (prefers-reduced-motion: reduce) {
+  .p2 *, .wa-sheet * { transition: none !important; animation: none !important; }
+}

@@ -1,0 +1,29 @@
+---
+/**
+ * Proof.astro - the home page's proof: the alumni's real WhatsApp messages, what they built, and
+ * the numbers. The content lives in src/data/proof.json; each piece was ruled by Guy one by one.
+ * A face shows only once its owner consents (a `photo` field in the data).
+ */
+import data from '../data/proof.json';
+import { renderProof } from '../lib/proof.mjs';
+import '../styles/proof.css';
+
+const { inbox, strip, nums, sheet } = renderProof(data);
+---
+<section class="p2" id="proof">
+  <div class="wrap">
+    <h2 class="rev-h">אל תאמין לי.<br>תקרא מה הם כתבו לי.</h2>
+    <p class="lede">👇 תלחץ על שיחה, היא באמת נפתחת.</p>
+    <Fragment set:html={inbox} />
+    <h3 class="p2-h3">את זה הם בנו, לא אני.</h3>
+    <Fragment set:html={strip} />
+    <p class="p2-note">כל אלה נבנו אחרי הסדנה.</p>
+    <Fragment set:html={nums} />
+    <div class="cta-row proof-cta"><a class="btn" href="#price">להצטרף לסדנה</a></div>
+  </div>
+</section>
+<dialog class="wa-sheet" id="wa-sheet" aria-label="השיחה"><Fragment set:html={sheet} /></dialog>
+
+<script>
+  import '../scripts/proof.js';
+</script>

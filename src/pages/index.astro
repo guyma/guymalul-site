@@ -2,18 +2,21 @@
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import Proof from '../components/Proof.astro';
+import { Image } from 'astro:assets';
+import avatar from '../assets/guy.png';
 ---
 
 <Base
   title={"העובד הראשון שלך | גיא מלול"}
-  description={"סדנה של שלוש שעות בזום. העובד הראשון שלך. לומדים איך לגייס אותו."}
+  description={"בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
   canonical={"https://guymalul.co.il/"}
   ogImage={"https://guymalul.co.il/og-card-v4.png"}
   ogImageAlt={"מספיק להאכיל את הצ'אט בכפית. בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך."}
   ogTitle={"העובד הראשון שלך | גיא מלול"}
-  ogDescription={"סדנה של שלוש שעות בזום. העובד הראשון שלך. לומדים איך לגייס אותו."}
+  ogDescription={"בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
   twitterTitle={"העובד הראשון שלך | גיא מלול"}
-  twitterDescription={"סדנה של שלוש שעות בזום. העובד הראשון שלך. לומדים איך לגייס אותו."}
+  twitterDescription={"בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
   favicon={"/favicon.svg"}
   appleTouchIcon={"/apple-touch-icon.png"}
   share
@@ -142,52 +145,6 @@ import SiteFooter from '../components/SiteFooter.astro';
     color: var(--ink);
     margin-bottom: 1.6rem;
   }
-  /* the line a section lands on */
-  .verdict {
-    font-size: 1.28rem;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--ink);
-    margin: 1.7rem 0 1.5rem;
-  }
-  /* the section's visual peak: a sentence that has to be seen, lifted by size,
-     air and the page's own hairline vocabulary instead of by a frame or a hue.
-     Everything around it is 17px body; the two words inside step up again, and
-     the contrast line under it stays small so the peak keeps the height. */
-  .pull-block {
-    margin: 2.9rem 0;
-    padding: 1.9rem 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .pull {
-    font-size: clamp(1.32rem, 5.8vw, 1.65rem);
-    font-weight: 400;
-    line-height: 1.34;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: 0.55rem;
-    text-wrap: balance;
-  }
-  .pull-key {
-    font-weight: 700;
-    font-size: 1.12em;
-    letter-spacing: -0.035em;
-  }
-  .pull-under {
-    font-size: 0.95rem;
-    line-height: 1.55;
-    color: var(--body);
-    margin-bottom: 0;
-  }
-  .quote {
-    font-size: 1.28rem;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-
 
   /* ---------- buttons: flat solid fill, rounded rectangle, no gradient, no glow ----------
      The 12px corner plus a saturated fill is the page's ONE pressable signature -
@@ -241,14 +198,11 @@ import SiteFooter from '../components/SiteFooter.astro';
   }
 
   /* =================== the fold ===================
-     Two movements, one continuous scroll. The first carries the
-     eyebrow, the headline and one 17px spoken paragraph, and the
-     headline is the only large thing on the screen. The turn (the
-     name of the thing) opens the second movement after a long pause,
-     which is what decision 20 asks for: the name answers the pain. */
+     The eyebrow, the headline, who and what, one short spoken paragraph
+     and the button: one opening, on one screen. */
   .hero {
     padding-top: calc(var(--bar) + 3rem);
-    padding-bottom: 0;
+    padding-bottom: var(--sec-y);
   }
   /* above the headline: the line that lowers the guard, and the page's model
      for every coloured thing you cannot press. No fill and no frame - a solid
@@ -302,94 +256,17 @@ import SiteFooter from '../components/SiteFooter.astro';
      lines - at 390px the violet clause was orphaning its final word. */
   .nb { white-space: nowrap; }
 
-  /* below the headline: what the thing actually is. Grey, so it reads as
-     the fact line it is and never competes with the spoken paragraph.
-     It is bound TIGHT to the H1 and opens a real gap under itself, so it
-     reads as a caption on the headline. It also carries the disambiguation:
-     the H1 names a monthly price, and סדנה plus בזום are what stop the page
-     reading as a subscription sold here. */
-  .fold-what {
-    font-size: 1.15rem;
-    font-weight: 500;
-    line-height: 1.45;
-    letter-spacing: -0.015em;
-    color: var(--body);
-    margin-bottom: 2.6rem;
-  }
-
   /* one paragraph, three beats, all at body size */
   .said { font-size: 1.0625rem; line-height: 1.65; margin-bottom: 0; }
   .said .b-frag { display: block; color: var(--ink); font-weight: 500; margin-bottom: 0.5rem; }
   .said .b-pain { display: block; }
   .said .b-punch { display: block; color: var(--ink); font-weight: 700; margin-top: 0.75rem; }
 
-  /* the turn: the fold's second movement, and its payoff. It sits on WHITE -
-     the full-colour panel that used to carry it was rejected as too strong and
-     reading dated (owner, 27.7), so the name carries the moment on type and
-     air. One colour panel survives on the page and it is the close. */
-  .turn {
-    margin-top: 8rem;
-    padding-bottom: var(--sec-y);
-  }
-  /* the name is the page's peak and it carries that on SIZE. It used to run
-     27px against a 40px H1 - typographically subordinate to the line it
-     answers - and the colour panel had been hiding that. */
-  .turn .brand-peak {
-    font-size: clamp(2.3rem, 10.2vw, 3.3rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    color: var(--ink);
-    margin-bottom: 0.65rem;
-    /* the clipping edge below would cut the descenders without this */
-    padding-bottom: 0.09em;
-    overflow: hidden;
-  }
-  /* The only motion on the page. The RESTING state here is the finished
-     state, so if the script never runs the name is simply present at full
-     size; only JS that is actually running arms the hidden state. */
-  .turn .brand-peak > .peak-in { display: block; }
-  .turn .brand-peak > .peak-in.armed { transform: translateY(115%); }
-  .turn .brand-peak > .peak-in.armed.go {
-    transform: translateY(0);
-    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .turn .method { margin-bottom: 0; font-size: 1.12rem; }
-  .turn .cta-row { margin-top: 2.4rem; }
   /* on the closing colour block the button inverts: white is what you press there */
   .final .btn { background: #ffffff; color: var(--acc-d); }
   .final .btn:hover, .final .btn:focus-visible { background: var(--acc-tint); }
   .final .soft-line { color: #ffe0d6; }
   .final .soft-line a { color: #ffffff; }
-
-  /* ---------- the pair table: hairline rows, hierarchy in ink ---------- */
-  .tw { width: 100%; border-collapse: collapse; margin: 1.8rem 0 1.6rem; }
-  .tw thead { display: none; }
-  .tw tbody, .tw tr, .tw td { display: block; }
-  .tw tr { padding: 1.15rem 0; border-top: 1px solid var(--line); }
-  .tw tr:last-child { border-bottom: 1px solid var(--line); }
-  .tw td { padding: 0; line-height: 1.6; }
-  .tw td::before {
-    content: attr(data-label);
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    line-height: 1.6;
-    color: var(--muted);
-  }
-  .tw td.cell-emp { margin-top: 0.7rem; color: var(--ink); font-weight: 500; }
-
-  /* ---------- the aside: an indent and a hairline, never a box ---------- */
-  .aside {
-    margin: 1.8rem 0;
-    padding-inline-start: 1.1rem;
-    border-inline-start: 2px solid var(--line);
-    color: var(--ink);
-    font-weight: 400;
-  }
-  .aside p { color: var(--ink); }
-  .tone .aside { border-inline-start-color: var(--line-tone); }
 
   /* ---------- callouts: two on the whole page, and that is the design ----------
      A frame here means "this one will cost you if you skip it". Three signals
@@ -433,10 +310,6 @@ import SiteFooter from '../components/SiteFooter.astro';
   .tone .callout--info { --co-bg: #ffffff; }
 
   /* ---------- lists ---------- */
-  .reqs { list-style: none; margin: 1.3rem 0 1.6rem; }
-  .reqs li { padding: 0.85rem 0; border-top: 1px solid var(--line); }
-  .reqs li:last-child { border-bottom: 1px solid var(--line); }
-
   .gets { list-style: none; margin: 1.3rem 0 1.6rem; }
   .gets li {
     display: flex;
@@ -462,16 +335,6 @@ import SiteFooter from '../components/SiteFooter.astro';
     justify-content: center;
   }
 
-  .nots { list-style: none; margin: 1.3rem 0 1.6rem; }
-  .nots li {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-    padding: 0.8rem 0;
-    border-top: 1px solid var(--line);
-  }
-  .nots li:last-child { border-bottom: 1px solid var(--line); }
-  .tone .nots li { border-color: var(--line-tone); }
   .no {
     flex: none;
     width: 1.4rem;
@@ -486,42 +349,9 @@ import SiteFooter from '../components/SiteFooter.astro';
     align-items: center;
     justify-content: center;
   }
-  /* the build/not-build pair: two titled lists, stacked on phone, side by side from tablet */
-  .duo { margin: 1.8rem 0 1.6rem; }
   .duo-title { color: var(--ink); font-weight: 700; margin-bottom: 0; }
-  .duo .gets, .duo .nots { margin: 0.5rem 0 0; }
-  .duo .gets li:last-child, .duo .nots li:last-child { border-bottom: none; }
-  .duo-col + .duo-col { margin-top: 1.8rem; }
-  .tone .duo .gets li { border-color: var(--line-tone); }
 
-  .yes-line { display: flex; gap: 0.75rem; align-items: flex-start; margin-top: 1.6rem; }
-  .yes-line .yes {
-    flex: none;
-    width: 1.4rem;
-    height: 1.4rem;
-    margin-top: 0.3rem;
-    border-radius: 50%;
-    background: var(--acc);
-    color: #ffffff;
-    font-size: 0.72rem;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .yes-line span:last-child { color: var(--ink); }
-  .after-yes { margin-top: 1.6rem; }
-
-  /* ---------- the offer: the one card on the page ---------- */
-  .price-figure {
-    display: block;
-    font-size: clamp(3.2rem, 15vw, 4.6rem);
-    font-weight: 700;
-    letter-spacing: -0.045em;
-    line-height: 1.1;
-    color: var(--acc);
-  }
-  .price-line { margin-top: 0.7rem; margin-bottom: 2rem; }
+  /* ---------- the offer: the price's card, with the coloured edge ---------- */
   .offer {
     background: var(--ground);
     border: 1px solid var(--acc-line);
@@ -530,10 +360,10 @@ import SiteFooter from '../components/SiteFooter.astro';
     padding: clamp(1.3rem, 5vw, 1.9rem);
     margin-bottom: 1.6rem;
   }
-  .offer .gets { margin: 0.9rem 0 0; }
+  .offer .gets { margin: 0; }
   .offer .gets li { border-color: var(--line); }
+  .offer .gets li:first-child { border-top: none; padding-top: 0; }
   .offer .gets li:last-child { border-bottom: none; padding-bottom: 0; }
-  .stack-title { color: var(--ink); font-weight: 700; margin-bottom: 0; }
 
   /* ---------- FAQ ---------- */
   .faq-list { margin-top: 0.4rem; }
@@ -578,38 +408,123 @@ import SiteFooter from '../components/SiteFooter.astro';
   .final .after { margin-top: 1.2rem; margin-bottom: 0; color: #ffe0d6; }
 
 
+  /* =================== one claim per section ===================
+     Every headline states the section's point; the sentence that leads into
+     it is a small line above, so a reader of headlines alone gets the story. */
+  .bridge {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 0.45rem;
+  }
+  .fold-who { font-size: 1rem; color: var(--body); margin-bottom: 1.8rem; }
+  .fold-who b { color: var(--ink); font-weight: 700; }
+  .hero .cta-row { margin-top: 2rem; }
+
+  /* the facts every skimmer asks first, as one row */
+  .facts {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0 0 1.6rem;
+  }
+  .facts li {
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* three cards: what you build, the room, what stays with you */
+  .cards3 { list-style: none; display: grid; gap: 0.9rem; margin: 0 0 1.6rem; }
+  .card3 {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.1rem 1.2rem 1.2rem;
+  }
+  /* the card's mark: a shape that says what the card is about, never a colour code -
+     the title next to it carries the meaning */
+  .card3 .ic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 12px;
+    background: var(--acc-tint);
+    margin-bottom: 0.6rem;
+  }
+  .card3 .ic svg { width: 1.3rem; height: 1.3rem; fill: var(--acc-d); }
+  .card3 h3 { font-size: 1.15rem; line-height: 1.35; color: var(--ink); font-weight: 700; margin-bottom: 0.45rem; }
+  .card3 p { font-size: 1rem; line-height: 1.6; }
+  .card3 .card-q { color: var(--ink); font-weight: 500; margin-bottom: 0.4rem; }
+  .me-line {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.98rem;
+  }
+  .me-line .me-ava {
+    flex: none;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--tone);
+  }
+  .me-line p { margin: 0; }
+  .me-line strong { display: block; }
+
+  /* for whom: the two titled lists sit side by side even on a phone */
+  .duo2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin: 0 0 1.6rem; }
+  .duo2 .duo-col {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 0.9rem 0.85rem;
+  }
+  .tone .duo2 .duo-col { border-color: var(--line-tone); background: #ffffff; }
+  .offer > p { margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--line); }
+  .duo2 .duo-title { display: flex; gap: 0.45rem; align-items: center; font-size: 0.98rem; line-height: 1.35; margin-bottom: 0.55rem; }
+  .duo2 ul { list-style: none; }
+  .duo2 li { font-size: 0.93rem; line-height: 1.45; padding: 0.4rem 0; border-top: 1px solid var(--line); }
+  .tone .duo2 li { border-color: var(--line-tone); }
+  .duo2 .yes, .duo2 .no { width: 1.25rem; height: 1.25rem; margin: 0; font-size: 0.68rem; }
+  .duo2 .yes {
+    flex: none;
+    border-radius: 50%;
+    background: var(--acc);
+    color: #ffffff;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .honest-line { color: var(--ink); }
+  .needs { margin: 1.4rem 0 0; }
+  .needs-title { color: var(--ink); font-weight: 700; margin-bottom: 0.5rem; }
+  .needs ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem; }
+  .needs li {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--line-tone);
+    background: #ffffff;
+    border-radius: 999px;
+    font-size: 0.93rem;
+    color: var(--ink);
+  }
+
+  /* the proof's end: a button right where the page peaks */
+  .proof-cta { margin-top: 2rem; }
+
   /* ---------- from tablet up ---------- */
   @media (min-width: 640px) {
     .btn { width: auto; display: inline-flex; }
     .hero { padding-top: calc(var(--bar) + 6rem); }
-
-    .tw thead { display: table-header-group; }
-    .tw tbody { display: table-row-group; }
-    .tw tr { display: table-row; padding: 0; border-top: none; }
-    .tw tr:last-child { border-bottom: none; }
-    .tw th {
-      display: table-cell;
-      text-align: right;
-      vertical-align: bottom;
-      padding: 0 1rem 0.7rem;
-      font-weight: 500;
-      font-size: 0.86rem;
-      letter-spacing: 0.03em;
-      color: var(--muted);
-      border-bottom: 1px solid var(--line);
-    }
-    .tw td {
-      display: table-cell;
-      vertical-align: top;
-      width: 50%;
-      padding: 1rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .tw td::before { display: none; }
-    .tw td.cell-emp { margin-top: 0; }
-
-    .duo { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.4rem; align-items: start; }
-    .duo-col + .duo-col { margin-top: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -618,13 +533,10 @@ import SiteFooter from '../components/SiteFooter.astro';
 </style>
 <a class="skip" href="#main">דלג לתוכן</a>
 
-  <SiteHeader current="home" brandHref="#top" ctaLabel="להצטרף לסדנה" ctaHref="#straight" />
+  <SiteHeader current="home" brandHref="#top" ctaLabel="להצטרף לסדנה" ctaHref="#price" />
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <symbol id="ic-mail" viewBox="0 0 24 24">
-        <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
-      </symbol>
       <!-- the two callout marks. Triangle vs circle: the signal survives
            with every drop of colour removed. -->
       <symbol id="ic-warn" viewBox="0 0 24 24">
@@ -636,9 +548,6 @@ import SiteFooter from '../components/SiteFooter.astro';
       <symbol id="ic-ext" viewBox="0 0 24 24">
         <path d="M5 3h6v2H5.99L6 18h12v-5h2v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/>
         <path d="M14 3h7v7h-2V6.42l-7.3 7.29-1.41-1.42L17.58 5H14V3Z"/>
-      </symbol>
-      <symbol id="ic-in" viewBox="0 0 24 24">
-        <path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.75H5.67v8.59h2.67zM7 8.48a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 9.86v-4.71c0-2.53-1.35-3.7-3.15-3.7-1.45 0-2.1.8-2.47 1.36V9.75h-2.66v8.59h2.66v-4.8c0-1.27.24-2.5 1.82-2.5 1.55 0 1.57 1.45 1.57 2.58v4.72h2.23z"/>
       </symbol>
     </defs>
   </svg>
@@ -653,237 +562,134 @@ import SiteFooter from '../components/SiteFooter.astro';
           <span class="h1-say">מספיק להאכיל את הצ'אט <span class="nb">בכפית.</span></span>
           <span class="h1-ask">בסדנה אחת אתה לומד לגייס עובד AI שמכיר את <span class="nb">העסק שלך.</span></span>
         </h1>
-        <p class="fold-what rev">סדנה של שלוש שעות בזום.</p>
+        <p class="fold-who rev"><b>העובד הראשון שלך.</b> סדנה של שלוש שעות בזום, עם גיא מלול, מהנדס תוכנה במיקרוסופט.</p>
         <p class="said rev">
           <span class="b-frag">פותח צ'אט, מסביר, מעתיק, מדביק.</span>
-          <span class="b-pain">הוא מכיר את השיחות איתך, הדברים עובדים, אבל משהו עדיין לא 100. אין לו סביבת עבודה משלו ואין לו שיטה, אז הוא לא באמת <strong>עובד איתך</strong> או <strong>בשבילך</strong>, אתה כל הזמן אומר לו מה לעשות.</span>
+          <span class="b-pain">ובכל משימה אתה שוב אומר לו מה לעשות.</span>
           <span class="b-punch">הלו. זה בדיוק הפער.</span>
         </p>
-
-        <div class="turn">
-          <p class="brand-peak rev">העובד הראשון שלך.</p>
-          <p class="method rev">לומדים איך לגייס אותו.</p>
-          <div class="cta-row">
-            <a class="btn" href="#straight">להצטרף לסדנה</a>
-          </div>
-          <p class="soft-line">יש שאלה? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתבו לי</a></p>
+        <div class="cta-row">
+          <a class="btn" href="#price">להצטרף לסדנה</a>
         </div>
-      </div>
-    </section>
-
-    <!-- ===== הכאב, כלי מול עובד ===== -->
-    <section>
-      <div class="wrap">
-        <h2 class="rev-h">אבל תראה לאן זה יכול להגיע.</h2>
-
-        <table class="tw">
-          <thead>
-            <tr>
-              <th scope="col">היום, עם הצ'אט</th>
-              <th scope="col">היעד, עם עובד</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="rev">
-              <td data-label="היום, עם הצ'אט">אתה מבקש שיעזור לך לנסח פוסט</td>
-              <td class="cell-emp" data-label="היעד, עם עובד">הוא כותב אותו מהשיחה שהייתה לך ביום חמישי</td>
-            </tr>
-            <tr class="rev">
-              <td data-label="היום, עם הצ'אט">אתה מבקש שיסדר לך את רשימת המשימות</td>
-              <td class="cell-emp" data-label="היעד, עם עובד">הוא יודע מה אמרת שהכי חשוב, ולפני כמה ימים</td>
-            </tr>
-            <tr class="rev">
-              <td data-label="היום, עם הצ'אט">אתה מבקש שיסדר קובץ חשבוניות שהעלית</td>
-              <td class="cell-emp" data-label="היעד, עם עובד">הוא אומר לך אילו ארבע חסרות, ומאיזה ספק</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p class="aside rev">אתה מתחיל כל משימה.<br>
-        הוא כבר יודע מה לעשות בלי שתסביר מחדש.</p>
-
-        <p class="verdict rev">זה ההבדל בין כלי לעובד.</p>
-
-        <p class="lede rev">ככה נראה היעד. לא בונים את כל זה בשלוש שעות: בסדנה אתה בונה את הבסיס, עושה לעובד חפיפה ראשונה, ולומד איך ממשיכים לבנות אותו בשבועות שאחרי.</p>
-
-        <p class="rev">מגייסים אותו, עושים לו חפיפה על העסק, מלמדים אותו מי אנחנו ואיך אנחנו אוהבים לעבוד.</p>
-        <p class="rev">לא מחזיקים לו את היד. לא צריך להגיד לו מה לבנות, צריך ללמד אותו איך אנחנו עובדים, והוא ממשיך משם.</p>
-        <p class="rev">וזה לא הבדל של טכנולוגיה, זה הבדל של איך אתה מלמד אותו.</p>
-      </div>
-    </section>
-
-    <!-- ===== איפה זה בכלל יושב ===== -->
-    <section>
-      <div class="wrap">
-        <h2 class="rev-h">יש שלב לפני הראשון, ואף אחד לא הסביר לך אותו.</h2>
-        <p class="rev">מה שמשתנה אצל עובד זה לא הכלי, זו סביבת העבודה.<br>
-        חיפשת איפה לוחצים ולא מצאת? אין מסך שכתוב עליו "סוכנים", ואין כפתור כזה, וזאת הסיבה.</p>
-        <p class="rev">יש תיקייה, והיא במחשב שלך, ואתה יוצר אותה.<br>
-        בפנים יושבים קבצים, ובקבצים האלה יושב מה שהעובד יודע עליך.</p>
-        <p class="verdict rev">זה הבסיס. ובגלל זה זה עובד.</p>
-
-        <p class="rev">ואל תדאג, הכנתי לך מדריך מפורט ומסודר. בערך שעתיים של עבודה, פרושות על כמה ימים לפני הסדנה.<br>
-        חוץ ממנו: <strong>המדריך והסדנה בנויים למחשב Windows</strong>, איתו אתה מגיע לזום, ומנוי Claude בתשלום. על מק? כתוב לי לפני שנקבע.</p>
-
-        <div class="callout callout--warn rev">
-          <svg class="co-ic" aria-hidden="true"><use href="#ic-warn"/></svg>
-          <div class="co-body">
-            <span class="co-label">שים לב</span>
-            <p><strong>ההכנה היא דרישה, לא המלצה.</strong> תתחיל אותה כמה ימים לפני, לא ערב לפני, כי בזום לא עושים התקנות.</p>
-          </div>
-        </div>
-
-        <p class="rev">כל מילה במדריך כתובה לבן אדם שהוא לא איש מחשבים:</p>
-        <p class="btn-row rev">
-          <a class="btn-ghost" href="prework/" target="_blank" rel="noopener"><span>מדריך ההכנה</span><svg aria-hidden="true"><use href="#ic-ext"/></svg></a>
-        </p>
-        <p class="rev">תקרא אותו לפני שאתה מחליט. אני מעדיף שתדע למה אתה נכנס.</p>
       </div>
     </section>
 
     <!-- ===== מה קורה בשלוש השעות ===== -->
     <section>
       <div class="wrap">
-        <h2 class="rev-h">ובשלוש שעות איתי אתה יוצא עם משהו עובד.</h2>
-        <p class="quote rev">"הראית לי שזה עובד, לא לימדת אותי לבנות."</p>
-        <p class="rev">אם יצאת ככה מוובינר AI, צודק. אז ככה זה בנוי אצלי.</p>
-
-        <p class="rev">אני מסביר את השיטה ואת Claude Code בלי מילים גדולות, כדי שתדע בדיוק על מה מדברים.<br>
-        ומלמד אותך לגייס עובד, בלי לדלג על החלק המשעמם.<br>
-        ואתה מתחיל לעשות את זה בעצמך, על העסק שלך, בזמן שאני בחדר.</p>
-
-        <div class="callout callout--info rev">
-          <svg class="co-ic" aria-hidden="true"><use href="#ic-info"/></svg>
-          <div class="co-body">
-            <span class="co-label">שיהיה ברור</span>
-            <p>ושנדבר ישר, כי זה חשוב לי יותר מלמלא מקום:<br>
-            הלוואי שיכולתי להגיד לך שאחרי הסדנה אתה טס לתאילנד, יושב על החוף, והעסק עובד לבד. אבל זה לא קורה.<br>
-            הבנייה שלך, והיא לוקחת שבועות. ממש כמו לגייס עובד אמיתי.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== מה יוצא לך ביד ===== -->
-    <section>
-      <div class="wrap">
-        <h2 class="rev-h">אתה סוגר את הזום, ויש לך ממה להתחיל.</h2>
-        <p class="lede rev">"המשרד". בונוס: אני נותן לך את גרסת ההתחלה של התיקייה שאני עובד בה, והיא נשארת אצלך גם אם לא תראה אותי יותר לעולם.</p>
-
-        <p class="rev">בפנים תיקיות וקבצים, וכתוב בהם מה אתה עושה ואיך אתה עובד.<br>
-        יש שם סקילים שכבר עובדים, ויש קבצים שמחכים ריקים בכוונה, כי הם מתמלאים כשהעובד פוגש אותך.</p>
-
-        <div class="pull-block rev">
-          <p class="pull">התיקיות האלה הן <span class="pull-key">מוח שני</span> לעסק שלך.</p>
-          <p class="pull-under">במקום החומר העצום שמפוזר לך היום בין וואטסאפ, מיילים ומחברת.</p>
-        </div>
-        <p class="rev">בניתי אותו חודשים. שברתי ובניתי אותו מחדש כמה פעמים עד שהגיע לצורה הזאת, ואני עדיין מכוונן אותו.<br>
-        להרכיב דבר כזה מאפס זה סיוט.</p>
-
-        <div class="aside rev">
-          <p>מה שאתה מקבל זה בסיס שעובד, ואת הידיעה המדויקת איך להמשיך לבנות אותו.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== מי מלמד ===== -->
-    <section>
-      <div class="wrap">
-        <h2 class="rev-h">רגע, אתה עדיין לא יודע מי אני.</h2>
-        <p class="rev">נעים להכיר, אני גיא מלול. מהנדס תוכנה במיקרוסופט, ו-AI זה מה שאני עושה שם כל היום. לפני זה אלביט וצ'ק פוינט
-        (<a class="body-link" href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener">LinkedIn</a>).</p>
-        <p class="rev">לפני כל זה ניהלתי כמעט שבע שנים אתר תיירות במדבר. כספים, שיווק, עובדים, לקוחות.</p>
-        <p class="rev">את השיטה אני מריץ היום על העסק שלי. מה שתלמד בסדנה זה איך אני עובד באמת.</p>
-      </div>
-    </section>
-
-    <!-- ===== למי זה לא מתאים ===== -->
-    <section>
-      <div class="wrap">
-        <h2 class="rev-h">מה אם זה לא בשבילך? אני אגיד לך מאיפה כן להתחיל.</h2>
-        <p class="rev">אני רוצה שכל מי שנכנס לסדנה ייצא עם ערך אמיתי.</p>
-        <p class="rev">יש מצבים שבהם הסדנה הזאת לא תיתן לך את מה שאתה מחפש, לפחות לא עכשיו:</p>
-        <ul class="reqs">
-          <li class="rev">אם עוד לא עבדת עם AI, הסדנה מתחילה מהתקרה של מי שכבר עובד עם צ'אט, ולא מהיסודות. כתוב לי ואני אגיד לך מאיפה להתחיל.</li>
-          <li class="rev">ואם אתה כבר בונה לעצמך סוכנים ומערכות, הסדנה הזאת כנראה תרגיש לך בסיסית.</li>
-          <li class="rev">אם אתה מחפש שמישהו פשוט יבנה לך את זה, זה לא מה שאני מוכר. השיטה היא המוצר, ואתה בונה אותו.</li>
-          <li class="rev">וצריך מחשב, אנגלית בסיסית, ואהבה ללמוד דברים חדשים. עסק שרץ רק מהטלפון יתקשה פה.</li>
+        <p class="bridge rev">שלוש שעות איתי</p>
+        <h2 class="rev-h">אתה יוצא מהזום עם עובד ראשון, אחרי חפיפה ראשונה על העסק שלך.</h2>
+        <ul class="facts rev" aria-label="הסדנה בקצרה">
+          <li>3 שעות</li><li>בזום</li><li>עד 5 משתתפים</li>
         </ul>
-        <div class="yes-line rev"><span class="yes" aria-hidden="true">✓</span><span>וזה כן בשבילך אם אתה כבר עובד עם AI כל יום, מוצף, מרגיש שיש שם הרבה יותר, ובאת ללמוד לבנות בעצמך.</span></div>
-        <p class="rev after-yes">ואם אתה לא בטוח, כתוב לי לפני שאתה נרשם. אני מעדיף להגיד לך שזה לא הזמן, מאשר שתשב בסדנה ותרגיש שהיא לא בשבילך.</p>
-        <div class="cta-row rev">
-          <a class="btn-ghost" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%A4%D7%A0%D7%99%20%D7%A9%D7%90%D7%A0%D7%99%20%D7%A0%D7%A8%D7%A9%D7%9D."><span>בוא נבדוק אם זה מתאים לך</span></a>
+
+        <ol class="cards3">
+          <li class="card3 rev">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg></span>
+            <h3>תיקייה, ובה כל מה שהוא צריך לדעת עליך</h3>
+            <p>היא במחשב שלך, וכתוב בה מה אתה עושה ואיך אתה עובד. אתה בונה אותה בסדנה, ומאותו רגע הוא לא מתחיל כל שיחה מאפס.</p>
+          </li>
+          <li class="card3 rev">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg></span>
+            <h3>אתה בונה, ואני בחדר</h3>
+            <p class="card-q">"הראית לי שזה עובד, לא לימדת אותי לבנות."</p>
+            <p>אם יצאת ככה מוובינר AI, פה זה הפוך. אני מסביר את השיטה ואת Claude Code בלי מילים גדולות, ואתה מגייס את העובד הראשון שלך, על העסק שלך, בזמן שאני בחדר.</p>
+          </li>
+          <li class="card3 rev">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg></span>
+            <h3>"המשרד", בונוס שנשאר אצלך</h3>
+            <p>גרסת ההתחלה של התיקייה שאני עובד בה, עם סקילים שכבר עובדים. מוח שני לעסק שלך, במקום החומר שמפוזר היום בין וואטסאפ, מיילים ומחברת.</p>
+          </li>
+        </ol>
+
+        <div class="me-line rev">
+          <Image class="me-ava" src={avatar} alt="גיא מלול" width={128} height={128} />
+          <p><strong>אני מלמד בדיוק את מה שאני מריץ על העסק שלי.</strong>
+          מהנדס תוכנה במיקרוסופט, לפני זה אלביט וצ'ק פוינט, ולפני כל זה כמעט שבע שנים ניהלתי אתר תיירות במדבר
+          (<a class="body-link" href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener">LinkedIn</a>).</p>
         </div>
       </div>
     </section>
 
-    <!-- ===== תיאום ציפיות ===== -->
+    <Proof />
+
+    <!-- ===== למי זה, ומה בונים בשלוש שעות ===== -->
     <section class="tone" id="straight">
       <div class="wrap">
-        <h2 class="rev-h">לפני שנמשיך למחיר, שיהיה על השולחן.</h2>
-        <p class="rev">שלוש שעות נותנות לך שני דברים: אתה מבין איך השיטה עובדת, ואתה יודע איך לגייס את העובד הראשון שלך.<br>
-        הן לא נותנות עסק שרץ לבד.</p>
+        <p class="bridge rev">לפני שנמשיך, שיהיה על השולחן.</p>
+        <h2 class="rev-h">זה בשבילך אם אתה כבר עובד עם AI כל יום, ובא ללמוד לבנות בעצמך.</h2>
 
-        <div class="duo">
+        <div class="duo2">
           <div class="duo-col rev">
-            <p class="duo-title">בסדנה בונים</p>
-            <ul class="gets">
-              <li><span class="yes" aria-hidden="true">✓</span><span>סביבת עבודה קבועה לעסק שלך</span></li>
-              <li><span class="yes" aria-hidden="true">✓</span><span>חפיפה ראשונה ותפקיד ראשון לעובד</span></li>
-              <li><span class="yes" aria-hidden="true">✓</span><span>שיטה להוסיף לו ידע ותפקידים</span></li>
-              <li><span class="yes" aria-hidden="true">✓</span><span>בסיס להמשך בנייה, אצלך, בשבועות שאחרי</span></li>
+            <p class="duo-title"><span class="yes" aria-hidden="true">✓</span>בונים בסדנה</p>
+            <ul>
+              <li>תיקייה קבועה לעסק שלך</li>
+              <li>חפיפה ראשונה ותפקיד ראשון לעובד</li>
+              <li>שיטה להוסיף לו ידע ותפקידים</li>
             </ul>
           </div>
           <div class="duo-col rev">
-            <p class="duo-title">לא בונים בשלוש שעות</p>
-            <ul class="nots">
-              <li><span class="no" aria-hidden="true">✕</span><span>חיבור לוואטסאפ ולמערכות חיצוניות</span></li>
-              <li><span class="no" aria-hidden="true">✕</span><span>חיבורי API ושרתי MCP</span></li>
-              <li><span class="no" aria-hidden="true">✕</span><span>אוטומציות שרצות לפי שעון, ועובד 24/7</span></li>
-              <li><span class="no" aria-hidden="true">✕</span><span>מערכת שמישהו אחר בונה בשבילך</span></li>
+            <p class="duo-title"><span class="no" aria-hidden="true">✕</span>לא בונים בשלוש שעות</p>
+            <ul>
+              <li>חיבור לוואטסאפ ולמערכות חיצוניות</li>
+              <li>אוטומציות שרצות לפי שעון</li>
+              <li>מערכת שמישהו אחר בונה בשבילך</li>
             </ul>
           </div>
+        </div>
+
+        <p class="honest-line rev">הלוואי שיכולתי להגיד לך שאחרי הסדנה אתה טס לתאילנד והעסק עובד לבד. אבל זה לא קורה. הבנייה שלך, והיא לוקחת שבועות, ממש כמו לגייס עובד אמיתי.</p>
+        <div class="callout callout--warn rev">
+          <svg class="co-ic" aria-hidden="true"><use href="#ic-warn"/></svg>
+          <div class="co-body">
+            <span class="co-label">למי זה פחות מתאים</span>
+            <p><strong>עוד לא עבדת עם AI?</strong> הסדנה מתחילה ממי שכבר עובד עם צ'אט.<br>
+            <strong>כבר בונה סוכנים בעצמך?</strong> היא כנראה תרגיש לך בסיסית.</p>
+          </div>
+        </div>
+
+        <div class="needs rev">
+          <p class="needs-title">מה צריך</p>
+          <ul>
+            <li>מחשב Windows או מק</li>
+            <li>מנוי Claude בתשלום</li>
+            <li>אנגלית בסיסית</li>
+          </ul>
         </div>
 
         <div class="callout callout--info rev">
           <svg class="co-ic" aria-hidden="true"><use href="#ic-info"/></svg>
           <div class="co-body">
-            <span class="co-label">איך זה עובד</span>
-            <p>בוחר מועד, משלם, ומקבל את מדריך ההכנה.<br>
-            ואם בכל זאת תגיע בלי שהכול מוכן, אתה מוזמן להישאר, להקשיב, ולקחת את כל החומרים.<br>
-            פשוט לא נוכל לעבוד יחד באותו יום, ואין על זה החזר או מעבר למועד אחר.<br>
-            המדריך מגיע אליך כמה ימים מראש בדיוק בשביל זה.</p>
+            <span class="co-label">ההכנה היא חובה</span>
+            <p><strong>בערך שעתיים של עבודה, כמה ימים לפני הסדנה.</strong> מדריך מסודר מגיע אליך מראש, כי בזום לא עושים התקנות.</p>
           </div>
         </div>
+
+        <p class="soft-line rev">לא בטוח שזה בשבילך? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%A4%D7%A0%D7%99%20%D7%A9%D7%90%D7%A0%D7%99%20%D7%A0%D7%A8%D7%A9%D7%9D.">כתוב לי</a></p>
       </div>
     </section>
 
     <!-- ===== מחיר ===== -->
-    <section class="tone">
+    <section class="tone" id="price">
       <div class="wrap">
-        <h2 class="rev-h">ועכשיו למחיר.</h2>
-        <strong class="price-figure">1,000 ש"ח.</strong>
-        <p class="price-line rev">כתוב פה. בלי שיחת מכירה, ובלי להתמקח.</p>
+        <p class="bridge rev">ועכשיו למחיר.</p>
+        <h2 class="rev-h">1,000 ש"ח, בלי שיחת מכירה ובלי להתמקח.</h2>
 
         <div class="offer rev">
-          <p class="stack-title">מה שנכנס פנימה:</p>
           <ul class="gets">
-            <li><span class="yes" aria-hidden="true">✓</span><span>הסדנה עצמה. 3 שעות בזום, עד 5 אנשים, שיהיה לי זמן לכל אחד.</span></li>
-            <li><span class="yes" aria-hidden="true">✓</span><span>איך מגייסים את העובד הראשון שלך, על העסק שלך ואיתי בחדר.</span></li>
-            <li><span class="yes" aria-hidden="true">✓</span><span>בונוס: גרסת ההתחלה של "המשרד", התיקייה שאני עובד בה. נשארת אצלך.</span></li>
-            <li><span class="yes" aria-hidden="true">✓</span><span>שאלון הכנה והוראות התקנה מסודרות.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>הסדנה, ו"המשרד" שנשאר אצלך.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>מדריך ההכנה, שמגיע כמה ימים לפני.</span></li>
             <li><span class="yes" aria-hidden="true">✓</span><span>קבוצת הבוגרים, שנשארת פתוחה גם אחרי.</span></li>
           </ul>
-          <p class="rev">ומה שאין: ליווי אישי שלי אחרי הסדנה. יש קבוצת בוגרים, והיא נשארת פתוחה. אני מעדיף להגיד את זה מראש.</p>
+          <p class="rev">ומה שאין: ליווי אישי שלי אחרי הסדנה. אני מעדיף להגיד את זה מראש.</p>
         </div>
 
-        <p class="rev">מעבר לזה יש לך מנוי <bdi>Claude</bdi>, 20 דולר לחודש ומעלה. הוא לא עובר דרכי ואני לא מרוויח ממנו.</p>
+        <p class="rev">מעבר לזה יש לך מנוי <bdi>Claude</bdi>, 20 דולר לחודש ומעלה. הוא לא עובר דרכי.</p>
 
-        <p class="rev"><strong>הסדנאות בימי שני ורביעי, 10:00 עד 13:00.</strong></p>
         <div class="cta-row rev">
           <a class="btn" href="/dates/">לבחירת מועד</a>
         </div>
-        <p class="rev">אפשר לבטל עד יומיים לפני, ושישי ושבת לא נספרים. דמי ביטול 50 ש"ח.</p>
+        <p class="soft-line rev">כל המועדים והשעות בעמוד המועדים.</p>
       </div>
     </section>
 
@@ -892,6 +698,19 @@ import SiteFooter from '../components/SiteFooter.astro';
       <div class="wrap">
         <h2 class="rev-h" id="faq">בטח נשארו לך שאלות.</h2>
         <div class="faq-list">
+          <details class="rev">
+            <summary><span>מה צריך להכין לפני?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">מדריך מפורט ומסודר. בערך שעתיים של עבודה, פרושות על כמה ימים לפני הסדנה.<br>
+            כל מילה במדריך כתובה לבן אדם שהוא לא איש מחשבים.<br>
+            תקרא אותו לפני שאתה מחליט. אני מעדיף שתדע למה אתה נכנס.
+            <p class="btn-row"><a class="btn-ghost" href="/prework/" target="_blank" rel="noopener"><span>מדריך ההכנה</span><svg aria-hidden="true"><use href="#ic-ext"/></svg></a></p></div>
+          </details>
+          <details class="rev">
+            <summary><span>ומה אם אגיע בלי שהכל מוכן?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">אתה מוזמן להישאר, להקשיב, ולקחת את כל החומרים.<br>
+            פשוט לא נוכל לעבוד יחד באותו יום, ואין על זה החזר או מעבר למועד אחר.<br>
+            המדריך מגיע אליך כמה ימים מראש בדיוק בשביל זה.</div>
+          </details>
           <details class="rev">
             <summary><span>למה דווקא Claude Code, ולא הכלי שאני עובד איתו היום?</span><span class="tog" aria-hidden="true">+</span></summary>
             <div class="faq-body">כי הוא עובד על הקבצים שבמחשב שלך: סביבת עבודה קבועה שנשארת, ולא שיחה שמתאדה.<br>
@@ -914,7 +733,7 @@ import SiteFooter from '../components/SiteFooter.astro';
           </details>
           <details class="rev">
             <summary><span>מתי הסדנה הבאה? תהיה הקלטה?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">ימי שני ורביעי, 10:00 עד 13:00. כל המועדים: <a class="body-link" href="/dates/">עמוד המועדים</a>.<br>
+            <div class="faq-body">כל המועדים והשעות: <a class="body-link" href="/dates/">בעמוד המועדים</a>.<br>
             אין הקלטה. הסדנה חוזרת, אז אם פספסת אחת, יש את הבאה.</div>
           </details>
           <details class="rev">
@@ -926,7 +745,7 @@ import SiteFooter from '../components/SiteFooter.astro';
           <details class="rev">
             <summary><span>מי מחליט מה הוא עושה?</span><span class="tog" aria-hidden="true">+</span></summary>
             <div class="faq-body">אתה. ככה מגדירים את זה בסדנה: הוא קורא וממליץ.<br>
-            ופעולות רגישות, מייל שיוצא, שינוי, מחיקה, מחכות לאישור שלך.<br>
+            ופעולות רגישות, מייל שיוצא, פרסום, מחיקה, מחכות לאישור שלך.<br>
             אתה המנהל. הוא העובד.</div>
           </details>
           <details class="rev">
@@ -940,7 +759,7 @@ import SiteFooter from '../components/SiteFooter.astro';
             אם אני מבטל, מסיבה בריאותית או מכל סיבה אחרת, אתה בוחר: כל הכסף חזרה, או מעבר למועד הבא בלי תוספת.<br><br>
             עד יומיים לפני הסדנה אפשר לבטל, בדמי ביטול של 50 ש"ח, שהם 5% מהמחיר. שישי ושבת לא נספרים. החלפת מועד באותו טווח היא בחינם, לפי מקום פנוי.<br><br>
             מיומיים לפני ואילך, כולל אי הגעה, אין החזר ואין מעבר. רוצה בכל זאת להחליף מועד ברגע האחרון? נשתדל, בחצי ממחיר הכרטיס, לפי מקום פנוי.<br><br>
-            החזר כספי מגיע אליך תוך 7 ימי עבודה, בהעברה בנקאית ממני.<br><br>
+            החזר כספי מגיע תוך 7 ימי עבודה, לכרטיס שממנו שילמת.<br><br>
             קרה משהו? כתוב לי לפני שאתה מחליט. אני קורא הכול.</div>
           </details>
         </div>
@@ -952,11 +771,11 @@ import SiteFooter from '../components/SiteFooter.astro';
       <div class="wrap">
         <h2 class="rev-h">ואם זה מדבר אליך, בוא נתחיל.</h2>
         <p class="lead rev">אותה סדנה בכל המועדים. תבחר מה שמתאים לך.</p>
+        <p class="fq"><q>ממליץ בחום לכל בעל עסק שכבר התחיל לעבוד עם <bdi>ai</bdi>.</q><span>גיל, בעלים של חברת מדיה</span></p>
         <div class="cta-row">
           <a class="btn" href="/dates/">לבחירת מועד</a>
         </div>
-        <p class="after rev">1,000 ש"ח למשתתף. הקבוצה עד 5 אנשים.<br>
-        אפשר לבטל עד יומיים לפני, ושישי ושבת לא נספרים. דמי ביטול 50 ש"ח.</p>
+        <p class="after rev">1,000 ש"ח למשתתף. הקבוצה עד 5 אנשים.</p>
         <p class="soft-line">אף מועד לא מתאים, או שאתה רוצה לדבר קודם? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתוב לי</a></p>
       </div>
     </section>
@@ -964,44 +783,4 @@ import SiteFooter from '../components/SiteFooter.astro';
   </main>
 
   <SiteFooter />
-  <script is:inline>
-    /* The page's only animation: the brand name rises once out of its clipping
-       edge. No library - CSS does the motion, this just decides when.
-       Reduced-motion never arms, so that reader gets the finished page. */
-    (function () {
-      var el = document.querySelector('.turn .brand-peak');
-      if (!el) return;
-      var inner = document.createElement('span');
-      inner.className = 'peak-in';
-      inner.innerHTML = el.innerHTML;
-      el.innerHTML = '';
-      el.appendChild(inner);
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      if (!('IntersectionObserver' in window)) return;
-
-      /* Nothing may leave the name hidden. The hidden state is armed only once
-         an observer is really watching, and it is dropped again the moment the
-         observer misbehaves - a peak nobody can see is worse than no motion. */
-      var io, delivered = false;
-      function show() { inner.classList.add('go'); if (io) io.disconnect(); }
-
-      try {
-        io = new IntersectionObserver(function (entries) {
-          delivered = true;
-          entries.forEach(function (e) { if (e.isIntersecting) show(); });
-        }, { threshold: 0.2 });
-        inner.classList.add('armed');
-        io.observe(el);
-      } catch (err) {
-        inner.classList.remove('armed');
-        return;
-      }
-
-      /* An observer always delivers a first entry for what it observes, even
-         when the element is off-screen. No first entry means it is not working,
-         and only then does the name reveal itself without the rise. Waiting for
-         a scroll is NOT a failure and must not trip this. */
-      setTimeout(function () { if (!delivered) show(); }, 1000);
-    })();
-  </script>
 </Base>
