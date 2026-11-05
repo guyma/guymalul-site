@@ -1,0 +1,194 @@
+---
+import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+---
+
+{/* Every line here traces to the law, Google's terms or the owner's ruling:
+    guy-hq desk/2026-08-10-gsc-ga4/03-privacy-requirements.md. The words are the
+    approved text of desk/2026-11-05-privacy-page/ - change them there first. */}
+<Base
+  title={"מדיניות פרטיות | העובד הראשון שלך | גיא מלול"}
+  description={"מה נאסף באתר, למה, מי מקבל את המידע, איך מסרבים, כמה זמן הוא נשמר, ומה הזכויות שלכם."}
+  favicon={"/favicon.svg"}
+  appleTouchIcon={"/apple-touch-icon.png"}
+>
+  <style is:global>
+  /* The accessibility statement's page, the site's other legal page: same
+     brand language, same reading column, no colour block, no animation. The
+     colours come from tokens.css through Base. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  body {
+    font-family: var(--font);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.7;
+    background: var(--ground);
+    color: var(--body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+  }
+
+  ::selection { background: var(--acc-tint); }
+
+  a { color: var(--acc-d); font-weight: 500; }
+
+  .skip {
+    position: fixed;
+    inset-inline-start: var(--pad-x);
+    top: -120px;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.55rem 1.15rem;
+    border-radius: 12px;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .skip:focus { top: 0.4rem; }
+  #main:focus { outline: 2px solid var(--acc); outline-offset: -4px; }
+
+  main { flex: 1 0 auto; padding: calc(var(--bar) + 2.6rem) var(--pad-x) 3.5rem; }
+  .wrap { max-width: 620px; margin: 0 auto; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    color: var(--acc-d);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+    margin-bottom: 1.8rem;
+  }
+  .back-link:hover, .back-link:focus-visible { text-decoration-thickness: 2px; }
+  .back-link svg { width: 14px; height: 14px; fill: currentColor; flex: none; }
+
+  h1 {
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .stamp { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.6rem; }
+  .opening { color: var(--ink); font-weight: 500; font-size: 1.18rem; line-height: 1.5; margin-bottom: 3rem; }
+
+  h2 {
+    font-size: clamp(1.35rem, 5.6vw, 1.65rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+
+  .block { padding-top: 2.4rem; border-top: 1px solid var(--line); }
+  .block + .block { margin-top: 2.8rem; }
+
+  p { margin-bottom: 1.15rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .wrap p a {
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+  .wrap p a:hover, .wrap p a:focus-visible { text-decoration-thickness: 2px; }
+
+  .choice {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.55rem 1.15rem;
+    border: 0;
+    border-radius: 12px;
+    background: var(--acc);
+    color: #ffffff;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .choice:hover { background: var(--acc-d); }
+  .choice:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+<a class="skip" href="#main">דלג לתוכן</a>
+
+  <SiteHeader ctaLabel="לקבוע שיחת התאמה" ctaHref="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94%20%22%D7%94%D7%A2%D7%95%D7%91%D7%93%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%A9%D7%9C%D7%9A%22%20%D7%95%D7%9C%D7%A7%D7%91%D7%95%D7%A2%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94." />
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="ic-back" viewBox="0 0 24 24">
+        <path d="M9.7 6.3 8.3 4.9 1.2 12l7.1 7.1 1.4-1.4L5 13h17.8v-2H5l4.7-4.7z" transform="scale(-1,1) translate(-24,0)"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <a class="back-link" href="/"><svg aria-hidden="true"><use href="#ic-back"/></svg><span>חזרה לעמוד הסדנה</span></a>
+
+      <h1>מדיניות פרטיות</h1>
+      <p class="stamp">עודכן: 5.11.2026</p>
+      <p class="opening">האתר הזה הוא של גיא מלול. בכל שאלה על המידע שנאסף כאן, כתבו לי: <a href="mailto:guy@guymalul.co.il">guy@guymalul.co.il</a></p>
+
+      <section class="block" aria-labelledby="what-h">
+        <h2 id="what-h">מה נאסף</h2>
+        <p>כשאתם גולשים באתר נאסף מידע על איך משתמשים בו: באילו עמודים ביקרתם, על מה לחצתם, כמה גללתם, מאיזה מכשיר ודפדפן, ומאיזה אזור בערך, לפי כתובת ה-IP.</p>
+        <p>המידע נאסף דרך עוגיות (cookies) של Google Analytics.</p>
+        <p>לא נאסף שם, לא כתובת מייל ולא מה שאתם מקלידים.</p>
+        <p>בעמודי ההכנה לסדנה אין מדידה בכלל.</p>
+      </section>
+
+      <section class="block" aria-labelledby="why-h">
+        <h2 id="why-h">למה</h2>
+        <p>כדי לראות אילו עמודים קוראים, איפה מפסיקים לקרוא ומה לא ברור, ולשפר את האתר.</p>
+      </section>
+
+      <section class="block" aria-labelledby="who-h">
+        <h2 id="who-h">מי מקבל את המידע</h2>
+        <p>גוגל, שמפעילה את Google Analytics בשבילי. כך גוגל משתמשת בו:</p>
+        <p><a href="https://policies.google.com/technologies/partner-sites" rel="noopener">איך גוגל משתמשת במידע מאתרים שמשתמשים בשירותים שלה</a></p>
+      </section>
+
+      <section class="block" aria-labelledby="no-h">
+        <h2 id="no-h">זה לא חובה</h2>
+        <p>אין שום חובה לתת את המידע הזה, והאתר עובד בדיוק אותו דבר בלעדיו.</p>
+        <p>אפשר לסרב בכפתור "בלי, תודה" שבתחתית המסך, ולשנות את הבחירה מתי שרוצים:</p>
+        <p><button type="button" class="choice" data-ga-reopen>שינוי הבחירה</button></p>
+      </section>
+
+      <section class="block" aria-labelledby="keep-h">
+        <h2 id="keep-h">כמה זמן זה נשמר</h2>
+        <p>ב-Google Analytics הנתונים המפורטים נשמרים 14 חודשים.</p>
+      </section>
+
+      <section class="block" aria-labelledby="rights-h">
+        <h2 id="rights-h">הזכויות שלכם</h2>
+        <p>אתם יכולים לבקש לראות את המידע שנאסף עליכם, ולבקש לתקן או למחוק אותו. כתבו לי לכתובת שלמעלה.</p>
+      </section>
+    </div>
+  </main>
+
+  <SiteFooter />
+
+</Base>

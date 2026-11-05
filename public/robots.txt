@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://guymalul.co.il/sitemap-index.xml
