@@ -10,7 +10,7 @@
  * decides on its way past. Each page keeps its own chrome until he rules.
  *
  * What this layout does own: <html dir/lang>, the meta and share card, the
- * fonts, and the ONE import of tokens.css.
+ * fonts, the ONE import of tokens.css, and Google Analytics with its notice card.
  */
 import '../styles/tokens.css';
 
@@ -45,6 +45,11 @@ export interface Props {
   /** emit the OG/Twitter share card. Off by default: three of the six pages
    *  never carried one, and adding tags they did not have is a change. */
   share?: boolean;
+  /** Google Analytics and its notice card. On by default; the two student pages
+   *  (/prework/ and the questionnaire) turn it off - the owner's ruling 5.11.
+   *  What the card and /privacy/ promise is guy-hq
+   *  desk/2026-08-10-gsc-ga4/03-privacy-requirements.md. */
+  analytics?: boolean;
 }
 
 const {
@@ -62,6 +67,7 @@ const {
   share = false,
   favicon,
   appleTouchIcon,
+  analytics = true,
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://guymalul.co.il');
@@ -74,6 +80,39 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, site)
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  {/* Google's snippet, made conditional. A stored "denied" sets the official
+      ga-disable flag and gtag.js is never loaded - Google: the flag "must be set
+      before any calls to gtag() are made". Only the live hostname loads it, so a
+      local build never sends a hit; dataLayer still fills, which is how the
+      events are tested locally. */}
+  {analytics && (
+  <script is:inline>
+    (function () {
+      var ID = 'G-W2DB6FTQV2';
+      // /thanks/ is where the payment page sends a buyer; whatever a payment
+      // provider appends to that address is dropped from the address bar first,
+      // for every visitor - a refuser who later accepts elsewhere would otherwise
+      // carry it to Google as the referrer. A page_location override on config
+      // was tried and proved live (5.11) not to reach the hits.
+      if (/^\/thanks\/(index\.html)?$/.test(location.pathname) && location.search) {
+        history.replaceState(null, '', location.pathname + location.hash);
+      }
+      var choice = null;
+      try { choice = localStorage.getItem('gm-analytics'); } catch (e) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      if (choice === 'denied') { window['ga-disable-' + ID] = true; return; }
+      if (!/^(www\.)?guymalul\.co\.il$/.test(location.hostname)) return;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', ID);
+    })();
+  </script>
+  )}
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
   <link rel="canonical" href={canonicalUrl} />
@@ -116,5 +155,145 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, site)
 </head>
 <body>
   <slot />
+
+  {analytics && (<>
+  <div class="ga-bar" id="ga-bar" role="region" aria-label="הודעה על מדידה" hidden>
+    <p>יש פה עוגיות (רק בלי סוכר, בלי גלוטן ובלי קלוריות&nbsp;😉), בזכות העוגיות אני רואה איך גולשים באתר ואיפה משהו נתקע. לא בא לך? מכבים בלחיצה. <a href="/privacy/">מדיניות הפרטיות</a></p>
+    <div class="ga-bar-actions">
+      <button type="button" class="ga-yes" data-ga-choice="granted">אין בעיה</button>
+      <button type="button" class="ga-no" data-ga-choice="denied">בלי, תודה</button>
+    </div>
+  </div>
+
+  {/* The card, the refusal, and the events beyond Google's defaults - what the
+      owner's before/after question needs: which section a visitor reached, how
+      far he scrolled (Google's own scroll event fires only at 90%), which
+      internal link moved him (Google counts only outbound clicks), and the card
+      itself - shown, accepted, declined - so its cost in exits is visible. */}
+  <script is:inline>
+    (function () {
+      var KEY = 'gm-analytics', ID = 'G-W2DB6FTQV2';
+      var bar = document.getElementById('ga-bar');
+      function stored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+      function store(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+      function off() { return window['ga-disable-' + ID] === true; }
+      function send(name, params) { if (!off()) gtag('event', name, params); }
+      function text(el) { return (el && el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100); }
+
+      function clearGaCookies() {
+        document.cookie.split(';').forEach(function (c) {
+          var name = c.split('=')[0].trim();
+          if (!/^_ga/.test(name)) return;
+          ['', '; domain=' + location.hostname, '; domain=.' + location.hostname.replace(/^www\./, '')].forEach(function (d) {
+            document.cookie = name + '=; Max-Age=0; path=/' + d;
+          });
+        });
+      }
+
+      // While the card is up, the page gets room below it, so the footer can
+      // always be scrolled clear of it.
+      function showBar(on) {
+        bar.hidden = !on;
+        document.body.style.paddingBottom = on ? bar.offsetHeight + 32 + 'px' : '';
+      }
+
+      if (!stored()) { showBar(true); send('notice_shown'); }
+
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        var choice = t.closest('[data-ga-choice]');
+        if (choice) {
+          var v = choice.getAttribute('data-ga-choice');
+          var was = stored();
+          store(v);
+          showBar(false);
+          // The refusal is sent, then the flag is set. Whether Google's queue still
+          // delivers that last hit, and sends nothing after it, is checked live.
+          if (v === 'denied') { send('notice_decline'); window['ga-disable-' + ID] = true; clearGaCookies(); }
+          else if (was === 'denied') { location.reload(); }
+          else if (was !== 'granted') { send('notice_accept'); }
+          return;
+        }
+        if (t.closest('[data-ga-reopen]')) { showBar(true); bar.querySelector('button').focus(); return; }
+        var a = t.closest('a[href]');
+        if (a && a.host === location.host) send('internal_click', { link_text: text(a), link_url: a.pathname + a.hash });
+      });
+
+      // A section counts as reached once its top passes the middle of the
+      // screen. Checked against every section on each scroll, not observed one
+      // by one, so a fast flick past a section still reports it.
+      var marks = [25, 50, 75], hit = {};
+      var sections = [];
+      document.querySelectorAll('main section').forEach(function (s) {
+        if (s.querySelector('h1, h2')) sections.push({ el: s, index: sections.length, sent: false });
+      });
+      function check() {
+        var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+        if (max > 0) {
+          var p = h.scrollTop / max * 100;
+          marks.forEach(function (m) { if (p >= m && !hit[m]) { hit[m] = 1; send('scroll_depth', { percent: m }); } });
+        }
+        var middle = innerHeight / 2;
+        sections.forEach(function (s) {
+          if (s.sent || s.el.getBoundingClientRect().top > middle) return;
+          s.sent = true;
+          send('section_view', { section_heading: text(s.el.querySelector('h1, h2')), section_index: s.index });
+        });
+      }
+      addEventListener('scroll', check, { passive: true });
+      check();
+    })();
+  </script>
+  </>)}
 </body>
 </html>
+
+<style>
+  /* A small card in the corner, never a strip across the page: the owner's
+     ruling 5.11 - "לא בצורה שזה בולט מדי וחוסם לאנשים את האתר" - sized like the
+     reference he named (360px at most, 16px from the edges, 14px type). */
+  .ga-bar {
+    position: fixed;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    inset-inline-start: 16px;
+    z-index: 90;
+    width: calc(100% - 32px);
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 18px 20px;
+    background: var(--ground);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(43, 31, 28, .12);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .ga-bar[hidden] { display: none; }
+  .ga-bar p { margin: 0; }
+  .ga-bar a {
+    color: var(--acc-d);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+  }
+  .ga-bar-actions { display: flex; gap: 0.5rem; }
+  /* The accept is filled, the decline outlined: both plainly buttons, the
+     decline the quieter one. */
+  .ga-bar button {
+    min-height: 44px;
+    padding: 0.45rem 1.1rem;
+    border-radius: 10px;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .ga-yes { border: 1px solid var(--acc); background: var(--acc); color: #ffffff; }
+  .ga-yes:hover { background: var(--acc-d); border-color: var(--acc-d); }
+  .ga-no { border: 1px solid var(--muted); background: var(--ground); color: var(--body); }
+  .ga-no:hover { border-color: var(--muted); color: var(--ink); }
+  .ga-bar button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+</style>
