@@ -50,7 +50,7 @@ export function renderProof(D) {
       const u = unreadOf(c);
       return `<li><button type="button" class="wa-row${u ? ' is-unread' : ''}" data-chat="${c.id}">${waAv(c)}
         <span class="wa-mid"><span class="wa-l1"><span class="wa-name">${esc(chatTitle(c))}</span><span class="wa-time">${c.when}</span></span>
-        <span class="wa-l2"><span class="wa-pv">${previewOf(c)}</span>${u ? `<span class="wa-badge" aria-label="${u} הודעות שלא נקראו">${u}</span>` : ''}</span></span></button></li>`;
+        <span class="wa-l2"><span class="wa-pv">${previewOf(c)}</span>${u ? `<span class="wa-badge" aria-label="${u === 1 ? 'הודעה אחת שלא נקראה' : u + ' הודעות שלא נקראו'}">${u}</span>` : ''}</span></span></button></li>`;
     }).join('');
     return `<div class="wa-screen wa-list"><div class="wa-top"><span class="wa-brand">WhatsApp</span><span class="wa-icons"><span class="wa-ic">${I.cam}</span><span class="wa-ic">${I.dots}</span></span></div>
       <div class="wa-search">${I.search}<span>חיפוש</span></div>

@@ -27,7 +27,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
     --muted:  #7d6e69;   /* ~5:1 */
     --line:      #eee6e3;
     --line-tone: #f4d8d0;
-    --acc:      #d4654e;   /* fills only; white on it is the brand's one AA exception */
+    --acc:      #c0563f;   /* fills only; white on it is 4.5:1, AA */
     --acc-d:    #a84634;   /* ~5.6:1 on white - coloured TEXT and hover */
     --acc-tint: #fdeae4;   /* flat wash, never a gradient */
     --acc-line: #f0c4b8;
@@ -172,9 +172,9 @@ import SiteFooter from '../../components/SiteFooter.astro';
 
   <!-- ============ Task 1 ============ -->
   <section class="card task">
-    <div class="task-head"><div class="task-num">1</div><h2>חשבון Claude בתשלום</h2><span class="time">כ-5 דקות</span></div>
+    <div class="task-head"><div class="task-num">1</div><h2>חשבון Claude&nbsp;בתשלום</h2><span class="time">כ-5 דקות</span></div>
     <div class="task-body">
-      <p>אני מלמד בסדנה לעבוד עם Claude Code, וזה דורש מנוי בתשלום: Pro
+      <p>אני מלמד בסדנה לעבוד עם Claude Code, וזה דורש מנוי בתשלום: <bdi>Pro</bdi>
       (20$ לחודש) ומעלה. מתחילים ב-Pro, וכשנגמרת המכסה עולים ל-Max.
       תזהרו, זה ממכר 😉</p>
       <ul>
@@ -191,7 +191,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 
   <!-- ============ Task 2 ============ -->
   <section class="card task">
-    <div class="task-head"><div class="task-num">2</div><h2>מתקינים את Claude Code</h2><span class="time">כ-10 דקות</span></div>
+    <div class="task-head"><div class="task-num">2</div><h2>מתקינים את Claude&nbsp;Code</h2><span class="time">כ-10 דקות</span></div>
     <div class="task-body">
       <ul>
         <li class="os-win">נכנסים אל <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> ולוחצים על כפתור ההורדה ל-Windows. הקובץ יורד לתיקיית Downloads.</li>
@@ -226,7 +226,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
         <li class="os-win">ועוד התקנה אחת, באותה שיטה בדיוק: נכנסים אל <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> ולוחצים על כפתור ההורדה הירוק (גרסת LTS). מריצים את הקובץ שירד, Next בכל המסכים ובסוף Finish.</li>
         <li class="os-win">סוגרים את Claude לגמרי ופותחים מחדש, כדי שיזהה את שתי ההתקנות. אם נשאר סמל של Claude באזור השעון, קליק ימני עליו ואז Quit לפני הפתיחה מחדש.</li>
         <li class="os-mac">את Git לא מתקינים לבד: הוא מגיע עם כלי המפתחים של Apple. אם בבדיקה במשימה 4 קופץ חלון שמציע להתקין developer tools, לוחצים Install ומחכים שיסתיים.</li>
-        <li class="os-mac">את Node מורידים מ-<a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>: בוחרים את קובץ ההתקנה ל-macOS, זה שהשם שלו נגמר ב-.pkg, פותחים אותו ולוחצים Continue עד הסוף.</li>
+        <li class="os-mac">את Node מורידים מ-<a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>: בוחרים את קובץ ההתקנה ל-macOS, זה עם הסיומת pkg, פותחים אותו ולוחצים Continue עד הסוף.</li>
         <li class="os-mac">בסוף סוגרים את Claude לגמרי, Command ו-Q, ופותחים מחדש.</li>
       </ul>
     </div>
@@ -295,7 +295,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
       <a class="big-link" href="./questionnaire/">לשאלון ההקמה</a>
       <ul style="margin-top:12px;">
         <li>אפשר לעצור באמצע ולחזור להמשיך, באותו מחשב ואותו דפדפן.</li>
-        <li>בסוף לוחצים על כפתור ההורדה. הקובץ <span dir="ltr" style="unicode-bidi:isolate;white-space:nowrap">my-business-he.md</span> יורד לתיקיית Downloads (לא מוצאים? <span class="os-win">Ctrl ו-J ביחד פותח את רשימת ההורדות של הדפדפן</span><span class="os-mac">ב-Finder, Option ו-Command ו-L ביחד פותח את תיקיית ההורדות</span>).</li>
+        <li>בסוף לוחצים על כפתור ההורדה. הקובץ <span dir="ltr" style="unicode-bidi:isolate;white-space:nowrap">my-business-he.md</span> יורד לתיקיית Downloads (לא מוצאים? <span class="os-win">לוחצים Ctrl ו-J ביחד, ונפתחת רשימת ההורדות של הדפדפן</span><span class="os-mac">פותחים את Finder ולוחצים Option ו-Command ו-L ביחד, ונפתחת תיקיית ההורדות</span>).</li>
         <li><strong>מעבירים אותו לתוך <span dir="ltr" style="unicode-bidi:isolate;white-space:nowrap">my-office</span></strong>, התיקייה מהבדיקה במשימה 4, ולא משנים את שם הקובץ.</li>
       </ul>
     </div>
@@ -312,8 +312,8 @@ import SiteFooter from '../../components/SiteFooter.astro';
       <p>בתוך my-office, התיקייה מהבדיקה במשימה 4, פותחים תיקייה בשם <strong>my-samples</strong> ואוספים אליה דברים שאתם כתבתם.<br>
       מהדוגמאות האלה העובד לומד את הקול שלכם.</p>
       <div class="callout warn">
-        <span class="w-icon">⚠️</span>כלל אחד שמלווה את כל האיסוף: שם או פרט רגיש
-        של לקוח שלא צריך לחיות בקובץ, מחליפים ל-[שם] כבר עכשיו, בזמן האיסוף.
+        <span class="w-icon">⚠️</span>כבר עכשיו, תוך כדי שאוספים: שם של לקוח, או פרט רגיש
+        שאין סיבה שיהיה בקובץ, מחליפים ב-[שם].
       </div>
       <ul>
         <li>פוסטים שפרסמתם: פייסבוק, אינסטגרם, לינקדאין.</li>

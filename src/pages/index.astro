@@ -9,14 +9,14 @@ import avatar from '../assets/guy.png';
 
 <Base
   title={"העובד הראשון שלך | גיא מלול"}
-  description={"בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
+  description={"בסדנה אחת אני מלמד אותך לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
   canonical={"https://guymalul.co.il/"}
   ogImage={"https://guymalul.co.il/og-card-v4.png"}
   ogImageAlt={"מספיק להאכיל את הצ'אט בכפית. בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך."}
   ogTitle={"העובד הראשון שלך | גיא מלול"}
-  ogDescription={"בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
+  ogDescription={"בסדנה אחת אני מלמד אותך לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
   twitterTitle={"העובד הראשון שלך | גיא מלול"}
-  twitterDescription={"בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
+  twitterDescription={"בסדנה אחת אני מלמד אותך לגייס עובד AI שמכיר את העסק שלך. שלוש שעות בזום, בלי לכתוב שורת קוד."}
   favicon={"/favicon.svg"}
   appleTouchIcon={"/apple-touch-icon.png"}
   share
@@ -38,7 +38,7 @@ import avatar from '../assets/guy.png';
     --muted:  #7d6e69;   /* ~5:1 - the secondary greys have to clear AA too */
     --line:   #eee6e3;
     --line-tone: #f4d8d0;
-    --acc:      #d4654e;   /* fills only; white on it is the brand's one AA exception */
+    --acc:      #c0563f;   /* fills only; white on it is 4.5:1, AA */
     --acc-d:    #a84634;   /* ~5.6:1 on white - coloured TEXT and hover */
     --acc-tint: #fdeae4;   /* a flat wash, never a gradient */
     --acc-line: #f0c4b8;
@@ -439,6 +439,18 @@ import avatar from '../assets/guy.png';
     font-variant-numeric: tabular-nums;
   }
 
+  /* before, on Zoom, after: a rail and a word on every step, so order never rides on colour */
+  .beats {
+    list-style: none;
+    display: grid;
+    gap: 0.55rem;
+    margin: 0 0 1.6rem;
+    padding-inline-start: 0.9rem;
+    border-inline-start: 2px solid var(--line);
+  }
+  .beats li { line-height: 1.55; color: var(--body); }
+  .beats b { color: var(--ink); margin-inline-end: 0.3rem; }
+
   /* three cards: what you build, the room, what stays with you */
   .cards3 { list-style: none; display: grid; gap: 0.9rem; margin: 0 0 1.6rem; }
   .card3 {
@@ -560,12 +572,12 @@ import avatar from '../assets/guy.png';
         <p class="eyebrow rev">בלי לכתוב שורת קוד, ובלי להיות איש מחשבים</p>
         <h1>
           <span class="h1-say">מספיק להאכיל את הצ'אט <span class="nb">בכפית.</span></span>
-          <span class="h1-ask">בסדנה אחת אתה לומד לגייס עובד AI שמכיר את <span class="nb">העסק שלך.</span></span>
+          <span class="h1-ask">בסדנה אחת אני מלמד אותך לגייס עובד AI שמכיר את <span class="nb">העסק שלך.</span></span>
         </h1>
         <p class="fold-who rev"><b>העובד הראשון שלך.</b> סדנה של שלוש שעות בזום, עם גיא מלול, מהנדס תוכנה במיקרוסופט.</p>
         <p class="said rev">
-          <span class="b-frag">פותח צ'אט, מסביר, מעתיק, מדביק.</span>
-          <span class="b-pain">ובכל משימה אתה שוב אומר לו מה לעשות.</span>
+          <span class="b-frag">פתחת צ'אט, הסברת, העתקת, הדבקת.</span>
+          <span class="b-pain">ובכל משימה, שוב אמרת לו מה לעשות.</span>
           <span class="b-punch">הלו. זה בדיוק הפער.</span>
         </p>
         <div class="cta-row">
@@ -578,33 +590,39 @@ import avatar from '../assets/guy.png';
     <section>
       <div class="wrap">
         <p class="bridge rev">שלוש שעות איתי</p>
-        <h2 class="rev-h">אתה יוצא מהזום עם עובד ראשון, אחרי חפיפה ראשונה על העסק שלך.</h2>
+        <h2 class="rev-h">בסוף הסדנה כבר עובד אצלך צוות שלם, ולמדת איך מגייסים עוד עובדים לעסק שלך.</h2>
         <ul class="facts rev" aria-label="הסדנה בקצרה">
           <li>3 שעות</li><li>בזום</li><li>עד 5 משתתפים</li>
         </ul>
 
+        <ol class="beats rev" aria-label="מה קורה מתי">
+          <li><b>לפני:</b> מדריך הכנה, בערך שעתיים. מתקינים, ממלאים שאלון ואוספים דוגמאות.</li>
+          <li><b>בזום:</b> הצוות קורא את השאלון שלך ולומד את&nbsp;העסק.</li>
+          <li><b>אחרי:</b> שבעה ימים, משימה אחת ביום. ביום השביעי הצוות מתחיל לעבוד לבד.</li>
+        </ol>
+
         <ol class="cards3">
           <li class="card3 rev">
             <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg></span>
-            <h3>תיקייה, ובה כל מה שהוא צריך לדעת עליך</h3>
-            <p>היא במחשב שלך, וכתוב בה מה אתה עושה ואיך אתה עובד. אתה בונה אותה בסדנה, ומאותו רגע הוא לא מתחיל כל שיחה מאפס.</p>
+            <h3>תיקייה, ובה כל מה שהצוות צריך לדעת&nbsp;עליך</h3>
+            <p>היא במחשב שלך, ובה כתוב מה העסק שלך עושה, ואיך נראה אצלך יום עבודה. בונים אותה בסדנה, ומאותו רגע אף שיחה לא מתחילה מאפס.</p>
           </li>
           <li class="card3 rev">
             <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg></span>
-            <h3>אתה בונה, ואני בחדר</h3>
+            <h3>הידיים שלך על המקלדת, ואני בחדר</h3>
             <p class="card-q">"הראית לי שזה עובד, לא לימדת אותי לבנות."</p>
-            <p>אם יצאת ככה מוובינר AI, פה זה הפוך. אני מסביר את השיטה ואת Claude Code בלי מילים גדולות, ואתה מגייס את העובד הראשון שלך, על העסק שלך, בזמן שאני בחדר.</p>
+            <p>אם יצאת ככה מוובינר AI, פה זה הפוך. אני מסביר את השיטה ואת Claude Code בלי מילים גדולות, ואת התרגול עושים על העסק שלך, ואני שם לכל שאלה.</p>
           </li>
           <li class="card3 rev">
             <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg></span>
             <h3>"המשרד", בונוס שנשאר אצלך</h3>
-            <p>גרסת ההתחלה של התיקייה שאני עובד בה, עם סקילים שכבר עובדים. מוח שני לעסק שלך, במקום החומר שמפוזר היום בין וואטסאפ, מיילים ומחברת.</p>
+            <p>גרסה ראשונה של המשרד שלי, עם צוות שלם שכבר יודע את העבודה. מוח שני לעסק שלך, במקום החומר שמפוזר היום בין וואטסאפ, מיילים ומחברת.</p>
           </li>
         </ol>
 
         <div class="me-line rev">
           <Image class="me-ava" src={avatar} alt="גיא מלול" width={128} height={128} />
-          <p><strong>אני מלמד בדיוק את מה שאני מריץ על העסק שלי.</strong>
+          <p><strong>אני מלמד בדיוק את מה שאני עושה בעסק שלי כל יום.</strong>
           מהנדס תוכנה במיקרוסופט, לפני זה אלביט וצ'ק פוינט, ולפני כל זה כמעט שבע שנים ניהלתי אתר תיירות במדבר
           (<a class="body-link" href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener">LinkedIn</a>).</p>
         </div>
@@ -617,41 +635,41 @@ import avatar from '../assets/guy.png';
     <section class="tone" id="straight">
       <div class="wrap">
         <p class="bridge rev">לפני שנמשיך, שיהיה על השולחן.</p>
-        <h2 class="rev-h">זה בשבילך אם אתה כבר עובד עם AI כל יום, ובא ללמוד לבנות בעצמך.</h2>
+        <h2 class="rev-h">זה בשבילך אם AI כבר חלק מהיום שלך, ובא לך ללמוד לבנות בעצמך.</h2>
 
         <div class="duo2">
           <div class="duo-col rev">
-            <p class="duo-title"><span class="yes" aria-hidden="true">✓</span>בונים בסדנה</p>
+            <p class="duo-title"><span class="yes" aria-hidden="true">✓</span>מה עושים&nbsp;בסדנה</p>
             <ul>
               <li>תיקייה קבועה לעסק שלך</li>
-              <li>חפיפה ראשונה ותפקיד ראשון לעובד</li>
+              <li>לומדים לגייס עובד: חפיפה ותפקיד</li>
               <li>שיטה להוסיף לו ידע ותפקידים</li>
             </ul>
           </div>
           <div class="duo-col rev">
-            <p class="duo-title"><span class="no" aria-hidden="true">✕</span>לא בונים בשלוש שעות</p>
+            <p class="duo-title"><span class="no" aria-hidden="true">✕</span>לא בונים בשלוש&nbsp;שעות</p>
             <ul>
               <li>חיבור לוואטסאפ ולמערכות חיצוניות</li>
-              <li>אוטומציות שרצות לפי שעון</li>
+              <li>אוטומציות שפועלות לבד בשעות קבועות</li>
               <li>מערכת שמישהו אחר בונה בשבילך</li>
             </ul>
           </div>
         </div>
 
-        <p class="honest-line rev">הלוואי שיכולתי להגיד לך שאחרי הסדנה אתה טס לתאילנד והעסק עובד לבד. אבל זה לא קורה. הבנייה שלך, והיא לוקחת שבועות, ממש כמו לגייס עובד אמיתי.</p>
+        <p class="honest-line rev">הלוואי שיכולתי להגיד לך שאחרי הסדנה אפשר לטוס לתאילנד והעסק עובד לבד. אבל זה לא קורה. הבנייה שלך, והיא לוקחת שבועות, ממש כמו לגייס עובד אמיתי.</p>
         <div class="callout callout--warn rev">
           <svg class="co-ic" aria-hidden="true"><use href="#ic-warn"/></svg>
           <div class="co-body">
             <span class="co-label">למי זה פחות מתאים</span>
-            <p><strong>עוד לא עבדת עם AI?</strong> הסדנה מתחילה ממי שכבר עובד עם צ'אט.<br>
-            <strong>כבר בונה סוכנים בעצמך?</strong> היא כנראה תרגיש לך בסיסית.</p>
+            <p><strong>עוד לא עבדת עם AI?</strong> הסדנה בנויה למי שכבר עובד עם צ'אט.<br>
+            <strong>כבר בונה סוכנים בעצמך?</strong> היא כנראה תהיה בסיסית מדי בשבילך.</p>
           </div>
         </div>
 
         <div class="needs rev">
           <p class="needs-title">מה צריך</p>
           <ul>
-            <li>מחשב Windows או מק</li>
+            <li>מחשב Windows או Mac</li>
             <li>מנוי Claude בתשלום</li>
             <li>אנגלית בסיסית</li>
           </ul>
@@ -660,12 +678,12 @@ import avatar from '../assets/guy.png';
         <div class="callout callout--info rev">
           <svg class="co-ic" aria-hidden="true"><use href="#ic-info"/></svg>
           <div class="co-body">
-            <span class="co-label">ההכנה היא חובה</span>
+            <span class="co-label">ההכנה חובה</span>
             <p><strong>בערך שעתיים של עבודה, כמה ימים לפני הסדנה.</strong> מדריך מסודר מגיע אליך מראש, כי בזום לא עושים התקנות.</p>
           </div>
         </div>
 
-        <p class="soft-line rev">לא בטוח שזה בשבילך? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%A4%D7%A0%D7%99%20%D7%A9%D7%90%D7%A0%D7%99%20%D7%A0%D7%A8%D7%A9%D7%9D.">כתוב לי</a></p>
+        <p class="soft-line rev">עוד לא ברור לך אם זה בשבילך? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%A4%D7%A0%D7%99%20%D7%94%D7%94%D7%A8%D7%A9%D7%9E%D7%94.">אפשר לכתוב לי</a></p>
       </div>
     </section>
 
@@ -678,18 +696,18 @@ import avatar from '../assets/guy.png';
         <div class="offer rev">
           <ul class="gets">
             <li><span class="yes" aria-hidden="true">✓</span><span>הסדנה, ו"המשרד" שנשאר אצלך.</span></li>
-            <li><span class="yes" aria-hidden="true">✓</span><span>מדריך ההכנה, שמגיע כמה ימים לפני.</span></li>
-            <li><span class="yes" aria-hidden="true">✓</span><span>קבוצת הבוגרים, שנשארת פתוחה גם אחרי.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>מדריך ההכנה, שמגיע כמה ימים&nbsp;לפני.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>שבעת הימים שאחרי: משימה אחת ביום, באתר שפתוח לך 30 יום.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>קבוצת הבוגרים, שנשארת פתוחה גם&nbsp;אחרי.</span></li>
           </ul>
           <p class="rev">ומה שאין: ליווי אישי שלי אחרי הסדנה. אני מעדיף להגיד את זה מראש.</p>
         </div>
 
-        <p class="rev">מעבר לזה יש לך מנוי <bdi>Claude</bdi>, 20 דולר לחודש ומעלה. הוא לא עובר דרכי.</p>
+        <p class="rev">מעבר לזה צריך מנוי <bdi>Claude</bdi>, 20 דולר לחודש ומעלה, ומשלמים עליו ישירות, לא דרכי.</p>
 
         <div class="cta-row rev">
           <a class="btn" href="/dates/">לבחירת מועד</a>
         </div>
-        <p class="soft-line rev">כל המועדים והשעות בעמוד המועדים.</p>
       </div>
     </section>
 
@@ -700,29 +718,29 @@ import avatar from '../assets/guy.png';
         <div class="faq-list">
           <details class="rev">
             <summary><span>מה צריך להכין לפני?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">מדריך מפורט ומסודר. בערך שעתיים של עבודה, פרושות על כמה ימים לפני הסדנה.<br>
+            <div class="faq-body">יש מדריך מפורט ומסודר, ובו כל ההכנה: בערך שעתיים של עבודה, לפני הסדנה.<br>
             כל מילה במדריך כתובה לבן אדם שהוא לא איש מחשבים.<br>
-            תקרא אותו לפני שאתה מחליט. אני מעדיף שתדע למה אתה נכנס.
+            אני ממליץ לך לקרוא אותו לפני שמחליטים. חשוב לי שיהיה לך ברור למה נכנסים.
             <p class="btn-row"><a class="btn-ghost" href="/prework/" target="_blank" rel="noopener"><span>מדריך ההכנה</span><svg aria-hidden="true"><use href="#ic-ext"/></svg></a></p></div>
           </details>
           <details class="rev">
             <summary><span>ומה אם אגיע בלי שהכל מוכן?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">אתה מוזמן להישאר, להקשיב, ולקחת את כל החומרים.<br>
+            <div class="faq-body">אפשר להישאר, להקשיב, ולקחת את כל החומרים.<br>
             פשוט לא נוכל לעבוד יחד באותו יום, ואין על זה החזר או מעבר למועד אחר.<br>
             המדריך מגיע אליך כמה ימים מראש בדיוק בשביל זה.</div>
           </details>
           <details class="rev">
-            <summary><span>למה דווקא Claude Code, ולא הכלי שאני עובד איתו היום?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">כי הוא עובד על הקבצים שבמחשב שלך: סביבת עבודה קבועה שנשארת, ולא שיחה שמתאדה.<br>
+            <summary><span>למה דווקא Claude Code, ולא הכלי שכבר יש לי?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">כי הוא עובד עם הקבצים שבמחשב שלך: סביבת עבודה קבועה שנשארת, ולא שיחה שמתאדה.<br>
             זה ההבדל שמאפשר לעובד להתקיים בכלל, ולא רק לענות לך.<br>
             השיטה עצמה עוברת לכל כלי. הכלים מתחלפים, המבנה נשאר.<br>
             אבל הסדנה עצמה בנויה על Claude Code, וכל ההכנה שלה היא בשבילו.</div>
           </details>
           <details class="rev">
-            <summary><span>אני לא טכני. זה בשבילי?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">בוא נדייק. לא צריך לדעת לתכנת, לא צריך להיות איש מחשבים, ולא כותבים שורת קוד.<br>
-            כן צריך: לשבת מול מחשב בנוחות, להתקין תוכנה לפי הוראות, ולאהוב ללמוד דברים חדשים.<br>
-            אם זה אתה, זה בשבילך.</div>
+            <summary><span>אין לי רקע טכני. זה בשבילי?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">נדייק רגע. לא צריך לדעת לתכנת, לא צריך להיות איש מחשבים, ולא כותבים שורת קוד.<br>
+            כן צריך: להרגיש בנוח מול מחשב, להתקין תוכנה לפי הוראות, ולאהוב ללמוד דברים חדשים.<br>
+            אם זה נשמע כמוך, זה בשבילך.</div>
           </details>
           <details class="rev">
             <summary><span>כמה זה עולה לי מעבר למחיר הסדנה?</span><span class="tog" aria-hidden="true">+</span></summary>
@@ -739,28 +757,28 @@ import avatar from '../assets/guy.png';
           <details class="rev">
             <summary><span>איפה המידע שלי יושב?</span><span class="tog" aria-hidden="true">+</span></summary>
             <div class="faq-body">הקבצים יושבים במחשב שלך, בתיקייה שלך. לא אצלי ולא בשרת שלי.<br>
-            מה שאתה שולח ל-Claude עובר ל-Claude, בדיוק כמו בצ'אט שאתה עובד איתו היום.<br>
+            מה שנשלח ל-Claude עובר ל-Claude, בדיוק כמו בצ'אט שלך היום.<br>
             לי אין גישה לקבצים שלך, לא בסדנה ולא אחריה.</div>
           </details>
           <details class="rev">
             <summary><span>מי מחליט מה הוא עושה?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">אתה. ככה מגדירים את זה בסדנה: הוא קורא וממליץ.<br>
-            ופעולות רגישות, מייל שיוצא, פרסום, מחיקה, מחכות לאישור שלך.<br>
-            אתה המנהל. הוא העובד.</div>
+            <div class="faq-body">ההחלטה שלך. ככה מגדירים את זה בסדנה: הוא קורא וממליץ.<br>
+            ופעולות רגישות, כמו מייל שיוצא, פרסום או מחיקה, מחכות לאישור שלך.<br>
+            הוא העובד, והמילה האחרונה שלך.</div>
           </details>
           <details class="rev">
-            <summary><span>הכלים משתנים כל חודש. מה יישאר לי בעוד שנה?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">גם עם טכנולוגיה מלפני שנה, אם תעבוד בשיטה שאני מלמד, אתה תגיע לתוצאות יותר טובות ממי שעובד עם הטכנולוגיה שיצאה היום.<br>
-            כשהכלי מתקדם, אתה לא רודף אחריו. אתה מקבל במתנה עובד יותר חכם.</div>
+            <summary><span>הכלים משתנים כל חודש. מה יישאר לי בעוד&nbsp;שנה?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">גם עם טכנולוגיה מלפני שנה, עם השיטה שאני מלמד יהיו לך תוצאות טובות יותר מאשר למי שעובד עם הטכנולוגיה שיצאה היום.<br>
+            כשהכלי מתקדם, לא צריך לרדוף אחריו. העובד שלך פשוט נעשה חכם יותר, במתנה.</div>
           </details>
           <details class="rev">
-            <summary><span>ואם אני צריך לבטל או להחליף מועד?</span><span class="tog" aria-hidden="true">+</span></summary>
-            <div class="faq-body">החדר הוא חמישה אנשים, וכיסא שמתפנה ברגע האחרון פשוט נשאר ריק. משם כל מה שכתוב פה.<br><br>
-            אם אני מבטל, מסיבה בריאותית או מכל סיבה אחרת, אתה בוחר: כל הכסף חזרה, או מעבר למועד הבא בלי תוספת.<br><br>
-            עד יומיים לפני הסדנה אפשר לבטל, בדמי ביטול של 50 ש"ח, שהם 5% מהמחיר. שישי ושבת לא נספרים. החלפת מועד באותו טווח היא בחינם, לפי מקום פנוי.<br><br>
-            מיומיים לפני ואילך, כולל אי הגעה, אין החזר ואין מעבר. רוצה בכל זאת להחליף מועד ברגע האחרון? נשתדל, בחצי ממחיר הכרטיס, לפי מקום פנוי.<br><br>
-            החזר כספי מגיע תוך 7 ימי עבודה, לכרטיס שממנו שילמת.<br><br>
-            קרה משהו? כתוב לי לפני שאתה מחליט. אני קורא הכול.</div>
+            <summary><span>ואם צריך לבטל או להחליף מועד?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">אנחנו חמישה בחדר, אז כיסא שמתפנה ברגע האחרון פשוט נשאר ריק.<br><br>
+            אם אני מבטל, מסיבה בריאותית או מכל סיבה אחרת, הבחירה שלך: כל הכסף חזרה, או מעבר למועד הבא בלי תוספת.<br><br>
+            ביטלת עד יומיים לפני הסדנה? אני מחזיר הכל חוץ מ-50 ש"ח, שהם 5% מהמחיר. שישי ושבת לא נספרים ביומיים. מועד אחר מתאים לך יותר? עד אז זה בחינם, כל עוד יש שם כיסא.<br><br>
+            פחות מיומיים לפני, או שלא הגעת? שם כבר אין לי איך להחזיר כסף או להעביר מועד. רוצה בכל זאת להחליף ברגע האחרון? אנסה למצוא לך כיסא, בחצי ממחיר הסדנה.<br><br>
+            כסף שחוזר מגיע תוך 7 ימי עבודה, לכרטיס שממנו שילמת.<br><br>
+            קרה משהו? אפשר לכתוב לי לפני שמחליטים. אני קורא הכול.</div>
           </details>
         </div>
       </div>
@@ -769,14 +787,14 @@ import avatar from '../assets/guy.png';
     <!-- ===== הכפתור ===== -->
     <section class="final">
       <div class="wrap">
-        <h2 class="rev-h">ואם זה מדבר אליך, בוא נתחיל.</h2>
-        <p class="lead rev">אותה סדנה בכל המועדים. תבחר מה שמתאים לך.</p>
+        <h2 class="rev-h">ואם זה מדבר אליך, הגיע הזמן להתחיל.</h2>
+        <p class="lead rev">אותה סדנה בכל המועדים, אז אפשר לבחור מה שנוח לך.</p>
         <p class="fq"><q>ממליץ בחום לכל בעל עסק שכבר התחיל לעבוד עם <bdi>ai</bdi>.</q><span>גיל, בעלים של חברת מדיה</span></p>
         <div class="cta-row">
           <a class="btn" href="/dates/">לבחירת מועד</a>
         </div>
         <p class="after rev">1,000 ש"ח למשתתף. הקבוצה עד 5 אנשים.</p>
-        <p class="soft-line">אף מועד לא מתאים, או שאתה רוצה לדבר קודם? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתוב לי</a></p>
+        <p class="soft-line">אף מועד לא מתאים, או שבא לך לדבר קודם? <a class="body-link" href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">אפשר לכתוב לי</a></p>
       </div>
     </section>
 

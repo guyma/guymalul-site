@@ -5,12 +5,12 @@ import SiteFooter from '../../components/SiteFooter.astro';
 ---
 
 <Base
-  title={"מועדי סדנאות | העובד הראשון שלך | גיא מלול"}
+  title={"מועדי הסדנה | העובד הראשון שלך | גיא מלול"}
   description={"המועדים הקרובים של הסדנה \"העובד הראשון שלך\". שלוש שעות בזום. בוחרים מועד ונרשמים."}
   canonical={"https://guymalul.co.il/dates/"}
   ogImage={"https://guymalul.co.il/og-card-v4.png"}
   ogImageAlt={"העובד הראשון שלך. סדנה של שלוש שעות בזום."}
-  ogTitle={"מועדי סדנאות | העובד הראשון שלך"}
+  ogTitle={"מועדי הסדנה | העובד הראשון שלך"}
   ogDescription={"שלוש שעות בזום. בוחרים מועד ונרשמים."}
   favicon={"/favicon.svg"}
   appleTouchIcon={"/apple-touch-icon.png"}
@@ -29,7 +29,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
     --body:   #6b5a55;   /* ~6.3:1 */
     --muted:  #7d6e69;   /* ~5:1   */
     --line:   #eee6e3;
-    --acc:      #d4654e;   /* fills only; white on it is the brand's one AA exception */
+    --acc:      #c0563f;   /* fills only; white on it is 4.5:1, AA */
     --acc-d:    #a84634;   /* ~5.6:1 on white - coloured TEXT and hover */
     --acc-tint: #fdeae4;
     --acc-line: #f0c4b8;
@@ -225,14 +225,14 @@ import SiteFooter from '../../components/SiteFooter.astro';
     <div class="wrap">
       <a class="back-link" href="/"><svg aria-hidden="true"><use href="#ic-back"/></svg><span>חזרה לעמוד הסדנה</span></a>
 
-      <h1>מועדי סדנאות</h1>
+      <h1>מועדי הסדנה</h1>
       <p class="sub">"העובד הראשון שלך". שלוש שעות בזום, קבוצה של עד 5 אנשים, 1,000 ש"ח למשתתף.</p>
 
       <section class="block" aria-labelledby="honest-h">
-        <h2 id="honest-h">לפני שבוחרים מועד, שיהיה על השולחן.</h2>
+        <h2 id="honest-h">לפני שבוחרים מועד, שיהיה על&nbsp;השולחן.</h2>
         <ul class="truth">
-          <li>לפני הסדנה ממלאים שאלון ומתקינים כמה תוכנות, בערך שעתיים. <strong>מתחילים כמה ימים לפני, לא בערב שלפני</strong>, מניסיון. בלי זה אי אפשר לעבוד בסדנה.</li>
-          <li>בסדנה לומדים את העקרונות ומתאמנים עליהם בתוך מערכת שכבר עובדת. את העובד עצמו בונים אחרי, על העסק שלך.</li>
+          <li>לפני הסדנה ממלאים שאלון ומתקינים כמה תוכנות, בערך שעתיים. מניסיון: <strong>מתחילים כמה ימים לפני, לא בערב שלפני</strong>. בלי זה אי אפשר לעבוד בסדנה.</li>
+          <li>בסדנה לומדים את העקרונות ומתאמנים עליהם עם צוות שכבר עובד. את העובדים החדשים לעסק שלך מגייסים אחרי.</li>
           <li>אחרי הסדנה אני לא מלווה אישית. יש קבוצת בוגרים, והיא נשארת פתוחה.</li>
           <li>אנחנו חמישה בחדר, אז כיסא שמתפנה ברגע האחרון פשוט נשאר ריק.</li>
         </ul>
@@ -248,8 +248,9 @@ import SiteFooter from '../../components/SiteFooter.astro';
             <a class="btn" href="https://pay.sumit.co.il/116dead/118635y/118638a/payment">להרשמה</a>
           </li>
         </ul>
+        <p class="no-dates" hidden>כרגע אין מועד פתוח. רוצה שאודיע לך כשייפתח מועד חדש? <a href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%A9%D7%AA%D7%95%D7%93%D7%99%D7%A2%20%D7%9C%D7%99%20%D7%9B%D7%A9%D7%99%D7%99%D7%A4%D7%AA%D7%97%20%D7%9E%D7%95%D7%A2%D7%93%20%D7%97%D7%93%D7%A9%20%D7%9C%D7%A1%D7%93%D7%A0%D7%94.">אפשר לכתוב לי</a></p>
         <p>1,000 ש"ח למשתתף. אפשר לבטל עד יומיים לפני, ושישי ושבת לא נספרים. כל התנאים <a href="/#faq">בעמוד הסדנה</a>.</p>
-        <p class="soft-line">אף מועד לא מתאים, או שאתה רוצה לדבר קודם? <a href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">כתוב לי</a></p>
+        <p class="soft-line">אף מועד לא מתאים, או שבא לך לדבר קודם? <a href="https://wa.me/972559526627?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8.%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%A1%D7%93%D7%A0%D7%94.">אפשר לכתוב לי</a></p>
       </section>
     </div>
   </main>
@@ -275,14 +276,36 @@ import SiteFooter from '../../components/SiteFooter.astro';
     (function () {
       var CLOSED_LINE = 'אזלו המקומות לסדנה';   /* his ruling 26.8 */
 
+      /* The stamps are Israel wall-clock time with no offset, and a bare stamp
+         parses in the READER's zone. Read them in Asia/Jerusalem instead, so a
+         buyer abroad sees the seat close at the same moment as everyone else;
+         the offset changes with daylight saving, which is why it is not written. */
+      var IL = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Jerusalem', hourCycle: 'h23', hour12: false,
+        year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
+      function offsetAt(t) {
+        var p = {};
+        IL.formatToParts(new Date(t)).forEach(function (x) { p[x.type] = +x.value; });
+        return Date.UTC(p.year, p.month - 1, p.day, p.hour % 24, p.minute) - t;
+      }
+      /* Measured twice: the second pass takes the offset at the real instant, so a
+         stamp near a clock change lands on the right side of it. A malformed stamp
+         gives NaN, which hides nothing and stops nothing. */
+      function ilTime(stamp) {
+        var asUtc = new Date(stamp + 'Z').getTime();
+        if (isNaN(asUtc)) return NaN;
+        var guess = asUtc - offsetAt(asUtc);
+        return asUtc - offsetAt(guess);
+      }
+
       function apply() {
         var now = Date.now();
+        var open = 0;
         document.querySelectorAll('.date-row[data-ends]').forEach(function (row) {
-          var ends = new Date(row.dataset.ends).getTime();
+          var ends = ilTime(row.dataset.ends);
           if (ends < now) { row.hidden = true; return; }
           /* a row with no data-closes falls back to its end hour, so an older
              rendered page keeps the behaviour it already had */
-          var closes = row.dataset.closes ? new Date(row.dataset.closes).getTime() : ends;
+          var closes = row.dataset.closes ? ilTime(row.dataset.closes) : ends;
           if (closes <= now && !row.classList.contains('is-closed')) {
             row.classList.add('is-closed');
             var btn = row.querySelector('a.btn');
@@ -293,7 +316,11 @@ import SiteFooter from '../../components/SiteFooter.astro';
               btn.replaceWith(said);
             }
           }
+          if (!row.classList.contains('is-closed')) open++;
         });
+        /* no row left to buy means the roll is late or every seat is gone: say so */
+        document.querySelector('.no-dates').hidden = open > 0;
+        document.querySelector('.gate-line').hidden = open === 0;
       }
 
       apply();

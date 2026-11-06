@@ -92,7 +92,7 @@ Claude אוהב לדבר. הרבה.
   <img src="/blog/claude-modes-output/mode-menu.webp" alt="תפריט המצבים ב-Claude Code: Auto מסומן, ואחריו Manual, Accept edits, Plan ו-Bypass permissions. מתחתיו השורה שמתחת לתיבת הכתיבה: Opus 5.5, High, Auto" width="773" height="647" style="width:100%;max-width:420px;height:auto;border-radius:12px;display:block;margin:0 auto;">
 </figure>
 
-- **Auto**: Claude מחליט לבד על ההרשאות. לפני פעולות כמו הרצת פקודות או פנייה לאינטרנט, מודל נפרד בודק שהן באמת מה שביקשת.
+- **Auto**: מחליט לבד על ההרשאות. לפני פעולות כמו הרצת פקודות או פנייה לאינטרנט, מודל נפרד בודק שהן באמת מה שביקשת.
 - **Manual**: שואל לפני כל שינוי. הכי הרבה שליטה, וגם הכי מציק.
 - **Accept edits**: עורך קבצים לבד, ושואל לפני רוב הפקודות.
 - **Plan**: קודם תוכנית, ורק אחרי שאישרת אותה, עבודה. מתאים כשמתחילים משהו חדש: מערכת, אתר, תהליך עבודה.

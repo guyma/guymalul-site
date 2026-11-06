@@ -26,7 +26,7 @@
   --line-tone: #f4d8d0;
 
   /* the one accent */
-  --acc: #d4654e;         /* fills only; white on it is the brand's one AA exception */
+  --acc: #c0563f;         /* fills only; white on it is 4.5:1, AA (his ruling 6.11, was #d4654e at 3.6) */
   --acc-d: #a84634;       /* ~5.6:1 on white - coloured TEXT and hover */
   --acc-tint: #fdeae4;    /* a flat wash, never a gradient */
   --acc-line: #f0c4b8;
