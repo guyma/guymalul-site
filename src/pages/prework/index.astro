@@ -82,6 +82,8 @@ import SiteFooter from '../../components/SiteFooter.astro';
   /* the list marker echoes the mark: a small solid accent rule, flat */
   .task-body ul li::before { content: ""; position: absolute; inset-inline-start: 0; top: 0.62em; width: 12px; height: 3px; background: var(--acc); }
 
+  .shot { display: block; max-width: 100%; height: auto; margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; }
+
   /* the plain note: an aside - an indent and a hairline, never a box */
   .callout { margin-top: 14px; padding-inline-start: 1.1rem; border-inline-start: 2px solid var(--line); color: var(--ink); font-size: 0.95rem; }
   /* the constraint: the tint frame with the accent spine; the icon and the
@@ -179,7 +181,8 @@ import SiteFooter from '../../components/SiteFooter.astro';
       תזהרו, זה ממכר 😉</p>
       <ul>
         <li>נכנסים אל <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> ולוחצים Sign up. נרשמים עם המייל שלכם או עם חשבון Google. רואים: מסך השיחה של Claude, אתם בפנים.</li>
-        <li>פותחים את תפריט החשבון (לוחצים על השם או על סמל הפרופיל), בוחרים Settings, ומחפשים שם Billing או Plan. זה העמוד שמראה על איזה מסלול אתם.</li>
+        <li>פותחים את תפריט החשבון (לוחצים על השם או על סמל הפרופיל), בוחרים Settings, ומחפשים שם Billing או Plan. זה העמוד שמראה על איזה מסלול אתם.
+          <img class="shot" src="/prework/account-name.png" width="230" height="74" alt="השם בפינה השמאלית התחתונה של claude.ai, ולידו שם המסלול" loading="lazy"></li>
         <li>כתוב שם Free? לוחצים Upgrade, בוחרים Pro או Max, וממלאים פרטי תשלום. בסיום, באותו עמוד יהיה כתוב Pro או Max.</li>
       </ul>
     </div>
@@ -199,7 +202,8 @@ import SiteFooter from '../../components/SiteFooter.astro';
         <li class="os-mac">נכנסים אל <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> ולוחצים על ההורדה ל-macOS. צריך <bdi>macOS</bdi> 13 ומעלה: את הגרסה שלכם רואים בתפריט התפוח למעלה ← About This Mac.</li>
         <li class="os-mac">פותחים את הקובץ שירד וממשיכים לפי מה שמופיע על המסך. בסוף פותחים את Claude מתיקיית Applications. ה-Mac שואל אם לפתוח אפליקציה שהורדה מהאינטרנט? בודקים שכתוב Claude ולוחצים Open.</li>
         <li>לוחצים Sign in. נפתח דפדפן עם עמוד התחברות: מתחברים עם החשבון מהמשימה הקודמת ומאשרים. חוזרים לחלון של Claude (אם הוא לא קפץ לבד, לוחצים עליו<span class="os-win"> בשורת המשימות למטה</span><span class="os-mac"> ב-Dock למטה</span>).</li>
-        <li>בסרגל הצד של החלון, למעלה, לוחצים על <strong>Code</strong> (רואים שם רק סמלים? עוברים עליהם עם העכבר עד שמופיע <bdi>Code</bdi>). נפתח מסך עבודה עם תיבת כתיבה, בלי שום בקשת שדרוג. זה הבית של העובד שלכם.</li>
+        <li>למעלה משמאל בחלון, ליד החצים, יש שני סמלים קטנים צמודים: בועת שיחה, ולידה הסמל <bdi dir="ltr"><strong>&lt;/&gt;</strong></bdi>. לוחצים עליו, זה <strong>Code</strong> (מעבירים עליו את העכבר וכתוב <bdi>Code</bdi>). נפתח מסך עבודה עם תיבת כתיבה, בלי שום בקשת שדרוג. זה הבית של העובד שלכם.
+          <img class="shot" src="/prework/code-icon.png" width="620" height="92" alt="הפינה השמאלית העליונה של חלון Claude: בועת השיחה, ולידה הסמל של Code מסומן" loading="lazy"></li>
       </ul>
       <details class="branch os-win"><summary>Windows מציג חלון אזהרה כחול על הקובץ?</summary><div class="b-body">
         <p>זה מסך הבדיקה של Windows (SmartScreen). לוחצים More info ובודקים את
@@ -209,7 +213,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
       </div></details>
     </div>
     <div class="check-row">
-      <p class="how">סיימתם כשלשונית Code נפתחת עם תיבת כתיבה, בלי בקשת שדרוג.</p>
+      <p class="how">סיימתם כשמסך Code נפתח עם תיבת כתיבה, בלי בקשת שדרוג.</p>
       <label><input type="checkbox" data-task="2"><span>Claude Code מותקן ומחובר</span></label>
     </div>
   </section>
@@ -220,13 +224,16 @@ import SiteFooter from '../../components/SiteFooter.astro';
     <div class="task-body">
       <div class="callout warn"><span class="w-icon">⚠️</span>שתי ההתקנות נדרשות לסדנה: דרך <bdi>Git</bdi>, <bdi>Claude</bdi> מריץ את הפקודות שלו מאחורי הקלעים, ועליו עובד גם הגיבוי של המשרד. על <bdi>Node</bdi> רצים כלים שמגיעים עם המשרד, כבר בסדנה.</div>
       <ul>
-        <li class="os-win">נכנסים אל <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">git-scm.com/downloads/win</a> ולוחצים על קישור ההורדה הראשון (Click here to download).</li>
+        <li class="os-win">נכנסים אל <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener" style="white-space:nowrap">git-scm.com/downloads/win</a> ולוחצים על קישור ההורדה הראשון (Click here to download).
+          <img class="shot" src="/prework/git-win.png" width="360" height="114" alt="עמוד ההורדה של Git, והקישור Click here to download מסומן" loading="lazy"></li>
         <li class="os-win">מריצים את הקובץ שירד. אם מופיעה אזהרת מפרסם: החותם הרשמי של Git for Windows הוא Johannes Schindelin. זה השם? ממשיכים. שם אחר? עוצרים ושואלים אותי.</li>
         <li class="os-win">יגיעו הרבה מסכי אפשרויות בזה אחר זה. לוחצים Next בכולם בלי לשנות כלום, גם במסכים שנראים מסובכים (בחירת עורך, שם ה-branch). בסוף לוחצים Finish.</li>
-        <li class="os-win">ועוד התקנה אחת: נכנסים אל <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org/en/download</a>. בראש העמוד יש קוד, ולא צריך אותו. גוללים מתחתיו ולוחצים על הכפתור הירוק <bdi style="white-space:nowrap">Windows Installer (.msi)</bdi>. מריצים את הקובץ שירד, Next בכל המסכים ובסוף Finish.</li>
+        <li class="os-win">ועוד התקנה אחת: נכנסים אל <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org/en/download</a>. בראש העמוד יש קוד, ולא צריך אותו. גוללים מתחתיו ולוחצים על הכפתור הירוק <bdi style="white-space:nowrap">Windows Installer (.msi)</bdi>. מריצים את הקובץ שירד, Next בכל המסכים ובסוף Finish.
+          <img class="shot" src="/prework/node-win.png" width="500" height="210" alt="עמוד ההורדה של Node: מתחת לקוד, הכפתור Windows Installer מסומן" loading="lazy"></li>
         <li class="os-win">סוגרים את Claude לגמרי ופותחים מחדש, כדי שיזהה את שתי ההתקנות. אם נשאר סמל של Claude באזור השעון, קליק ימני עליו ואז Quit לפני הפתיחה מחדש.</li>
         <li class="os-mac">את Git לא מתקינים לבד: הוא מגיע עם כלי המפתחים של Apple. אם בבדיקה במשימה 4 קופץ חלון שמציע להתקין developer tools, לוחצים Install ומחכים שיסתיים.</li>
-        <li class="os-mac">את Node מורידים מהעמוד <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org/en/download</a>. בראש העמוד יש קוד, ולא צריך אותו. גוללים מתחתיו ולוחצים על הכפתור הירוק <bdi style="white-space:nowrap">macOS Installer (.pkg)</bdi>, פותחים את הקובץ שירד ולוחצים Continue עד הסוף.</li>
+        <li class="os-mac">את Node מורידים מהעמוד <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org/en/download</a>. בראש העמוד יש קוד, ולא צריך אותו. גוללים מתחתיו ולוחצים על הכפתור הירוק <bdi style="white-space:nowrap">macOS Installer (.pkg)</bdi>, פותחים את הקובץ שירד ולוחצים Continue עד הסוף.
+          <img class="shot" src="/prework/node-mac.png" width="500" height="210" alt="עמוד ההורדה של Node: מתחת לקוד, הכפתור macOS Installer מסומן" loading="lazy"></li>
         <li class="os-mac">בסוף סוגרים את Claude לגמרי, Command ו-Q, ופותחים מחדש.</li>
       </ul>
     </div>
@@ -244,8 +251,9 @@ import SiteFooter from '../../components/SiteFooter.astro';
     <div class="task-body">
       <p>המשימה הכי חשובה בהכנה. אם היא עוברת, אתם מוכנים לסדנה.</p>
       <ul>
-        <li>פותחים את <bdi>Claude</bdi> ונכנסים ל-<strong>Code</strong>.</li>
-        <li>בשורה שמתחת לתיבת הכתיבה בוחרים <strong>Local</strong>, ולידה לוחצים על בחירת התיקייה (<bdi>Open folder</bdi>).</li>
+        <li>פותחים את <bdi>Claude</bdi> ולוחצים למעלה משמאל על הסמל <bdi dir="ltr"><strong>&lt;/&gt;</strong></bdi>, זה <strong>Code</strong>.</li>
+        <li>בשורה שמתחת לתיבת הכתיבה משאירים <strong>This computer</strong>, ולידה לוחצים על <strong>Choose folder</strong>.
+          <img class="shot" src="/prework/folder-row.png" width="370" height="48" alt="השורה שמתחת לתיבת הכתיבה: This computer ו-Choose folder" loading="lazy"></li>
         <li>בחלון שנפתח עוברים לתיקיית הבית שלכם במחשב (<bdi class="os-win">C:\Users\your-name</bdi><bdi class="os-mac">/Users/your-name</bdi>), יוצרים בה תיקייה חדשה בשם <strong>my-office</strong>, בדיוק ככה, ובוחרים אותה. <bdi>Claude</bdi> שואל אם לסמוך עליה? מאשרים.<br>
         לא מוצאים את תיקיית הבית? <span class="os-win">מקלידים בשורת הכתובת של החלון <bdi>%USERPROFILE%</bdi> ולוחצים Enter.</span><span class="os-mac">לוחצים Shift ו-Command ו-H ביחד. Finder בעברית? היא בתוך "משתמשים", בשם שלכם.</span></li>
       </ul>
@@ -253,7 +261,8 @@ import SiteFooter from '../../components/SiteFooter.astro';
         <span class="w-icon">⚠️</span><strong>לא</strong> על שולחן העבודה ולא ב-Documents: הן יכולות להיות מגובות לענן (<span class="os-win">OneDrive</span><span class="os-mac">iCloud</span>), ותיקיית הבית לא.
       </div>
       <ul>
-        <li>באותה שורה בודקים שמצב האישורים הוא <strong>Auto</strong>. כתוב משהו אחר? לוחצים עליו ובוחרים Auto. הבחירה נשמרת לתיקייה הזאת, והיא מחכה לכם בסדנה.</li>
+        <li>באותה שורה בודקים שמצב האישורים הוא <strong>Auto</strong>. כתוב משהו אחר? לוחצים עליו ובוחרים Auto. הבחירה נשמרת לתיקייה הזאת, והיא מחכה לכם בסדנה.
+          <img class="shot" src="/prework/auto-mode.png" width="360" height="94" alt="הקצה הימני של השורה שמתחת לתיבת הכתיבה, ו-Auto מסומן" loading="lazy"></li>
         <li>מעתיקים את הפרומפט בכפתור, מדביקים בתיבת הכתיבה ולוחצים Enter. <bdi>Claude</bdi> יוצר קובץ בשם hello.md, בודק את Git ואת Node, ומספר לכם תוך כדי. בסוף הוא כותב שורה אחת: מוכן לסדנה, או מה חסר ולאיזו משימה לחזור.</li>
       </ul>
       <button class="copy-btn" onclick="copyPrompt(this)" style="background:var(--acc); color:#fff; border:none; border-radius:8px; padding:10px 18px; font-size:0.95rem; font-family:inherit; cursor:pointer; margin:12px 0 10px;">העתק את הפרומפט</button>
