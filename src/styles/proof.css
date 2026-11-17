@@ -3,7 +3,14 @@
 
 /* ---------- the section ---------- */
 .p2 { overflow-x: clip; }
-.p2-h3 { font-size: 1.35rem; line-height: 1.35; margin: 2.6rem 0 1rem; color: var(--ink); }
+/* "את זה הם בנו" opens a section of its own on both pages, so it wears a section heading's size */
+.p2-h3 { font-size: clamp(1.55rem, 6.8vw, 2.1rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.12; margin: 0 0 1.5rem; color: var(--ink); text-wrap: balance; }
+/* from a tablet up the proof stands on one centre line: the heading, the line under it, the phone
+   and the button, so the phone no longer reads as pushed to one side */
+@media (min-width: 768px) {
+  .p2 .wrap > h2, .p2 .wrap > .lede, .p2 .wrap > .p2-h3, .p2 .wrap > .p2-note { text-align: center; }
+  .p2 .proof-cta { display: flex; justify-content: center; }
+}
 .p2 .honest { font-size: 13.5px; color: var(--muted); text-align: center; margin: 12px 0 0; }
 .p2 .p2-note { font-size: 0.95rem; color: var(--muted); margin-top: 14px; }
 .p2 svg { display: block; }

@@ -3,6 +3,9 @@ Every public page of the business, served by GitHub Pages at guymalul.co.il.
 - `/` the workshop landing page
 - `/dates.html` the schedule
 - `/accessibility.html` the accessibility statement
+- `/privacy/` the privacy policy
+- `/terms/` the terms and cancellation policy
+- `/recorded/` the recorded workshop's sales page: noindex, out of the sitemap, linked from no page
 - `/prework/` the preparation guide
 - `/prework/questionnaire/` the setup questionnaire
 
