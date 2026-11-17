@@ -1,0 +1,202 @@
+---
+import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+---
+
+{/* The site's terms and cancellation policy, for both workshops. Every line traces to guy-hq
+    core/business-profile.md and the owner's rulings; the words are the text of
+    desk/2026-11-17-terms-page/ - change them there first. */}
+<Base
+  title={"תקנון ומדיניות ביטולים | העובד הראשון שלך | גיא מלול"}
+  description={"מה קונים בסדנה בזום ובסדנה המוקלטת, איך מבטלים, איך מקבלים את הכסף בחזרה, ומה הסדנה ומה היא לא."}
+  favicon={"/favicon.svg"}
+  appleTouchIcon={"/apple-touch-icon.png"}
+>
+  <style is:global>
+  /* The privacy page's layout: the site's legal pages share one reading column, no colour block,
+     no animation. The colours come from tokens.css through Base. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  body {
+    font-family: var(--font);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.7;
+    background: var(--ground);
+    color: var(--body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+  }
+
+  ::selection { background: var(--acc-tint); }
+
+  a { color: var(--acc-d); font-weight: 500; }
+
+  .skip {
+    position: fixed;
+    inset-inline-start: var(--pad-x);
+    top: -120px;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.55rem 1.15rem;
+    border-radius: 12px;
+    background: var(--acc);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .skip:focus { top: 0.4rem; }
+  #main:focus { outline: 2px solid var(--acc); outline-offset: -4px; }
+
+  main { flex: 1 0 auto; padding: calc(var(--bar) + 2.6rem) var(--pad-x) 3.5rem; }
+  .wrap { max-width: 620px; margin: 0 auto; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    color: var(--acc-d);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+    margin-bottom: 1.8rem;
+  }
+  .back-link:hover, .back-link:focus-visible { text-decoration-thickness: 2px; }
+  .back-link svg { width: 14px; height: 14px; fill: currentColor; flex: none; }
+
+  h1 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .stamp { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.6rem; }
+  .opening { color: var(--ink); font-weight: 500; font-size: 1.18rem; line-height: 1.5; margin-bottom: 3rem; }
+
+  h2 {
+    font-size: clamp(1.35rem, 5.6vw, 1.65rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+
+  .block { padding-top: 2.4rem; border-top: 1px solid var(--line); }
+  .block + .block { margin-top: 2.8rem; }
+
+  p { margin-bottom: 1.15rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 700; }
+
+  /* the cancellation cases: a word in ink that names the case, then what happens - the case is
+     carried by the word, never by colour */
+  .cases { list-style: none; display: grid; gap: 0.9rem; }
+  .cases li { padding-inline-start: 0.9rem; border-inline-start: 2px solid var(--line); }
+
+  .wrap p a, .wrap li a {
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+  .wrap p a:hover, .wrap p a:focus-visible { text-decoration-thickness: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+<a class="skip" href="#main">דלג לתוכן</a>
+
+  <SiteHeader />
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="ic-back" viewBox="0 0 24 24">
+        <path d="M9.7 6.3 8.3 4.9 1.2 12l7.1 7.1 1.4-1.4L5 13h17.8v-2H5l4.7-4.7z" transform="scale(-1,1) translate(-24,0)"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <a class="back-link" href="/"><svg aria-hidden="true"><use href="#ic-back"/></svg><span>חזרה לעמוד הסדנה</span></a>
+
+      <h1>תקנון ומדיניות ביטולים</h1>
+      <p class="stamp">עודכן: 17.11.2026</p>
+      <p class="opening">האתר הזה הוא של גיא מלול, ובו נמכרות שתי סדנאות: "העובד הראשון שלך" בזום, והסדנה המוקלטת.</p>
+
+      <section class="block" aria-labelledby="buy-h">
+        <h2 id="buy-h">מה קונים</h2>
+        <p><strong>הסדנה בזום.</strong> סדנה חיה בזום, במועד שבחרתם. לפני הסדנה יש הכנה לפי מדריך, והיא חובה.</p>
+        <p><strong>הסדנה המוקלטת.</strong> הסדנה מוקלטת ומחולקת לשיעורים. הגישה נשלחת במייל תוך כמה דקות מהתשלום, ואפשר לצפות בה 60 יום מיום הרכישה.</p>
+        <p>כדי לעבוד צריך מנוי <bdi>Claude</bdi> בתשלום, שמשלמים עליו בנפרד.</p>
+      </section>
+
+      <section class="block" aria-labelledby="pay-h">
+        <h2 id="pay-h">התשלום</h2>
+        <p>משלמים בכרטיס אשראי בדף התשלום, וקבלה נשלחת במייל.</p>
+      </section>
+
+      <section class="block" aria-labelledby="zoom-h">
+        <h2 id="zoom-h">ביטול הסדנה בזום</h2>
+        <ul class="cases">
+          <li><strong>עד יומיים לפני הסדנה:</strong> אני מחזיר הכול חוץ מ-5% מהמחיר או 100 ש"ח, הנמוך מביניהם. שישי ושבת לא נספרים ביומיים. מעבר למועד אחר עד אז הוא בחינם, כל עוד יש מקום.</li>
+          <li><strong>פחות מיומיים לפני, או שלא הגעתם:</strong> אין החזר ואין מעבר מועד.</li>
+          <li><strong>הגעתם בלי ההכנה:</strong> אפשר להישאר ולהקשיב, ואין החזר או מעבר מועד.</li>
+          <li><strong>אני מבטל:</strong> הבחירה שלכם, כל הכסף חזרה או מעבר למועד הבא.</li>
+        </ul>
+      </section>
+
+      <section class="block" aria-labelledby="rec-h">
+        <h2 id="rec-h">ביטול הסדנה המוקלטת</h2>
+        <p>אפשר לבטל ולקבל את כל הכסף בחזרה תוך 14 יום מהרכישה, כל עוד לא נכנסתם לאתר הצפייה. מרגע שנכנסתם, אין החזר. כל כניסה נרשמת במערכת.</p>
+      </section>
+
+      <section class="block" aria-labelledby="how-h">
+        <h2 id="how-h">איך מבטלים</h2>
+        <p>כותבים לי ל-<a href="mailto:guy@guymalul.co.il">guy@guymalul.co.il</a>, או עונים למייל שקיבלתם אחרי התשלום. כסף שחוזר מגיע תוך 7 ימי עבודה, לכרטיס שממנו שילמתם.</p>
+      </section>
+
+      <section class="block" aria-labelledby="access-h">
+        <h2 id="access-h">הגישה לסדנה המוקלטת</h2>
+        <p>הגישה אישית, ואי אפשר להעביר אותה למישהו אחר. אפשר לצפות משלושה מכשירים במקביל.</p>
+      </section>
+
+      <section class="block" aria-labelledby="resp-h">
+        <h2 id="resp-h">אחריות</h2>
+        <p>הסדנה מלמדת שיטה ומידע. אני לא אחראי ליישום שלהם אצלכם, לתוצאות שלהם או לנזק שייגרם מהשימוש בהם. התוכן יכול להשתנות מסדנה לסדנה.</p>
+      </section>
+
+      <section class="block" aria-labelledby="data-h">
+        <h2 id="data-h">פרטיות</h2>
+        <p>מה נאסף ואיך הוא נשמר: <a href="/privacy/">מדיניות פרטיות</a>.</p>
+      </section>
+
+      <section class="block" aria-labelledby="contact-h">
+        <h2 id="contact-h">פרטי העסק ויצירת קשר</h2>
+        <p>גיא מלול, עוסק פטור</p>
+        <p>מושב נאות הכיכר, ד.נ. ים המלח</p>
+        <p>מייל: <a href="mailto:guy@guymalul.co.il">guy@guymalul.co.il</a></p>
+        <p>וואטסאפ: <a href="https://wa.me/972559526627"><bdi>055-952-6627</bdi></a></p>
+      </section>
+    </div>
+  </main>
+
+  <SiteFooter />
+
+</Base>

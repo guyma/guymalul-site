@@ -3,26 +3,47 @@
  * Proof.astro - the home page's proof: the alumni's real WhatsApp messages, what they built, and
  * the numbers. The content lives in src/data/proof.json; each piece was ruled by Guy one by one.
  * A face shows only once its owner consents (a `photo` field in the data).
+ *
+ * `part` splits it in two for /recorded/, where what they built stands before the questions:
+ * "chat" is the heading and the messages, "built" is the cards and the numbers. The home page
+ * renders it whole.
  */
 import data from '../data/proof.json';
 import { renderProof } from '../lib/proof.mjs';
 import '../styles/proof.css';
 
+interface Props {
+  /** the heading's two lines; /recorded/ says whose messages these are */
+  heading?: [string, string];
+  /** the line under what they built */
+  note?: string;
+  ctaLabel?: string;
+  part?: 'all' | 'chat' | 'built';
+}
+const {
+  heading = ['שמעת מספיק הבטחות.', 'הנה מה שהם כתבו לי.'],
+  note = 'כל אלה נבנו אחרי הסדנה.',
+  ctaLabel = 'להצטרף לסדנה',
+  part = 'all',
+} = Astro.props;
+
 const { inbox, strip, nums, sheet } = renderProof(data);
+const chat = part !== 'built';
+const built = part !== 'chat';
 ---
-<section class="p2" id="proof">
+<section class="p2" id={chat ? 'proof' : 'built'}>
   <div class="wrap">
-    <h2 class="rev-h">שמעת מספיק הבטחות.<br>הנה מה שהם כתבו לי.</h2>
-    <p class="lede">👇 אפשר ללחוץ על שיחה, היא באמת&nbsp;נפתחת.</p>
-    <Fragment set:html={inbox} />
-    <h3 class="p2-h3">את זה הם בנו, לא אני.</h3>
-    <Fragment set:html={strip} />
-    <p class="p2-note">כל אלה נבנו אחרי הסדנה.</p>
-    <Fragment set:html={nums} />
-    <div class="cta-row proof-cta"><a class="btn" href="#price">להצטרף לסדנה</a></div>
+    {chat && <h2 class="rev-h">{heading[0]}<br>{heading[1]}</h2>}
+    {chat && <p class="lede">👇 אפשר ללחוץ על שיחה, היא באמת&nbsp;נפתחת.</p>}
+    {chat && <Fragment set:html={inbox} />}
+    {built && <h3 class="p2-h3">את זה הם בנו, לא אני.</h3>}
+    {built && <Fragment set:html={strip} />}
+    {built && <p class="p2-note">{note}</p>}
+    {built && <Fragment set:html={nums} />}
+    <div class="cta-row proof-cta"><a class="btn" href="#price">{ctaLabel}</a></div>
   </div>
 </section>
-<dialog class="wa-sheet" id="wa-sheet" aria-label="השיחה"><Fragment set:html={sheet} /></dialog>
+{chat && <dialog class="wa-sheet" id="wa-sheet" aria-label="השיחה"><Fragment set:html={sheet} /></dialog>}
 
 <script>
   import '../scripts/proof.js';

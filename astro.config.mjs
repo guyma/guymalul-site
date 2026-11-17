@@ -39,7 +39,8 @@ export default defineConfig({
       // that are deliberately out of search. /thanks/ was simultaneously
       // submitted AND marked noindex, which is a contradiction a crawler reads.
       filter: (page) =>
-        !page.includes('/thanks/') && !page.includes('/prework/questionnaire/'),
+        !page.includes('/thanks/') && !page.includes('/prework/questionnaire/') &&
+        !page.includes('/recorded/'),
     }),
   ],
 

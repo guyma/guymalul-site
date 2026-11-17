@@ -1,0 +1,363 @@
+---
+/**
+ * /recorded/ - the recorded workshop's sales page. Guy sends this address himself to people
+ * who want the workshop at their own pace; no page on the site links here, it is out of the
+ * sitemap and noindex. The copy's source of truth is guy-hq
+ * desk/2026-11-16-recorded-workshop-sales-page/ (the approved draft); change it there first.
+ * One action: the course's SUMIT payment page.
+ * The home page (index.astro) carries the same sections in the same order: a change to a shared
+ * one is made there too.
+ */
+import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import Proof from '../../components/Proof.astro';
+import { Image } from 'astro:assets';
+import avatar from '../../assets/guy.png';
+import '../../styles/sales-page.css';
+import '../../styles/recorded.css';
+
+// His seven, picked 17.11 from the ten options. The same list as /recorded-short/.
+const REASONS = [
+  'אין לי שלוש שעות ברצף.',
+  'התאריכים לא מסתדרים לי.',
+  'אני רוצה להתחיל עכשיו, לא לחכות למועד.',
+  'אני רוצה לעצור, לחזור ולראות שוב.',
+  'בלייב זה איטי לי מדי.',
+  'יש לי זמן רק בלילה, אחרי שכולם ישנים.',
+  'חצי שעה פה, חצי שעה שם. ככה זה מסתדר לי.',
+];
+
+const PAY = 'https://pay.sumit.co.il/116dead/176qkez/176nu9g/payment';
+const WA = 'https://wa.me/972559526627?text=' + encodeURIComponent('היי גיא, יש לי שאלה על הסדנה המוקלטת.');
+const description = 'כל הסדנה כבר מוקלטת, ובה אני מלמד אותך לגייס עובד AI שמכיר את העסק שלך. 497 ש"ח, וגישה ל-60 יום.';
+---
+
+<Base
+  title={"הסדנה המוקלטת | גיא מלול"}
+  description={description}
+  ogImage={"https://guymalul.co.il/og-card-v4.png"}
+  ogImageAlt={"מספיק להאכיל את הצ'אט בכפית. בסדנה אחת אתה לומד לגייס עובד AI שמכיר את העסק שלך."}
+  ogTitle={"הסדנה המוקלטת | גיא מלול"}
+  ogDescription={description}
+  twitterTitle={"הסדנה המוקלטת | גיא מלול"}
+  twitterDescription={description}
+  favicon={"/favicon.svg"}
+  appleTouchIcon={"/apple-touch-icon.png"}
+  share
+  noindex
+>
+<a class="skip" href="#main">דלג לתוכן</a>
+
+  <SiteHeader brandHref="#top" ctaLabel="לקנות את הסדנה" ctaHref="#price" />
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="ic-info" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M12 1.9a10.1 10.1 0 1 0 0 20.2 10.1 10.1 0 0 0 0-20.2Zm0 3.6a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Zm0 4a1.1 1.1 0 0 1 1.1 1.1v5.9a1.1 1.1 0 0 1-2.2 0v-5.9A1.1 1.1 0 0 1 12 9.5Z"/>
+      </symbol>
+      <symbol id="ic-warn" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M12 2.4 23 21.4H1L12 2.4Zm0 4.6a1.1 1.1 0 0 0-1.1 1.1v5.3a1.1 1.1 0 0 0 2.2 0V8.1A1.1 1.1 0 0 0 12 7Zm0 8.7a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main id="main" class="rec" tabindex="-1">
+
+    <!-- ===== הפתיחה (the fold) ===== -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="main">
+          <p class="eyebrow rev">בלי לכתוב שורת קוד, ובלי להיות איש מחשבים</p>
+          <div class="why" aria-label="למה בוחרים בהקלטה">
+            <ul class="why-list" data-reasons={JSON.stringify(REASONS)}>
+              {REASONS.slice(0, 3).reverse().map((r) => <li>{r}</li>)}
+            </ul>
+          </div>
+          <h1>
+            <span class="h1-say"><span class="h1-line">כל הסדנה, מוקלטת.</span> <span class="h1-line">מתי שנוח לך, בקצב <span class="nb">שלך.</span></span></span>
+            <span class="h1-ask">אני מלמד אותך לגייס עובד AI שמכיר את <span class="nb">העסק שלך.</span></span>
+          </h1>
+          <p class="said rev">
+            <span class="b-frag">פתחת צ'אט, הסברת, העתקת, הדבקת.</span>
+            <span class="b-pain">ובכל משימה, שוב אמרת לו מה לעשות.</span>
+            <span class="b-punch">הלו. זה בדיוק הפער.</span>
+          </p>
+        </div>
+        <div class="buy">
+          <p class="buy-name rev"><b>העובד הראשון שלך.</b> הסדנה המוקלטת.</p>
+          <p class="fold-who rev">
+            <span class="was"><span class="was-label">בזום</span> <s>1,000 ש"ח</s></span>
+            <b>497 ש"ח</b><span class="sep">,</span> ויש לך גישה <span class="nb">ל-60 יום</span>&nbsp;מהקנייה.
+          </p>
+          <div class="cta-row">
+            <a class="btn" href="#price">לקנות את הסדנה המוקלטת</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== מה יש בפנים ===== -->
+    <section id="inside">
+      <div class="wrap">
+        <h2 class="rev-h">בסוף הסדנה כבר עובד אצלך צוות שלם, ולמדת איך מגייסים עוד עובדים לעסק שלך.</h2>
+        <ul class="facts rev" aria-label="הסדנה המוקלטת בקצרה">
+          <li>13 שיעורים</li><li>תשובות לשאלות של משתתפים</li><li>60 יום</li>
+        </ul>
+
+        <!-- the three stages and what each leaves you with, one card each, one under the other -->
+        <ol class="cards3 stages" aria-label="מה קורה מתי">
+          <li class="card3 rev">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></span>
+            <p class="stage-tag">לפני · בערך שעתיים</p>
+            <h3>מכינים את המחשב ואת החומר</h3>
+            <p>מדריך צעד אחרי צעד: מתקינים את <bdi>Claude</bdi> ועוד שני כלים, ממלאים שאלון על העסק ואוספים כמה דוגמאות של דברים שכתבת.</p>
+          </li>
+          <li class="card3 rev">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg></span>
+            <p class="stage-tag">בהקלטה · 13 שיעורים</p>
+            <h3>לא רק צופים. עושים את זה אצלך.</h3>
+            <p class="card-q">"הראית לי שזה עובד, לא לימדת אותי לבנות."</p>
+            <p>אם יצאת ככה מוובינר AI, פה זה הפוך. אחרי כל צעד עוצרים את הסרטון ועושים אותו על העסק שלך. בסוף יש במחשב שלך תיקייה, ובה כל מה שהצוות צריך לדעת עליך, ומאותו רגע אף שיחה לא מתחילה מאפס.</p>
+          </li>
+          <li class="card3 rev">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg></span>
+            <p class="stage-tag">אחרי · שבעה ימים</p>
+            <h3>"המשרד", בונוס שנשאר&nbsp;אצלך</h3>
+            <p>משימה אחת ביום. ביום השביעי הצוות כבר מכיר את העסק, ועובד בלי שצריך להאכיל אותו בכפית. זו גרסה ראשונה של המשרד שאני עובד ממנו, עם צוות שלם שכבר יודע את&nbsp;העבודה.</p>
+          </li>
+        </ol>
+
+        <div class="me-line rev">
+          <Image class="me-ava" src={avatar} alt="גיא מלול" width={128} height={128} />
+          <p><strong>אני מלמד בדיוק את מה שאני עושה בעסק שלי כל יום.</strong>
+          מהנדס תוכנה במיקרוסופט, לפני זה אלביט וצ'ק פוינט, ולפני כל זה כמעט שבע שנים ניהלתי אתר תיירות במדבר
+          (<a class="body-link" href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener">LinkedIn</a>).</p>
+        </div>
+      </div>
+    </section>
+
+    <Proof
+      part="chat"
+      heading={['שמעת מספיק הבטחות.', 'הנה מה שכתבו לי מי שהיו בסדנה.']}
+      ctaLabel="לקנות את הסדנה המוקלטת"
+    />
+
+    <!-- ===== ההקלטה או הזום ===== -->
+    <section class="tone" id="compare">
+      <div class="wrap">
+        <h2 class="rev-h">מה יש רק בזום, ומה יש רק בהקלטה.</h2>
+
+        <div class="duo2">
+          <div class="duo-col rev">
+            <p class="duo-title">רק&nbsp;בזום</p>
+            <ul>
+              <li>אני שם לכל שאלה, בזמן אמת</li>
+              <li>עד חמישה בחדר, ועובדים יחד</li>
+              <li>1,000 ש"ח</li>
+            </ul>
+          </div>
+          <div class="duo-col rev">
+            <p class="duo-title">רק&nbsp;בהקלטה</p>
+            <ul>
+              <li>עוצרים, חוזרים ורואים שוב</li>
+              <li>מתחילים מתי שנוח לך, בלי לחכות למועד</li>
+              <li>גישה ל-60 יום</li>
+              <li>497 ש"ח</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== למי זה, ומה בונים ===== -->
+    <section class="tone" id="fit">
+      <div class="wrap">
+        <h2 class="rev-h">זה בשבילך אם AI כבר חלק מהיום שלך, ובא לך ללמוד לבנות בעצמך.</h2>
+
+        <div class="duo2">
+          <div class="duo-col rev">
+            <p class="duo-title"><span class="yes" aria-hidden="true">✓</span>מה עושים&nbsp;בסדנה</p>
+            <ul>
+              <li>תיקייה קבועה לעסק שלך</li>
+              <li>לומדים לגייס עובד: חפיפה ותפקיד</li>
+              <li>שיטה להוסיף לו ידע ותפקידים</li>
+            </ul>
+          </div>
+          <div class="duo-col rev">
+            <p class="duo-title"><span class="no" aria-hidden="true">✕</span>מה לא&nbsp;בונים</p>
+            <ul>
+              <li>חיבור לוואטסאפ ולמערכות חיצוניות</li>
+              <li>אוטומציות שפועלות לבד בשעות קבועות</li>
+              <li>מערכת שמישהו אחר בונה בשבילך</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="honest-line rev">הלוואי שיכולתי להגיד לך שאחרי הסדנה אפשר לטוס לתאילנד והעסק עובד לבד. אבל זה לא קורה. הבנייה שלך, והיא לוקחת שבועות, ממש כמו לגייס עובד אמיתי.</p>
+
+        <div class="callout callout--warn rev">
+          <svg class="co-ic" aria-hidden="true"><use href="#ic-warn"/></svg>
+          <div class="co-body">
+            <span class="co-label">למי זה פחות מתאים</span>
+            <p><strong>עוד לא עבדת עם AI?</strong> הסדנה בנויה למי שכבר עובד עם צ'אט.<br>
+            <strong>כבר בונה סוכנים בעצמך?</strong> היא כנראה תהיה בסיסית מדי בשבילך.</p>
+          </div>
+        </div>
+
+        <div class="needs rev">
+          <p class="needs-title">מה צריך</p>
+          <ul>
+            <li>מחשב Windows או Mac</li>
+            <li>מנוי Claude בתשלום</li>
+            <li>אנגלית בסיסית</li>
+          </ul>
+          <p class="btn-row rev"><a class="btn-ghost" href="/prework/" target="_blank" rel="noopener"><span>מה מתקינים לפני: מדריך ההכנה</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3h6v2H5.99L6 18h12v-5h2v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3h7v7h-2V6.42l-7.3 7.29-1.41-1.42L17.58 5H14V3Z"/></svg></a></p>
+        </div>
+
+        <p class="soft-line rev">עוד לא ברור לך אם זה בשבילך? <a class="body-link" href={WA}>אפשר לכתוב לי</a></p>
+      </div>
+    </section>
+
+    <!-- ===== מחיר ===== -->
+    <section class="tone" id="price">
+      <div class="wrap">
+        <h2 class="rev-h">מה מקבלים.</h2>
+
+        <div class="offer rev">
+          <p class="offer-price">
+            <span class="was"><span class="was-label">בזום</span> <s>1,000 ש"ח</s></span>
+            <b>497 ש"ח</b>
+          </p>
+          <ul class="gets">
+            <li><span class="yes" aria-hidden="true">✓</span><span>הסדנה המוקלטת: 13 שיעורים.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>תשובות שלי לשאלות של משתתפים אחרים.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>מדריך ההכנה וההתקנה, צעד אחרי&nbsp;צעד.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>שבעה ימי תרגול אחרי הסדנה, משימה אחת&nbsp;ביום.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span><span class="pencil">"המשרד"</span>: צוות עובדים שנשאר אצלך גם אחרי 60&nbsp;הימים.</span></li>
+            <li><span class="yes" aria-hidden="true">✓</span><span>קבוצת הבוגרים בוואטסאפ.</span></li>
+          </ul>
+          <p class="rev">ומה שאין: ליווי אישי לאורך הדרך.</p>
+        </div>
+
+        <p class="rev">משלמים, ותוך כמה דקות מגיע אליך מייל עם לינק אישי. אפשר לצפות משלושה מכשירים במקביל.</p>
+
+        <div class="cta-row rev">
+          <a class="btn" href={PAY}>לקנות את הסדנה המוקלטת</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== מה הם בנו: just before the questions, his call 17.11 ===== -->
+    <Proof
+      part="built"
+      note="כל אלה נבנו אחרי הסדנה בזום."
+      ctaLabel="לקנות את הסדנה המוקלטת"
+    />
+
+    <!-- ===== שאלות ===== -->
+    <section>
+      <div class="wrap">
+        <h2 class="rev-h" id="faq">בטח נשארו לך שאלות.</h2>
+        <div class="faq-list">
+          <details class="rev">
+            <summary><span>כמה זמן זה לוקח?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">ההכנה בערך שעתיים. השיעורים, כולל ההתקנה, בערך שעה וחצי, ועוד קצת פחות מחצי שעה של תשובות לשאלות של משתתפים.<br>
+            ואחרי זה שבעה ימים, משימה אחת ביום.</div>
+          </details>
+          <details class="rev">
+            <summary><span>למה דווקא Claude Code, ולא הכלי שכבר יש לי?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">כי הוא עובד עם הקבצים שבמחשב שלך: סביבת עבודה קבועה שנשארת, ולא שיחה שמתאדה.<br>
+            בלי זה אין עובד, יש צ'אט שעונה לך.<br>
+            השיטה עצמה עוברת לכל כלי. הכלים מתחלפים, המבנה נשאר.<br>
+            אבל הסדנה עצמה בנויה על Claude Code, וכל ההכנה שלה היא בשבילו.</div>
+          </details>
+          <details class="rev">
+            <summary><span>אין לי רקע טכני. זה בשבילי?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">נדייק רגע. לא צריך לדעת לתכנת, לא צריך להיות איש מחשבים, ולא כותבים שורת קוד.<br>
+            כן צריך: להרגיש בנוח מול מחשב, להתקין תוכנה לפי הוראות, ולאהוב ללמוד דברים חדשים.<br>
+            אם זה נשמע כמוך, זה בשבילך.</div>
+          </details>
+          <details class="rev">
+            <summary><span>כמה זה עולה לי מעבר למחיר הסדנה?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">מנוי Claude בתשלום. Pro זה 20 דולר לחודש, ומספיק להתחיל.<br>
+            Max בסביבות 100 דולר בחודש, ואיתו עובדים בלי לחשוב על מכסות. עדיין יותר זול מבנאדם.<br>
+            עם החינמי אי אפשר לעבוד, וזה לא הערה קטנה, זה תנאי סף.<br>
+            שאר ההתקנות לא עולות כלום.</div>
+          </details>
+          <details class="rev">
+            <summary><span>אפשר לראות מהטלפון?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">את השיעורים אפשר לראות מכל מכשיר. את ההכנה ואת ההתקנה עושים מהמחשב.</div>
+          </details>
+          <details class="rev">
+            <summary><span>ומה אם אתקע לבד?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">מתחת לכל צעד בהתקנה כתוב מה עושים. משהו לא עובד? מדביקים ל-<bdi>Claude</bdi> את השגיאה, והוא מסביר בעברית ומתקן איתך.<br>
+            ואם נתקעת באמת, אפשר לענות למייל שמגיע אחרי התשלום, והתשובה שלך מגיעה ישר אליי.</div>
+          </details>
+          <details class="rev">
+            <summary><span>ומה קורה אחרי 60 יום?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">הצפייה בשיעורים נסגרת. "המשרד" שהתקנת נשאר אצלך במחשב, וקבוצת הבוגרים נשארת פתוחה.</div>
+          </details>
+          <details class="rev">
+            <summary><span>איפה המידע שלי יושב?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">הקבצים יושבים במחשב שלך, בתיקייה שלך. לא אצלי ולא בשרת שלי.<br>
+            מה ששולחים ל-<bdi>Claude</bdi> עובר לשרתים שלו, בדיוק כמו בצ'אט שלך היום.<br>
+            לי אין גישה לקבצים שלך, לא בסדנה ולא אחריה.</div>
+          </details>
+          <details class="rev">
+            <summary><span>מי מחליט מה העובד עושה?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">ההחלטה שלך. ככה מגדירים את זה בסדנה: הוא קורא וממליץ.<br>
+            ופעולות רגישות, כמו מייל שיוצא, פרסום או מחיקה, מחכות לאישור שלך.<br>
+            הוא העובד, והמילה האחרונה שלך.</div>
+          </details>
+          <details class="rev">
+            <summary><span>הכלים משתנים כל חודש. מה יישאר לי בעוד&nbsp;שנה?</span><span class="tog" aria-hidden="true">+</span></summary>
+            <div class="faq-body">גם עם טכנולוגיה מלפני שנה, עם השיטה שאני מלמד יהיו לך תוצאות טובות יותר מאשר למי שעובד עם הטכנולוגיה שיצאה היום.<br>
+            כשהכלי מתקדם, לא צריך לרדוף אחריו. העובד שלך פשוט נעשה חכם יותר, במתנה.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== הכפתור ===== -->
+    <section class="final">
+      <div class="wrap">
+        <div class="say">
+          <h2 class="rev-h">ואם זה מדבר אליך, אפשר להתחיל כבר&nbsp;היום.</h2>
+        </div>
+        <div class="act">
+          <div class="cta-row">
+            <a class="btn" href={PAY}>לקנות את הסדנה המוקלטת</a>
+          </div>
+          <p class="after rev">497 ש"ח, גישה ל-60 יום, ו"המשרד" נשאר אצלך.</p>
+          <p class="soft-line">רוצה לשאול משהו לפני? <a class="body-link" href={WA}>אפשר לכתוב לי</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <SiteFooter />
+</Base>
+
+<script>
+  // The same chat feed as /recorded-short/: the next reason drops in on top every 2.6 seconds.
+  const list = document.querySelector('.why-list');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (list && !still) {
+    const reasons = JSON.parse(list.dataset.reasons);
+    let next = 3;
+    let held = false;
+    list.closest('.why').addEventListener('pointerenter', () => { held = true; });
+    list.closest('.why').addEventListener('pointerleave', () => { held = false; });
+    list.classList.add('turning');
+    const drop = () => {
+      if (held || document.hidden) return;
+      const li = Object.assign(document.createElement('li'), { textContent: reasons[next], className: 'drop' });
+      list.prepend(li);
+      next = (next + 1) % reasons.length;
+      while (list.children.length > 4) list.lastElementChild.remove();
+    };
+    setTimeout(() => { drop(); setInterval(drop, 2600); }, 900);
+  }
+</script>
