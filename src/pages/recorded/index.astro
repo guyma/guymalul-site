@@ -1,8 +1,9 @@
 ---
 /**
  * /recorded/ - the recorded workshop's sales page. Guy sends this address himself to people
- * who want the workshop at their own pace; no page on the site links here, it is out of the
- * sitemap and noindex. The copy's source of truth is guy-hq
+ * who want the workshop at their own pace. No page on the site links here, so a visitor to the
+ * site never meets it, while search may index it: a buyer who finds it there is welcome. The
+ * copy's source of truth is guy-hq
  * desk/2026-11-16-recorded-workshop-sales-page/ (the approved draft); change it there first.
  * One action: the course's SUMIT payment page.
  * The home page (index.astro) carries the same sections in the same order: a change to a shared
@@ -17,7 +18,7 @@ import avatar from '../../assets/guy.png';
 import '../../styles/sales-page.css';
 import '../../styles/recorded.css';
 
-// His seven, picked 17.11 from the ten options. The same list as /recorded-short/.
+// His seven reasons, the fold's chat bubbles.
 const REASONS = [
   'אין לי שלוש שעות ברצף.',
   'התאריכים לא מסתדרים לי.',
@@ -45,7 +46,6 @@ const description = 'כל הסדנה כבר מוקלטת, ובה אני מלמד
   favicon={"/favicon.svg"}
   appleTouchIcon={"/apple-touch-icon.png"}
   share
-  noindex
 >
 <a class="skip" href="#main">דלג לתוכן</a>
 
