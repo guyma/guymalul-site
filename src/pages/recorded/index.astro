@@ -341,22 +341,23 @@ const description = 'כל הסדנה כבר מוקלטת, ובה אני מלמד
 </Base>
 
 <script>
-  // The same chat feed as /recorded-short/: the next reason drops in on top every 2.6 seconds.
-  const list = document.querySelector('.why-list');
+  // The chat feed in the fold: the next reason drops in on top every 2.6 seconds.
+  const list = document.querySelector<HTMLElement>('.why-list');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (list && !still) {
-    const reasons = JSON.parse(list.dataset.reasons);
+    const reasons: string[] = JSON.parse(list.dataset.reasons ?? '[]');
     let next = 3;
     let held = false;
-    list.closest('.why').addEventListener('pointerenter', () => { held = true; });
-    list.closest('.why').addEventListener('pointerleave', () => { held = false; });
+    const why = list.closest('.why');
+    why?.addEventListener('pointerenter', () => { held = true; });
+    why?.addEventListener('pointerleave', () => { held = false; });
     list.classList.add('turning');
     const drop = () => {
-      if (held || document.hidden) return;
-      const li = Object.assign(document.createElement('li'), { textContent: reasons[next], className: 'drop' });
+      if (held || document.hidden || !reasons.length) return;
+      const li = Object.assign(document.createElement('li'), { textContent: reasons[next % reasons.length], className: 'drop' });
       list.prepend(li);
       next = (next + 1) % reasons.length;
-      while (list.children.length > 4) list.lastElementChild.remove();
+      while (list.children.length > 4) list.lastElementChild?.remove();
     };
     setTimeout(() => { drop(); setInterval(drop, 2600); }, 900);
   }
