@@ -73,7 +73,9 @@ import SiteFooter from '../../../components/SiteFooter.astro';
   h1 { color: var(--ink); font-size: clamp(1.8rem, 6vw, 2.5rem); font-weight: 700; line-height: 1.25; margin-bottom: 6px; letter-spacing: -0.01em; }
   /* the brand mark: a solid rule, never a gradient bar */
   .h1-underline { width: 22px; height: 4px; background: var(--acc); margin-bottom: 16px; }
-  .hero-sub { font-size: 1.06rem; color: var(--body); margin-bottom: 14px; }
+  /* the one constraint on the page: a tint frame with the accent spine; the sign and the bold words carry it */
+  .warn { margin: 0 0 16px; padding: 13px 16px; border: 1px solid var(--acc-line); border-inline-start: 4px solid var(--acc); background: var(--acc-tint); border-radius: 16px; color: var(--ink); font-size: 0.98rem; }
+  .warn p + p { margin-top: 6px; }
   .hero-notes { list-style: none; display: grid; gap: 8px; margin-top: 6px; }
   .hero-notes li { padding-inline-start: 24px; position: relative; color: var(--body); font-size: 0.95rem; }
   .hero-notes li::before { content: "✦"; position: absolute; inset-inline-start: 0; color: var(--acc-d); font-weight: 700; }
@@ -136,21 +138,13 @@ import SiteFooter from '../../../components/SiteFooter.astro';
   code { direction: ltr; unicode-bidi: embed; background: var(--acc-tint); color: var(--ink); border-radius: 6px; padding: 1px 7px; font-size: 0.9em; }
 
   .fineprint { font-size: 0.92rem; color: var(--body); }
-  .samples-check {
-    display: flex; align-items: center; gap: 10px;
-    margin-top: 16px; padding: 13px 14px; cursor: pointer;
-    background: var(--ground); border: 1px solid var(--acc-line); border-radius: 12px;
-    font-weight: 500; color: var(--ink); font-size: 1rem;
-  }
-  .samples-check:has(input:checked) { border-color: var(--acc); background: var(--acc-tint); }
-  .samples-check input { width: 20px; height: 20px; accent-color: var(--acc); flex-shrink: 0; }
   .fineprint strong { color: var(--ink); }
 
 </style>
 <div class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="#top">העובד הראשון שלך</a>
-    <span class="progress-pill" id="progress-pill" role="status" aria-live="polite">0/13 הושלמו</span>
+    <span class="progress-pill" id="progress-pill" role="status" aria-live="polite">0/12 הושלמו</span>
   </div>
   <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
 </div>
@@ -159,13 +153,12 @@ import SiteFooter from '../../../components/SiteFooter.astro';
   <section class="card">
     <h1>שאלון ההקמה של המשרד</h1>
     <div class="h1-underline"></div>
-    <p class="hero-sub">
-      זו עבודת ההכנה שהופכת עובד AI גנרי לעובד שמכיר את העסק שלכם.
-      בסוף מורידים קובץ אחד מוכן.
-    </p>
+    <div class="warn">
+      <p>⚠️ <strong>שימו לב: זה אחד הדברים הכי חשובים בהכנה.</strong> בלי השאלון העובד לא באמת מכיר אתכם, וכל מה שהוא כותב נשאר "בערך". אז ממלאים בתשומת לב, ולוקחים את הזמן.</p>
+    </div>
     <ul class="hero-notes">
-      <li>ממלאים פעם אחת לעסק.</li>
-      <li><strong>עונים במילים שלכם, לא עם AI.</strong> מהתשובות האלה העובד לומד איך אתם נשמעים, ואם AI כתב אותן, הוא ילמד להישמע כמו AI, לא כמוכם.</li>
+      <li><strong>עונים במילים שלכם, לא עם AI.</strong> מהתשובות האלה העובד לומד איך אתם נשמעים. אם AI כתב אותן, הוא ילמד להישמע כמו AI.</li>
+      <li>אפשר לעצור באמצע ולחזור להמשיך, באותו מחשב ובאותו דפדפן.</li>
       <li>שום תשובה לא נשלחת לשום מקום. הקובץ נוצר אצלכם ויורד ישירות למחשב שלכם.</li>
     </ul>
   </section>
@@ -173,30 +166,8 @@ import SiteFooter from '../../../components/SiteFooter.astro';
   <div id="form-root"></div>
 
   <section class="card fineprint">
-    <p><strong>ועוד הכנה אחת, חשובה באמת: אספו דוגמאות כתיבה שלכם.</strong></p>
-    <p style="margin-top:8px;">
-      מהדוגמאות האלה העובד לומד את הקול שלכם, איך אתם באמת נשמעים. בתוך <bdi>my-office</bdi>,
-      התיקייה מהבדיקה במשימה 4 בדף ההכנה, פותחים תיקייה בשם <strong><bdi>my-samples</bdi></strong>
-      ואוספים אליה כל מה שתמצאו. לפחות 3, ואין תקרה: כל דוגמה מחדדת.
-    </p>
-    <ul class="hero-notes" style="margin-top:10px;">
-      <li>פוסטים שפרסמתם: פייסבוק, אינסטגרם, לינקדאין.</li>
-      <li>הצעת מחיר ששלחתם.</li>
-      <li>שיחות וואטסאפ עם לקוחות (באפליקציה: Export chat).</li>
-      <li>מיילים ששלחתם ללקוחות.</li>
-      <li>ניוזלטר, סיכום פגישה, או כל מסמך שכתבתם בעצמכם.</li>
-    </ul>
-    <p style="margin-top:10px;">
-      <strong>וגם קבצים של העסק.</strong> מחירון, חוזה, הצעת מחיר ישנה, ההודעה שאתם
-      שולחים שוב ושוב: אל תתארו אותם בטופס, פשוט אספו אותם לאותה תיקייה.
-    </p>
-    <p style="margin-top:10px;">
-      לא צריך לסדר כלום ולא צריך לשנות כלום. אוספים, ובסדנה נלמד את העובד מהכול.
-    </p>
-    <label class="samples-check">
-      <input type="checkbox" id="samples-done">
-      <span>הכנתי תיקיית דוגמאות, הכול בפנים</span>
-    </label>
+    <p><strong>ועוד הכנה אחת, חשובה באמת: דוגמאות כתיבה שלכם.</strong> אוספים אותן במשימה של
+      תיקיית הדוגמאות, <a href="/prework/">בדף ההכנה</a>.</p>
   </section>
 
   <section class="card actions">
@@ -208,7 +179,7 @@ import SiteFooter from '../../../components/SiteFooter.astro';
     <h2 class="part-title">מה עושים עם הקובץ?</h2>
     <ol class="steps">
       <li>מורידים את הקובץ <code>my-business-he.md</code> מהכפתור למעלה.</li>
-      <li>מעבירים אותו לתוך <bdi>my-office</bdi>, התיקייה מהבדיקה במשימה 4 בדף ההכנה, ולא משנים את שם הקובץ.</li>
+      <li>מעבירים אותו לתוך <bdi>my-office</bdi>, התיקייה מהבדיקה, ולא משנים את שם הקובץ.</li>
       <li>בסדנה <bdi>Claude</bdi> מעביר אותו למקום שלו במשרד, והעובד החדש שלכם קורא אותו ומכיר אתכם.</li>
     </ol>
   </section>
@@ -226,27 +197,27 @@ const PARTS = [
     intro: "כל עובד חדש צריך להכיר את הבוס. ספרו לו על עצמכם.",
     questions: [
       { id: "q0", radio: true, title: "לשון פנייה: באיזו לשון לכתוב אליך ועליך?",
-        hint: "עברית היא שפה ממוגדרת. זה קובע איך העובד מנסח כל משפט אליך ועליך.",
+        hint: "בעברית פונים אחרת לגבר ולאישה. לפי זה העובד ינסח כל משפט שהוא כותב אליך ועליך.",
         options: ["לשון זכר", "לשון נקבה"],
         md: "**לשון פנייה: באיזו לשון לכתוב אליך ועליך?**\nלשון זכר או לשון נקבה." },
       { id: "q1", title: "1. בפסקה אחת: מי אתם ומה אתם עושים?",
         hint: "שם, תפקיד, מה אתם נותנים ולמי. מה עובר רק דרככם, אילו החלטות רק אתם מקבלים. איך אתם עובדים: הרגלים, שעות, מה מעצבן אתכם. ועובדות שחשוב לכם שכל עובד ידע.",
         md: "**1. בפסקה אחת: מי אתם ומה אתם עושים?**\nשם, תפקיד, מה אתם נותנים ולמי. מה עובר רק דרככם, אילו החלטות רק אתם מקבלים.\nאיך אתם עובדים: הרגלים, שעות, מה מעצבן אתכם. ועובדות שחשוב לכם שכל עובד ידע." },
-      { id: "q2", title: "2. אם מחר אתם נעלמים: לאן הלקוחות הולכים, ומה הם מפסידים?",
-        hint: "ועוד אחת: מה לדעתכם כל התחום שלכם עושה לא נכון?",
-        md: "**2. אם מחר אתם נעלמים: לאן הלקוחות הולכים, ומה הם מפסידים?**\nועוד אחת: מה לדעתכם כל התחום שלכם עושה לא נכון?" }
+      { id: "q2", title: "2. אם מחר הייתם נעלמים, לאן היו הולכים הלקוחות, ומה הם היו מפסידים?",
+        hint: "מכאן העובד מבין מה מייחד אתכם. ועוד אחת: מה לדעתכם כל התחום שלכם עושה לא נכון?",
+        md: "**2. אם מחר הייתם נעלמים, לאן היו הולכים הלקוחות, ומה הם היו מפסידים?**\nמכאן העובד מבין מה מייחד אתכם. ועוד אחת: מה לדעתכם כל התחום שלכם עושה לא נכון?" }
     ]
   },
   {
     title: "חלק ב' · העסק",
-    intro: "דף החברה. מה שעובד חדש מקבל ביום הראשון.",
+    intro: "מה שעובד חדש מקבל ביום הראשון: מה העסק מוכר, ואיפה הוא עומד.",
     questions: [
       { id: "q3", title: "3. מה אתם מוכרים, וכמה זה עולה?",
         hint: "השירותים העיקריים וטווחי מחירים. אין עדיין מחיר סגור? כתבו את זה, גם זו תשובה.",
         md: "**3. מה אתם מוכרים, וכמה זה עולה?**\nהשירותים העיקריים וטווחי מחירים. אין עדיין מחיר סגור? כתבו את זה, גם זו תשובה." },
       { id: "q4", title: "4. איפה העסק היום, ולאן אתם חולמים לקחת אותו?",
-        hint: "מתחילים? צומחים? לבד או עם צוות. ואם יש אנשים: מי, ומה רק הם מאשרים? מה בוער בכם, מה התשוקה שלכם בהקשר העסקי? והחלום: אימפקט, לא מספר.",
-        md: "**4. איפה העסק היום, ולאן אתם חולמים לקחת אותו?**\nמתחילים? צומחים? לבד או עם צוות, ואם יש אנשים: מי, ומה רק הם מאשרים?\nמה בוער בכם, מה התשוקה שלכם (בהקשר העסקי)? והחלום: אימפקט, לא מספר." }
+        hint: "מתחילים? צומחים? לבד או עם צוות. ואם יש אנשים: מי, ומה רק הם מאשרים? מה בוער בכם, מה התשוקה שלכם בעסק? והחלום: האימפקט שאתם רוצים לעשות, לא מספר.",
+        md: "**4. איפה העסק היום, ולאן אתם חולמים לקחת אותו?**\nמתחילים? צומחים? לבד או עם צוות. ואם יש אנשים: מי, ומה רק הם מאשרים?\nמה בוער בכם, מה התשוקה שלכם בעסק? והחלום: האימפקט שאתם רוצים לעשות, לא מספר." }
     ]
   },
   {
@@ -255,31 +226,32 @@ const PARTS = [
     questions: [
       { id: "q5", title: "5. מי הלקוח האחד שלכם, ואיפה הוא מסתובב?",
         hint: "מי הוא, מה הוא מנסה לפתור, ומה לא נותן לו לישון בלילה. מה הוא מנסה להשיג, ומה הוא כבר ניסה ולא עבד לו? איפה הוא מסתובב, באילו קבוצות ופלטפורמות? באילו מילים הוא עצמו מדבר על זה, ואילו מילים תופסות לו את העין?",
-        md: "**5. מי הלקוח האחד שלכם, ואיפה הוא מסתובב?**\nמי הוא, מה הוא מנסה לפתור, ומה מעיר אותו בלילה. מה הוא מנסה להשיג, ומה הוא כבר\nניסה ולא עבד? איפה הוא מסתובב, אילו קבוצות ופלטפורמות? אילו מילים שלו תופסות אותו?" },
+        md: "**5. מי הלקוח האחד שלכם, ואיפה הוא מסתובב?**\nמי הוא, מה הוא מנסה לפתור, ומה לא נותן לו לישון בלילה. מה הוא מנסה להשיג, ומה הוא כבר\nניסה ולא עבד לו? איפה הוא מסתובב, באילו קבוצות ופלטפורמות? באילו מילים הוא עצמו מדבר\nעל זה, ואילו מילים תופסות לו את העין?" },
       { id: "q6", title: "6. ספרו על לקוח אחד: לפני ואחרי.",
-        hint: "איך הוא הגיע אליכם, איך הוא נראה שלושה חודשים אחרי, ומה הוא אמר לכם.",
-        md: "**6. ספרו על לקוח אחד: לפני ואחרי.**\nאיך הוא הגיע אליכם, איך הוא נראה שלושה חודשים אחרי, ומה הוא אמר לכם." },
+        hint: "איך הוא הגיע אליכם, מה השתנה אצלו שלושה חודשים אחרי, ומה הוא אמר לכם. מכאן העובד לומד מה אתם באמת עושים ללקוח.",
+        md: "**6. ספרו על לקוח אחד: לפני ואחרי.**\nאיך הוא הגיע אליכם, מה השתנה אצלו שלושה חודשים אחרי, ומה הוא אמר לכם. מכאן העובד\nלומד מה אתם באמת עושים ללקוח." },
       { id: "q7", title: "7. הדביקו 2 עד 3 הודעות אמיתיות מלקוחות.",
-        hint: "וואטסאפ, מייל, ביקורת. המילים שלהם שוות זהב, כמו שהן. רק שם או פרט רגיש מחליפים ל-[שם] לפני ההדבקה.",
-        md: "**7. הדביקו 2 עד 3 הודעות אמיתיות מלקוחות.**\nוואטסאפ, מייל, ביקורת. המילים שלהם שוות זהב, כמו שהן. רק שם או פרט רגיש\nמחליפים ל-[שם] לפני ההדבקה." }
+        hint: "וואטסאפ, מייל, ביקורת. המילים שלהם שוות זהב, כמו שהן. רק שם או פרט רגיש מחליפים ב-[שם] לפני ההדבקה.",
+        md: "**7. הדביקו 2 עד 3 הודעות אמיתיות מלקוחות.**\nוואטסאפ, מייל, ביקורת. המילים שלהם שוות זהב, כמו שהן. רק שם או פרט רגיש\nמחליפים ב-[שם] לפני ההדבקה." }
     ]
   },
   {
     title: "חלק ד' · הקול",
     intro: "ההבדל בין עובד שנשמע כמוכם לעובד שנשמע כמו רובוט.",
     questions: [
-      { id: "q8", title: "8. איך אתם נשמעים?",
-        hint: "השלימו: \"אנחנו ___ אבל לא ___\" (שניים או שלושה כאלה). הוסיפו משפט אחד שרק אתם הייתם כותבים, ושתיים או שלוש מילים שאסור שיצאו לכם מהמקלדת. והרגלי כתיבה: אורך משפטים, אימוג'י, שפה.",
-        md: "**8. איך אתם נשמעים?**\nהשלימו: \"אנחנו ___ אבל לא ___\" (שניים או שלושה כאלה). הוסיפו משפט אחד שרק אתם הייתם\nכותבים, ושתיים או שלוש מילים שאסור שיצאו לכם מהמקלדת. והרגלי כתיבה: אורך משפטים,\nאימוג'י, שפה." }
+      { id: "q8", title: "8. איך אתם נשמעים בכתב?",
+        hint: "הסגנון שלכם כשאתם כותבים בשם העסק, לא הערכים שלו. השלימו \"אנחנו ___ אבל לא ___\", שניים או שלושה כאלה: תכונה של הכתיבה שלכם, ומה היא נהיית כשמגזימים בה. הוסיפו משפט אחד שרק אתם הייתם כותבים, ושתיים או שלוש מילים שאסור שיצאו לכם מהמקלדת. והרגלי כתיבה: משפטים קצרים או ארוכים, אימוג'י, רשמי או בגובה העיניים.",
+        placeholder: "למשל: ישיר אבל לא בוטה. פשוט אבל לא שטחי. משפט שרק אני כותב: \"הכלים מתחלפים, המבנה נשאר\".",
+        md: "**8. איך אתם נשמעים בכתב?**\nהסגנון שלכם כשאתם כותבים בשם העסק, לא הערכים שלו. השלימו \"אנחנו ___ אבל לא ___\",\nשניים או שלושה כאלה: תכונה של הכתיבה שלכם, ומה היא נהיית כשמגזימים בה. הוסיפו משפט\nאחד שרק אתם הייתם כותבים, ושתיים או שלוש מילים שאסור שיצאו לכם מהמקלדת. והרגלי כתיבה:\nמשפטים קצרים או ארוכים, אימוג'י, רשמי או בגובה העיניים." }
     ]
   },
   {
     title: "חלק ה' · הכללים",
     intro: "מה שעובד ותיק יודע בלי לשאול.",
     questions: [
-      { id: "q9", title: "9. מתי כן ומתי לא?",
+      { id: "q9", title: "9. מתי אתם אומרים כן, ומתי לא?",
         hint: "מתי אתם נותנים הנחה? מתי מוותרים על לקוח? מה לא עושים: שעות, תחומים, סוגי עבודות.",
-        md: "**9. מתי כן ומתי לא?**\nמתי אתם נותנים הנחה? מתי מוותרים על לקוח? מה לא עושים: שעות, תחומים, סוגי עבודות." },
+        md: "**9. מתי אתם אומרים כן, ומתי לא?**\nמתי אתם נותנים הנחה? מתי מוותרים על לקוח? מה לא עושים: שעות, תחומים, סוגי עבודות." },
       { id: "q10", title: "10. מה אסור לעובד לעשות בלי לשאול אתכם?",
         hint: "לסגור מחיר? להבטיח מועד? לפנות ללקוח? ומה דווקא יגרום לכם לסמוך עליו יותר?",
         md: "**10. מה אסור לעובד לעשות בלי לשאול אתכם?**\nלסגור מחיר? להבטיח מועד? לפנות ללקוח? ומה דווקא יגרום לכם לסמוך עליו יותר?" }
@@ -297,7 +269,7 @@ const PARTS = [
   {
     title: "בונוס · המבחן (רשות)",
     bonus: true,
-    intro: "אפשר לדלג. אבל זה כיף.",
+    intro: "אפשר לדלג, אבל זה כיף.",
     questions: [
       { id: "q12", title: "12. כתבו 3 שאלות שעובד חדש חייב לדעת לענות עליהן.",
         hint: "\"כמה עולה X?\", \"מה סגרנו עם [שם]?\". בסדנה, אחרי שהעובד קורא את השאלון, בחנו אותו בהן.",
@@ -362,6 +334,7 @@ function render() {
         const ta = document.createElement("textarea");
         ta.id = q.id;
         ta.setAttribute("aria-label", q.title);
+        if (q.placeholder) ta.placeholder = q.placeholder;
         ta.value = store.getItem("misrad-" + q.id) || "";
         ta.addEventListener("input", () => {
           store.setItem("misrad-" + q.id, ta.value);
@@ -380,8 +353,6 @@ function answered(q) {
   return (store.getItem("misrad-" + q.id) || "").trim().length > 0;
 }
 
-function samplesDone() { return store.getItem("misrad-samples-done") === "1"; }
-
 function refresh() {
   let total = 0;
   PARTS.forEach(part => {
@@ -396,11 +367,11 @@ function refresh() {
       ? (partDone ? "נענתה, תודה" : "רשות, אפשר לדלג")
       : "נענו " + partDone + " מתוך " + part.questions.length;
   });
-  const done = total + (samplesDone() ? 1 : 0);
+  const done = total;
   const pill = document.getElementById("progress-pill");
-  const txt = done + "/" + (COUNTED + 1) + " הושלמו";
+  const txt = done + "/" + COUNTED + " הושלמו";
   if (pill.textContent !== txt) pill.textContent = txt;
-  document.getElementById("progress-bar").style.width = (done / (COUNTED + 1) * 100) + "%";
+  document.getElementById("progress-bar").style.width = (done / COUNTED * 100) + "%";
 }
 
 function buildMarkdown() {
@@ -450,13 +421,6 @@ function note(msg) { document.getElementById("action-note").textContent = msg; }
 document.addEventListener("DOMContentLoaded", () => {
   render();
 
-  const chk = document.getElementById("samples-done");
-  chk.checked = samplesDone();
-  chk.addEventListener("change", () => {
-    store.setItem("misrad-samples-done", chk.checked ? "1" : "0");
-    refresh();
-  });
-
   document.getElementById("btn-download").addEventListener("click", () => {
     const missing = unansweredCount();
     const blob = new Blob([buildMarkdown()], { type: "text/markdown;charset=utf-8" });
@@ -465,12 +429,11 @@ document.addEventListener("DOMContentLoaded", () => {
     a.download = "my-business-he.md";
     a.click();
     URL.revokeObjectURL(a.href);
-    let msg = missing === 1
+    const msg = missing === 1
       ? "הקובץ ירד. נשארה שאלה אחת פתוחה, אפשר להשלים אותה ישירות בקובץ."
       : missing
       ? "הקובץ ירד. נשארו " + missing + " שאלות פתוחות, אפשר להשלים אותן ישירות בקובץ."
       :"הקובץ ירד. כל השאלות נענו, העובד הולך להכיר אתכם טוב.";
-    if (!samplesDone()) msg += " ואל תשכחו: תיקיית הדוגמאות.";
     note(msg);
   });
 });
