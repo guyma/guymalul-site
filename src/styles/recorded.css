@@ -8,56 +8,35 @@
 .rec .hero .wrap { display: flex; flex-direction: column; }
 .rec .hero .main, .rec .hero .buy { display: contents; }
 .rec .hero .eyebrow { order: 1; }
-.rec .hero h1 { order: 3; }
-.rec .hero .said { order: 4; margin: 0.4rem 0 1.6rem; }
+.rec .hero h1 { order: 2; }
+.rec .hero .promise-under { order: 3; }
+.rec .hero .fold-for { order: 3; }
+.rec .hero .fold-gets { order: 4; }
 .rec .hero .buy-name { order: 5; margin-bottom: 0.4rem; font-size: 1rem; }
 .rec .hero .buy-name b { color: var(--ink); }
 .rec .hero .fold-who { order: 6; }
 .rec .hero .cta-row { order: 7; }
 
-.rec .hero .h1-line { display: block; }
+/* on a phone the button must stand inside the screen a real browser shows (~700px of 844), so the
+   fold gives back air above the eyebrow, between its blocks and before the button: the fit line
+   (round 5) took lines of the first screen, and the air pays for them. From 640px sales-page.css's
+   own tablet padding holds */
+@media (max-width: 639px) {
+  .rec .hero { padding-top: calc(var(--bar) + 1.25rem); }
+  /* on a phone the list above already says what the price buys, so the name line shows from 640px
+     on; the header carries the name on every phone screen */
+  .rec .hero .buy-name--wide { display: none; }
+  .rec .hero .eyebrow { margin-bottom: 1.1rem; }
+  .rec .hero .promise-under { margin-bottom: .8rem; }
+  .rec .hero .fold-for { font-size: .95rem; margin-bottom: .9rem; }
+  .rec .hero .fold-gets { margin-bottom: .9rem; }
+  .rec .hero .fold-who { margin-bottom: 0; }
+  .rec .hero .cta-row { margin-top: 1rem; }
+}
 .rec .hero .fold-who b { font-size: 1.45rem; }
 
-/* the reasons, as chat messages from people like the reader: a new one drops in on top every few
-   seconds and pushes the others down, and the oldest fades out at the bottom. The bubble is white
-   with the page's line, never coral: coral is what you press. The feed has a fixed height, so the
-   headline under it never jumps. */
-.rec .hero .why { order: 2; margin: 0 0 1.4rem; }
-.rec .why-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-}
-.rec .why-list li {
-  max-width: 88%;
-  padding: 0.55rem 0.95rem 0.6rem;
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  border-start-start-radius: 5px;
-  box-shadow: 0 2px 8px rgba(43, 31, 28, 0.07);
-  font-size: 1.02rem;
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--ink);
-}
-/* moving: three bubbles show, the feed clips the rest and fades its bottom edge */
-.rec .why-list.turning {
-  height: 9.6rem;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent);
-  mask-image: linear-gradient(to bottom, #000 62%, transparent);
-}
-.rec .why-list.turning li { flex: none; }
-/* standing (no script, or reduced motion): the first three, still */
-.rec .why-list:not(.turning) li:nth-child(n+4) { display: none; }
-.rec .why-list.turning li.drop { animation: rec-drop 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-@keyframes rec-drop {
-  from { opacity: 0; margin-top: -3.2rem; transform: translateY(-0.4rem) scale(0.96); }
-  to   { opacity: 1; margin-top: 0; transform: none; }
-}
+/* the gap: the heading carries the reader's complaint and two lines answer it */
+.rec #gap .said { margin-top: 0.4rem; }
 
 /* the price, against the Zoom room's: the Zoom figure is named and struck by a slanted line, so it
    reads as the other product's price, never as a "was" price */
@@ -118,11 +97,11 @@
 @media (min-width: 960px) {
   .rec .wrap { max-width: 1080px; }
 
-  /* the fold: the claim on one side; on the other the people's messages, and under them the price */
+  /* the fold: the claim, the line under it and what the price buys on one side; the price box beside them */
   .rec .hero .wrap {
     display: grid;
     grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
     column-gap: 4.5rem;
     row-gap: 1.2rem;
     align-items: center;
@@ -130,10 +109,10 @@
   .rec .hero .main { display: contents; }
   .rec .hero .eyebrow { grid-column: 1; grid-row: 1; margin-bottom: 0; align-self: end; }
   .rec .hero h1 { grid-column: 1; grid-row: 2; align-self: start; }
-  .rec .hero .main .said { grid-column: 1; grid-row: 3; align-self: start; margin: 0; }
-  .rec .hero .why { grid-column: 2; grid-row: 1 / 3; margin: 0; align-self: end; }
-  .rec .hero .buy { grid-row: 3; }
-  /* one notch down in the wide fold, so "מתי שנוח לך, בקצב שלך." holds one line beside the box */
+  .rec .hero .promise-under { grid-column: 1; grid-row: 3; margin: 0; }
+  .rec .hero .fold-for { grid-column: 1; grid-row: 4; margin: 0; }
+  .rec .hero .fold-gets { grid-column: 1; grid-row: 5; margin: 0; }
+  .rec .hero .buy { grid-row: 1 / 6; align-self: center; }
   .rec .hero h1 { font-size: 3.2rem; }
   .rec .hero .buy {
     grid-column: 2;
@@ -149,10 +128,10 @@
   .rec .hero .fold-who b { display: block; font-size: 2.9rem; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
   .rec .hero .buy .cta-row { margin-top: 1.6rem; }
   .rec .hero .buy .btn { display: flex; width: 100%; max-width: none; }
-  .rec .hero .said { margin-top: 1.8rem; }
 
-  /* the stages read one under the other, as on the home page, in a column a line can be read across */
-  .rec #inside .wrap { max-width: 820px; }
+  /* the stages read one under the other, as on the home page, in a column a line can be read across;
+     the gap and the office keep the same column */
+  .rec #inside .wrap, .rec #gap .wrap, .rec #office .wrap { max-width: 820px; }
   /* the proof keeps the home page's column: in a wide one the phone sat centered, away from its
      heading, and the two no longer read one above the other */
   .rec #proof .wrap, .rec #built .wrap { max-width: 660px; }
@@ -160,43 +139,6 @@
   .rec #compare .wrap { max-width: 820px; }
   /* the for-whom section reads top to bottom, one narrower column, as on the home page */
   .rec #fit .wrap { max-width: 820px; }
-
-  /* the three stages - before, in the recording, after - side by side, read in order */
-  .rec .beats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    padding: 0;
-    border: none;
-  }
-  .rec .beats li {
-    padding: 1.3rem 1.4rem 1.4rem;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-  }
-  .rec .beats b { display: block; font-size: 1.12rem; margin: 0 0 0.4rem; }
-  /* the installation is the long stage: each card keeps its own height, so the short one
-     beside it does not stand half empty, and no line runs past a readable length */
-  .rec .beats { align-items: start; }
-
-  /* the comparison and what you need, side by side */
-  .rec #straight .wrap {
-    display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-    column-gap: 2.5rem;
-    align-items: start;
-  }
-  .rec #straight h2 { grid-column: 1 / -1; }
-  .rec #straight .duo2 { margin: 0; }
-  .rec #straight .duo2 .duo-col { padding: 1.1rem 1.2rem; }
-  .rec #straight .duo2 li { font-size: 0.98rem; }
-  .rec #straight .needs {
-    margin: 0;
-    padding: 1.1rem 1.2rem;
-    border: 1px solid var(--line-tone);
-    border-radius: 14px;
-    background: #ffffff;
-  }
-  .rec #straight .needs li { border-color: var(--line); background: var(--ground); }
 
   /* the price: what you get in the card, the button beside it */
   .rec #price .wrap {
@@ -231,3 +173,79 @@
   .rec .final .act .cta-row { margin-top: 0; }
   .rec .final .act .btn { display: flex; width: 100%; max-width: none; }
 }
+
+/* the team, shown: three of the office's staff as the deck's stickers, a role and one job line each,
+   and an empty tile for the first one the buyer hires. Phone: 2x2; wide: one row of four */
+.rec .team { list-style: none; padding: 0; margin: 1.25rem 0 .5rem; display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.rec .team li { display: flex; flex-direction: column; align-items: center; text-align: center;
+  background: #fff; border-radius: 18px; padding: 14px 10px 16px; box-shadow: 0 6px 18px rgba(43, 31, 28, .08); }
+/* set by HEIGHT, not width: sized by width the narrow sticker stood taller and its name sat 16px
+   below its neighbours'; at one height every head is 68-76px and the names sit on one line */
+.rec .team img { width: auto; height: 136px; }
+.rec .team b { margin-top: 8px; font-size: 1.05rem; color: var(--ink); }
+.rec .team li > span { font-size: 15px; color: var(--muted); line-height: 1.35; }
+.rec .team .team-next { background: transparent; box-shadow: none; border: 2px dashed var(--acc-line);
+  padding-top: 12px; }
+.rec .team .plus { width: 110px; height: 136px; display: grid; place-items: center; font-size: 3rem;
+  color: var(--acc-d); }
+.rec .team-catch { margin-top: .75rem; color: var(--body); }
+@media (min-width: 760px) { .rec .team { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* the first screen: the line under the h1 rides it by size and proximity, then what the price buys
+   as short ticked lines a scanning eye reads in a second. A tick is decoration: its alt text is empty
+   (the plain `content` before it is for browsers without the alt-text form) */
+.rec .promise-under { font-size: 1.2rem; font-weight: 500; line-height: 1.45; color: var(--ink); margin: .5rem 0 1.2rem; max-width: 30em; text-wrap: balance; }
+/* who it is for, right under the definition (her הגדרה: what it is AND for whom, in the opening) */
+.rec .fold-for { font-size: 1rem; line-height: 1.5; margin: 0 0 1rem; max-width: 34em; text-wrap: balance; }
+.rec .fold-gets { margin: 0 0 1.3rem; }
+.rec .fold-gets-title { font-weight: 700; color: var(--ink); margin: 0 0 .3rem; font-size: 1rem; }
+.rec .fold-gets ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.rec .fold-gets li { position: relative; padding-inline-start: 20px; font-size: 1rem; line-height: 1.45; }
+.rec .fold-gets li::before { content: "✓"; content: "✓" / ""; position: absolute; inset-inline-start: 0; color: var(--acc-d); font-weight: 700; }
+
+/* Dana in the section after the fold: between the chat you feed by hand and the punch, she reports to
+   the reader - the one in charge - a person with a note, not a chat window */
+.rec .learned { display: flex; align-items: flex-end; gap: 12px; margin: 1.2rem 0 .4rem; }
+.rec .learned-who { width: 96px; flex: none; margin: 0; text-align: center; }
+.rec .learned-who img { width: 96px; height: auto; display: block; }
+.rec .learned-who figcaption { font-size: .8rem; line-height: 1.2; color: var(--muted); margin-top: 2px; }
+.rec .learned-who figcaption b { display: block; color: var(--ink); font-size: .9rem; }
+.rec .learned-bubble { position: relative; background: #fff; border: 1px solid var(--acc-line);
+  border-radius: 18px; padding: 12px 14px; box-shadow: 0 8px 22px rgba(43, 31, 28, .1); min-width: 0; }
+.rec .learned-bubble::after { content: ""; position: absolute; bottom: 24px; inset-inline-start: -8px; width: 14px; height: 14px;
+  background: #fff; border-left: 1px solid var(--acc-line); border-bottom: 1px solid var(--acc-line);
+  transform: rotate(-135deg); }
+.rec .learned-title { font-weight: 700; color: var(--acc-d); margin: 0 0 .35rem; font-size: .95rem; }
+.rec .learned-bubble ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.rec .learned-bubble li { font-size: .95rem; line-height: 1.4; padding-inline-start: 16px; position: relative; }
+.rec .learned-bubble li::before { content: "✓"; content: "✓" / ""; position: absolute; inset-inline-start: 0; color: var(--acc-d); font-weight: 700; }
+
+/* the explanation, the page's bulk (her הסברה): each stage card carries its steps in order. A part
+   is its name in bold and its size beside it, so the skim reads the five names alone; what you do
+   follows, and its why sits last, in ink - set apart by position and weight, never by colour */
+.rec .card3 .why { color: var(--ink); font-weight: 500; }
+.rec .parts { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0; }
+.rec .parts > li { padding: .9rem 0 .2rem; border-top: 1px solid var(--line); }
+.rec .parts > li p { margin: 0 0 .45rem; }
+.rec .parts .part-name { margin-bottom: .25rem; }
+.rec .parts .part-name b { color: var(--ink); font-size: 1.05rem; }
+.rec .parts .part-name span { color: var(--muted); font-size: .9rem; margin-inline-start: .35rem; white-space: nowrap; }
+.rec .parts .part-name span::before { content: "· "; }
+.rec .tasks { margin: .9rem 0 0; padding-inline-start: 1.4rem; display: grid; gap: .45rem; }
+.rec .tasks li { line-height: 1.55; padding-inline-start: .2rem; }
+.rec .tasks li::marker { color: var(--ink); font-weight: 700; }
+.rec .also { margin: 0 0 1.8rem; padding: 1rem 1.2rem; border: 1px dashed var(--acc-line); border-radius: 16px; }
+.rec .also-title { font-weight: 700; color: var(--ink); margin: 0 0 .45rem; }
+.rec .also ul { margin: 0; padding-inline-start: 1.2rem; display: grid; gap: .45rem; }
+.rec .also li { line-height: 1.55; }
+.rec .also b { color: var(--ink); }
+
+/* a graduate's own words, beside the fit: a quote is set by its frame and its name line, the
+   speaker named in bold under it */
+.rec .fit-quote { margin: 1.1rem 0 1.3rem; padding: .9rem 1.1rem; background: var(--ground, #fff);
+  border-inline-start: 3px solid var(--acc-line); border-start-start-radius: 4px; border-end-start-radius: 4px; border-start-end-radius: 14px; border-end-end-radius: 14px; }
+.rec .fit-quote blockquote { margin: 0; }
+.rec .fit-quote blockquote p { margin: 0 0 .5rem; color: var(--ink); line-height: 1.6; }
+.rec .fit-quote figcaption { font-size: .92rem; color: var(--muted); }
+.rec .fit-quote figcaption b { color: var(--ink); }
