@@ -1,5 +1,5 @@
 ---
-// recorded/index.astro carries the same sections in the same order: a change to a shared one is made there too.
+// The bio (.me-line) tells the same facts as recorded/index.astro's: a change to one is made on both.
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -101,10 +101,9 @@ import '../styles/sales-page.css';
         </ol>
 
         <div class="me-line rev">
-          <Image class="me-ava" src={avatar} alt="גיא מלול" width={128} height={128} />
+          <Image class="me-ava" src={avatar} alt="גיא מלול" width={384} height={384} />
           <p><strong>אני מלמד בדיוק את מה שאני עושה בעסק שלי כל יום.</strong>
-          מהנדס תוכנה במיקרוסופט, לפני זה אלביט וצ'ק פוינט, ולפני כל זה כמעט שבע שנים ניהלתי אתר תיירות במדבר
-          (<a class="body-link" href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener">LinkedIn</a>).</p>
+          מהנדס תוכנה במיקרוסופט, לפני זה אלביט <span class="nb">וצ'ק פוינט</span>, ולפני כל זה הייתי הבעלים של <span class="nb">"חאן קסם המדבר"</span>, אתר תיירות במדבר, וניהלתי אותו כמעט <span class="nb">שבע שנים (<a class="body-link" href="https://www.linkedin.com/in/guy-malul-35223a78/" target="_blank" rel="noopener">LinkedIn</a>).</span></p>
         </div>
       </div>
     </section>

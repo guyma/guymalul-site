@@ -452,24 +452,33 @@ section.final { background: var(--acc); border-top: none; }
 .card3 h3 { font-size: 1.15rem; line-height: 1.35; color: var(--ink); font-weight: 700; margin-bottom: 0.45rem; }
 .card3 p { font-size: 1rem; line-height: 1.6; }
 .card3 .card-q { color: var(--ink); font-weight: 500; margin-bottom: 0.4rem; }
+/* the bio: Guy on top in a large circle, the text centered under it. At 64px beside the text his
+   head was 38px against the office stickers' 72-74px; at 128px (144 from 960) it is 77-86px, level
+   with them or larger - the teacher is never the smallest face on the page (his pick, 21.11) */
 .me-line {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 0.9rem;
-  align-items: flex-start;
-  padding-top: 1.2rem;
+  margin-top: 0.4rem;
+  padding-top: 1.8rem;
   border-top: 1px solid var(--line);
   font-size: 0.98rem;
+  text-align: center;
 }
 .me-line .me-ava {
   flex: none;
-  width: 4rem;
-  height: 4rem;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   object-fit: cover;
   background: var(--tone);
 }
-.me-line p { margin: 0; }
-.me-line strong { display: block; }
+.me-line p { margin: 0; max-width: 34em; }
+.me-line strong { display: block; font-size: 1.08rem; margin-bottom: 0.3rem; text-wrap: balance; }
+@media (min-width: 960px) {
+  .me-line .me-ava { width: 144px; height: 144px; }
+}
 
 /* for whom: the two titled lists sit side by side even on a phone */
 .duo2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin: 0 0 1.6rem; }
